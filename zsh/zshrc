@@ -1,0 +1,113 @@
+
+# Source Local files in ~/.zsh/
+for file in $HOME/.zsh/*.zsh ; do
+	source $file
+done
+
+
+DEFAULT_USER=mark
+ZSH_THEME=agnoster
+
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=10000
+SAVEHIST=100000
+HISTFILE=~/.zsh_history
+
+# Paths
+export EDITOR=vim
+
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+
+# Aliases
+# Some more basic aliases
+alias ll='ls -lh'
+alias la='ls -lAh'
+alias l='ls -lah'
+alias md='mkdir -p'
+alias rd='rmdir'
+alias cd..='cd ..'
+alias cd...='cd ../..'
+alias cd....='cd ../../..'
+alias cd.....='cd ../../../..'
+alias cd......='cd ../../../../..'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+
+##############################
+# Zplug
+##############################
+# Check if zplug is installed
+if [[ ! -d ~/.zplug ]]; then
+  git clone https://github.com/zplug/zplug ~/.zplug
+  source ~/.zplug/init.zsh && zplug update --self
+fi
+
+# Essential
+source ~/.zplug/init.zsh
+
+# Add a bunch more of your favorite packages!
+zplug "zplug/zplug"
+zplug "zsh-users/zsh-completions" 
+zplug "zsh-users/zsh-history-substring-search"
+#zplug "rimraf/k"
+#zplug "b4b4r07/enhancd", use:init.sh
+zplug 'plugins/git', from:oh-my-zsh
+zplug "themes/agnoster", from:oh-my-zsh
+
+zplug "mollifier/anyframe"
+zplug "mafredri/zsh-async", from:github, defer:0
+zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:2
+zplug "plugins/golang", from:oh-my-zsh, ignore:oh-my-zsh.sh, defer:2
+zplug "desyncr/auto-ls"
+zplug "zpm-zsh/dircolors-material"
+zplug "zpm-zsh/ls"
+zplug "joepvd/zsh-hints"
+zplug "srijanshetty/zsh-pandoc-completion"
+
+#zplug "zpm-zsh/linuxbrew"
+#bbenne10/goenv
+
+# Install packages that have not been installed yet
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    else
+        echo
+    fi
+fi
+
+
+
+# ZPLUG LOAD
+zplug load --verbose
+
+
+
+# enhancd and tmux
+if zplug check b4b4r07/enhancd; then
+    export ENHANCD_FILTER=fzf-tmux
+fi
+
+
+# Source fzf.zsh (fuzzy-finder)
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+# Custom Functions
+function printpath {
+	echo $PATH | tr : \\n
+}
