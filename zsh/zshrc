@@ -1,21 +1,19 @@
 
 # Source Local files in ~/.zsh/
-for file in $HOME/.zsh/*.zsh ; do
-	source $file
-done
+#for file in $HOME/dotfiles/zsh/*.zsh ; do
+#	source $file
+#done
 
-
-DEFAULT_USER=mark
-ZSH_THEME=agnoster
+export DEFAULT_USER=mark
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=10000
-SAVEHIST=100000
-HISTFILE=~/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=100000
+export HISTFILE=~/.zsh_history
 
 # Paths
 export EDITOR=vim
-
+export VISUAL=$EDITOR
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
@@ -28,8 +26,31 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 
+bindkey -me
+autoload -Uz compinit
+compinit
+
+
+##############################
+# Colors
+##############################
+export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+export WORDCHARS='*?.[]~&;!#$%^(){}<>'
+
+# ls command colors
+export LSCOLORS=exfxcxdxbxegedabagacad
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+
+eval `dircolors -b`
+export ZLS_COLORS=$LS_COLORS
+
+
+
+##############################
 # Aliases
+##############################
 # Some more basic aliases
+alias ls='ls --color'
 alias ll='ls -lh'
 alias la='ls -lAh'
 alias l='ls -lah'
@@ -45,6 +66,31 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
+alias df='df -hT'
+alias ocaml='rlwrap ocaml'
+alias vi=vim
+alias make=pretty_make.py
+# Random aliases
+alias find_duplicate_names='find . -type f | sed "s#.*/##" | sort | uniq -c | sort -nr | egrep -v "\s+1\s+"'
+alias hh='history | grep -i '
+alias tododiff='git diff develop | grep -E -A8 "((JPADS)FSW.[0-9]+.*)|(todo.*)" --color=always | cut -c 2- | less -r'
+alias sshutdown='sudo shutdown -P 0'
+# Find aliases
+alias rfind='find -regextype posix-extended -regex'
+rfinda () { find -regextype posix-extended -regex ".*$@.*"; }
+# Fake pbcopy/paste
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+# Git Aliases
+alias gup='git pull --rebase origin $(current_branch)'
+compdef gup=git
+alias gpush='git push origin $(current_branch)'
+compdef gpush=git
+alias gsync='git pull --rebase origin $(current_branch) && git push origin $(current_branch)'
+compdef gsync=git
+
+
+
 
 ##############################
 # Zplug
@@ -60,25 +106,94 @@ source ~/.zplug/init.zsh
 
 # Add a bunch more of your favorite packages!
 zplug "zplug/zplug"
-zplug "zsh-users/zsh-completions" 
-zplug "zsh-users/zsh-history-substring-search"
-#zplug "rimraf/k"
-#zplug "b4b4r07/enhancd", use:init.sh
-zplug 'plugins/git', from:oh-my-zsh
-zplug "themes/agnoster", from:oh-my-zsh
 
-zplug "mollifier/anyframe"
-zplug "mafredri/zsh-async", from:github, defer:0
-zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:2
-zplug "plugins/golang", from:oh-my-zsh, ignore:oh-my-zsh.sh, defer:2
+# Theme
+export ZSH_THEME=punctual
+zplug "dannynimmo/punctual-zsh-theme", use:punctual.zsh-theme, from:github, as:theme
+# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+# pure
+# zplug "AugustoQueiroz/asq-theme", use:asq.zsh-theme, as:theme
+# zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+# zplug "themes/agnoster", from:oh-my-zsh
+
+# PUNCTUAL_TIMESTAMP_COLOUR="red";
+# PUNCTUAL_USER_COLOUR="green";
+# PUNCTUAL_ROOT_USER_COLOUR="yellow";
+# PUNCTUAL_HOSTNAME_COLOUR="blue";
+# PUNCTUAL_CURRENT_DIR_COLOUR="magenta";
+# PUNCTUAL_GIT_COLOUR="cyan";
+# PUNCTUAL_TIMESTAMP_BOLD="true";
+# PUNCTUAL_USER_BOLD="true";
+# PUNCTUAL_ROOT_USER_BOLD="true";
+# PUNCTUAL_HOSTNAME_BOLD="true";
+# PUNCTUAL_CURRENT_DIR_BOLD="true";
+# PUNCTUAL_GIT_BOLD="true";
+# PUNCTUAL_TIMESTAMP_FORMAT="%l:%M%P";
+PUNCTUAL_PROMPT="$";
+# PUNCTUAL_GIT_SYMBOL_UNTRACKED="?";
+# PUNCTUAL_GIT_SYMBOL_ADDED="+";
+# PUNCTUAL_GIT_SYMBOL_MODIFIED="!";
+# PUNCTUAL_GIT_SYMBOL_RENAMED="!";
+# PUNCTUAL_GIT_SYMBOL_DELETED="!";
+# PUNCTUAL_GIT_SYMBOL_STASHED="*";
+# PUNCTUAL_GIT_SYMBOL_UNMERGED="M";
+# PUNCTUAL_GIT_SYMBOL_AHEAD="↑";
+# PUNCTUAL_GIT_SYMBOL_BEHIND="↓";
+# PUNCTUAL_GIT_SYMBOL_DIVERGED="~";
+
+zplug "supercrabtree/k"
+zplug "mafredri/zsh-async"
 zplug "desyncr/auto-ls"
-zplug "zpm-zsh/dircolors-material"
-zplug "zpm-zsh/ls"
 zplug "joepvd/zsh-hints"
 zplug "srijanshetty/zsh-pandoc-completion"
+zplug "chipsenkbeil/zsh-notes"
+zplug "lukechilds/zsh-nvm"
+zplug "mafredri/zsh-async"
+zplug "hkupty/ssh-agent"
+zplug "djui/alias-tips"
+zplug "athityakumar/colorls"
 
-#zplug "zpm-zsh/linuxbrew"
-#bbenne10/goenv
+
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "Schnouki/git-annex-zsh-completion"
+zplug "akoenig/gulp.plugin.zsh"
+zplug "ytet5uy4/fzf-widgets"
+# zplug qoomon/zjump
+# zplug "plugins/golang", from:oh-my-zsh, ignore:oh-my-zsh.sh, defer:2
+# zplug 'plugins/git', from:oh-my-zsh
+# zplug "trapd00r/zsh-syntax-highlighting-filetypes"
+# zplug "zpm-zsh/dircolors-material"
+# zplug "zpm-zsh/ls"
+# zplug "zpm-zsh/colors"
+# zplug "zpm-zsh/linuxbrew"
+# zplug "bbenne10/goenv"
+# zplug "momo-lab/zsh-abbrev-alias"
+# zplug "peterhurford/up.zsh"
+# zplug "zakariaGatter/MarkEdit"
+# zplug "b4b4r07/enhancd", use:init.sh
+# zplug "wfxr/forgit", defer:1
+# zplug "chipsenkbeil/zsh-notes"
+# zplug "zlsun/solarized-man"
+# zplug "aramboi/zsh-ipfs"
+# zplug "hcgraf/zsh-sudo ", from:oh-my-zsh, ignore:oh-my-zsh.sh, defer:2
+zplug "mollifier/zload"
+# zplug "mollifier/anyframe"
+zplug "zdharma/zsh-diff-so-fancy", as:command, use:bin/git-dsf
+# zplug "psprint/zsh-select", defer:3
+
+# DEER
+# zplug "vifon/deer", use:deer
+# zle -N deer
+# bindkey '\ek' deer
+
+
+
+
+
+
 
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then
@@ -91,23 +206,247 @@ if ! zplug check --verbose; then
 fi
 
 
+##############################
+# Zstyle
+##############################
+zstyle ':completion:*' auto-description 'specify: %d'
+# zstyle ':completion:*' completer _expand _complete _correct _approximate
+# zstyle ':completion:*' format 'Completing %d'
+# zstyle ':completion:*' group-name ''
+# zstyle ':completion:*' menu select=2
+# eval "$(dircolors -b)"
+# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+# zstyle ':completion:*' list-colors ''
+# zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+# zstyle ':completion:*' menu select=long
+# zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+# zstyle ':completion:*' use-compctl false
+# zstyle ':completion:*' verbose true
 
-# ZPLUG LOAD
-zplug load --verbose
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+
+
+# Expansion options
+zstyle ':completion:*' completer _expand _complete _correct _prefix _approximate
+zstyle ':completion::prefix-1:*' completer _complete
+zstyle ':completion:incremental:*' completer _complete _correct
+zstyle ':completion:predict:*' completer _complete
+
+# Completion caching
+# zstyle ':completion::complete:*' use-cache 1
+# zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
+
+# Use menu selection
+zstyle ':completion:*' menu select=2
+
+# Expand partial paths
+zstyle ':completion:*' expand 'yes'
+zstyle ':completion:*' squeeze-slashes 'yes'
+
+# Include non-hidden directories in globbed file completions
+# for certain commands
+
+zstyle ':completion::complete:*' '\'
+
+# Use menuselection for pid completion
+zstyle ':completion:*:kill:*' force-list always
+zstyle ':completion:*:*:kill:*' menu yes select
+
+# tag-order 'globbed-files directories' all-files
+zstyle ':completion::complete:*:tar:directories' file-patterns '*~.*(-/)'
+
+# Don't complete backup files as executables
+zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
+
+# Separate matches into groups
+zstyle ':completion:*:matches' group 'yes'
+
+# With commands like rm, it's annoying if you keep getting offered the same
+# file multiple times. This fixes it. Also good for cp, et cetera..
+zstyle ':completion:*:rm:*' ignore-line yes
+zstyle ':completion:*:cp:*' ignore-line yes
+
+# Describe each match group.
+zstyle ':completion:*:descriptions' format "%B---- %d%b"
+
+# Messages/warnings format
+zstyle ':completion:*:messages' format '%B%U---- %d%u%b'
+zstyle ':completion:*:warnings' format '%B%U---- no match for: %d%u%b'
+
+# Describe options in full
+zstyle ':completion:*:options' description 'yes'
+# zstyle ':completion:*:options' auto-description '%d'
+
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:*:kill:*' list-colors '=%*=01;31'
+
+##############################
+# Options
+##############################
+setopt extended_glob
+setopt glob_dots                # include dotfiles in globbing
+setopt append_history
+setopt extended_history
+setopt inc_append_history
+setopt hist_expire_dups_first
+setopt hist_ignore_space
+setopt hist_reduce_blanks
+setopt hist_verify
+setopt always_to_end # When completing from the middle of a word, move the cursor to the end of the word
+setopt auto_name_dirs # any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
+setopt complete_in_word # Allow completion from within a word/phrase
+setopt auto_menu # show completion menu on successive tab press. needs unsetop menu_complete to work
+unsetopt menu_complete # do not autoselect the first completion entry
+unsetopt correct_all # spelling correction for arguments
+setopt correct # spelling correction for commands
+unsetopt bg_nice                # no lower prio for background jobs
+setopt list_ambiguous           # complete as much of a completion until it gets ambiguous.
+
+
+# setopt                       \
+#      NO_all_export           \
+#         always_last_prompt   \
+#         always_to_end        \
+#         append_history       \
+#      NO_auto_cd              \
+#         auto_list            \
+#         auto_menu            \
+#         auto_name_dirs       \
+#         auto_param_keys      \
+#         auto_param_slash     \
+#      NO_auto_pushd           \
+#         auto_remove_slash    \
+#      NO_auto_resume          \
+#         bad_pattern          \
+#      NO_bang_hist            \
+#      NO_beep                 \
+#         brace_ccl            \
+#         correct_all          \
+#      NO_bsd_echo             \
+#         cdable_vars          \
+#      NO_chase_links          \
+#         clobber              \
+#         complete_aliases     \
+#         complete_in_word     \
+#         correct              \
+#      NO_correct_all          \
+#      NO_csh_junkie_history   \
+#      NO_csh_junkie_loops     \
+#      NO_csh_junkie_quotes    \
+#      NO_csh_null_glob        \
+#         equals               \
+#         extended_glob        \
+#         extended_history     \
+# 	 NO_flow_control         \
+#         function_argzero     \
+#         glob                 \
+#      NO_glob_assign          \
+#         glob_complete        \
+#      NO_glob_dots            \
+#         glob_subst           \
+#         hash_cmds            \
+#         hash_dirs            \
+#         hash_list_all        \
+#         hist_allow_clobber   \
+#         hist_beep            \
+#         hist_ignore_dups     \
+#         hist_ignore_space    \
+#         hist_no_store        \
+#         hist_verify          \
+#      NO_hup                  \
+#      NO_ignore_braces        \
+#      NO_ignore_eof           \
+#         interactive_comments \
+#       	inc_append_history   \
+#      NO_list_ambiguous       \
+#      NO_list_beep            \
+#         list_types           \
+#         long_list_jobs       \
+#         magic_equal_subst    \
+#      NO_mail_warning         \
+#      NO_mark_dirs            \
+#         menu_complete        \
+#         multios              \
+#         nomatch              \
+#         notify               \
+#      NO_null_glob            \
+#         numeric_glob_sort    \
+#      NO_overstrike           \
+#         path_dirs            \
+#         posix_builtins       \
+#      NO_print_exit_value     \
+#         prompt_cr            \
+#         prompt_subst         \
+#         pushd_ignore_dups    \
+#      NO_pushd_minus          \
+#         pushd_silent         \
+#         pushd_to_home        \
+#         rc_expand_param      \
+#      NO_rc_quotes            \
+#      NO_rm_star_silent       \
+#      NO_sh_file_expansion    \
+#         sh_option_letters    \
+#         short_loops          \
+#      NO_sh_word_split        \
+#      NO_single_line_zle      \
+#      NO_sun_keyboard_hack    \
+#         unset                \
+#      NO_verbose              \
+#         zle
+
+
 
 
 
 # enhancd and tmux
 if zplug check b4b4r07/enhancd; then
-    export ENHANCD_FILTER=fzf-tmux
+    export ENHANCD_FILTER=fzf
 fi
-
 
 # Source fzf.zsh (fuzzy-finder)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS="--extended --ansi --multi"
 
 
-# Custom Functions
-function printpath {
-	echo $PATH | tr : \\n
-}
+if zplug check "zsh-users/zsh-history-substring-search"; then
+    bindkey '^[[A' history-substring-search-up
+    bindkey '^[[B' history-substring-search-down
+fi
+
+# rbenv
+if [[ $(command -v rbenv) ]]; then
+    eval "$(rbenv init - zsh --no-rehash)"
+fi
+
+# npm
+if [[ $(command -v npm) ]]; then
+    . <(npm completion)
+fi
+
+# fasd
+if [[ $(command -v fasd) ]]; then
+    eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
+fi
+
+
+
+# ZPLUG LOAD
+zplug load
+
+
+
+# Key bindings
+# bindkey -v
+
+
+# if zplug check "creationix/nvm" && [[ $(command -v nvm) ]] && [[ $(nvm current) == "system" ]]; then
+#     echo "Installing nvm latest node.js version"
+#     nvm install node
+#     nvm alias default node
+# fi
+
+
+# export GOPATH=$HOME/go
+# export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
