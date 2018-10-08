@@ -4,14 +4,14 @@
 
 bindkey "^K"      kill-whole-line                      # ctrl-k
 bindkey "^R"      history-incremental-search-backward  # ctrl-r
-bindkey "^A"      beginning-of-line                    # ctrl-a  
+bindkey "^A"      beginning-of-line                    # ctrl-a
 bindkey "^E"      end-of-line                          # ctrl-e
 bindkey "[B"      history-search-forward               # down arrow
 bindkey "[A"      history-search-backward              # up arrow
 bindkey "^D"      delete-char                          # ctrl-d
 bindkey "^F"      forward-char                         # ctrl-f
 bindkey "^B"      backward-char                        # ctrl-b
-bindkey -v   # Default to standard vi bindings, regardless of editor string
+# bindkey -v   # Default to standard vi bindings, regardless of editor string
 
 # [Esc-w] - Kill from the cursor to the mark
 bindkey '\ew' kill-region
@@ -50,25 +50,3 @@ bindkey '^[OH' beginning-of-line
 bindkey '^[[F' end-of-line
 bindkey '^[[4~' end-of-line
 bindkey '^[OF' end-of-line
-
-# [Space] - do history expansion
-# bindkey ' ' magic-space
-
-# [Alt+Right-Arrow] - move backward one word
-bindkey '^[b' backward-word
-
-# [Alt+Left-Arrow] - move forward one word
-bindkey '^[f' forward-word
-
-# Make the delete key (or Fn + Delete on the Mac) work instead of outputting ~
-# [Delete] - delete backward
-bindkey '^?' backward-delete-char
-
-# [fn-Delete] - delete forward
-bindkey '^[[3~' delete-char
-bindkey '^[3;5~' delete-char
-bindkey '\e[3~' delete-char
-
-# Emacs-style bindings
-bindkey '^a' beginning-of-line
-bindkey '^e' end-of-line

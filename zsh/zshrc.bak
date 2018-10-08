@@ -1,0 +1,145 @@
+
+# Source Local files in ~/.zsh/
+#for file in $HOME/dotfiles/zsh/*.zsh ; do
+#	source $file
+#done
+
+
+DEFAULT_USER=mark
+ZSH_THEME=pure
+
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=10000
+SAVEHIST=100000
+HISTFILE=~/.zsh_history
+
+# Paths
+export EDITOR=vim
+
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+
+# Aliases
+# Some more basic aliases
+alias ll='ls -lh'
+alias la='ls -lAh'
+alias l='ls -lah'
+alias md='mkdir -p'
+alias rd='rmdir'
+alias cd..='cd ..'
+alias cd...='cd ../..'
+alias cd....='cd ../../..'
+alias cd.....='cd ../../../..'
+alias cd......='cd ../../../../..'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+
+##############################
+# Zplug
+##############################
+# Check if zplug is installed
+if [[ ! -d ~/.zplug ]]; then
+  git clone https://github.com/zplug/zplug ~/.zplug
+  source ~/.zplug/init.zsh && zplug update --self
+fi
+
+# Essential
+source ~/.zplug/init.zsh
+
+# Add a bunch more of your favorite packages!
+zplug "zplug/zplug"
+
+# Theme
+zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+# zplug "themes/agnoster", from:oh-my-zsh
+
+zplug "supercrabtree/k"
+zplug "mafredri/zsh-async"
+zplug "desyncr/auto-ls"
+zplug "joepvd/zsh-hints"
+zplug "srijanshetty/zsh-pandoc-completion"
+zplug "chipsenkbeil/zsh-notes"
+zplug "lukechilds/zsh-nvm"
+zplug "mafredri/zsh-async"
+zplug "hkupty/ssh-agent"
+zplug "djui/alias-tips"
+zplug "athityakumar/colorls"
+
+
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting", defer:3
+zplug "zsh-users/zsh-history-substring-search", defer:3
+zplug "zsh-users/zsh-autosuggestions", defer:3
+# zplug "plugins/golang", from:oh-my-zsh, ignore:oh-my-zsh.sh, defer:2
+# zplug 'plugins/git', from:oh-my-zsh
+# zplug "trapd00r/zsh-syntax-highlighting-filetypes"
+# zplug "zpm-zsh/dircolors-material"
+# zplug "zpm-zsh/ls"
+# zplug "zpm-zsh/colors"
+# zplug "zpm-zsh/linuxbrew"
+# zplug "bbenne10/goenv"
+# zplug "momo-lab/zsh-abbrev-alias"
+# zplug "peterhurford/up.zsh"
+# zplug "zakariaGatter/MarkEdit"
+# zplug "b4b4r07/enhancd", use:init.sh
+# zplug "wfxr/forgit", defer:1
+# zplug "chipsenkbeil/zsh-notes"
+# zplug "zlsun/solarized-man"
+# zplug "aramboi/zsh-ipfs"
+# zplug "hcgraf/zsh-sudo ", from:oh-my-zsh, ignore:oh-my-zsh.sh, defer:2
+zplug "mollifier/zload"
+zplug "mollifier/anyframe"
+zplug "zdharma/zsh-diff-so-fancy", as:command, use:bin/git-dsf
+# zplug "psprint/zsh-select", defer:3
+
+
+# DEER
+zplug "vifon/deer", use:deer
+zle -N deer
+bindkey '\ek' deer
+
+
+# Install packages that have not been installed yet
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    else
+        echo
+    fi
+fi
+
+
+
+# ZPLUG LOAD
+zplug load # --verbose
+
+# ls command colors
+export LSCOLORS=exfxcxdxbxegedabagacad
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+
+# enhancd and tmux
+if zplug check b4b4r07/enhancd; then
+    export ENHANCD_FILTER=fzf-tmux
+fi
+
+
+# Source fzf.zsh (fuzzy-finder)
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# export FZF_DEFAULT_OPTS="--extended --ansi --multi"
+
+
+export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+export WORDCHARS='*?.[]~&;!#$%^(){}<>'

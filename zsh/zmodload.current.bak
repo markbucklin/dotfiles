@@ -1,0 +1,17 @@
+zmodload zsh/compctl
+zmodload zsh/complete
+zmodload zsh/complist
+zmodload zsh/computil
+zmodload zsh/curses
+zmodload zsh/datetime
+zmodload zsh/files
+zmodload zsh/main
+zmodload zsh/parameter
+zmodload zsh/regex
+zmodload zsh/stat
+zmodload zsh/system
+zmodload zsh/terminfo
+zmodload zsh/zle
+zmodload zsh/zleparameter
+zmodload zsh/zpty
+zmodload zsh/zutil

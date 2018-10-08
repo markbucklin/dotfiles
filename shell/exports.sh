@@ -3,8 +3,18 @@
 #export PATH=$PATH:/usr/local/bin:/usr/local/sbin:$HOME/bin
 #export PATH=$PATH:/usr/local/sbin:$HOME/bin:/usr/local/go/bin
 
-# remove duplicate entries
-typeset -U PATH
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+
 
 
 # Setup terminal, and turn on colors
@@ -22,10 +32,7 @@ export ARCHFLAGS='-arch x86_64'
 
 export LESS='--ignore-case --raw-control-chars'
 export PAGER='less'
-
-if [[ $IS_LINUX -eq 1 ]]; then
-    export EDITOR='vim'
-fi
+export EDITOR='nano'
 
 # Set LC_ALL="UTF8"
 export LC_ALL=en_US.UTF-8
@@ -37,3 +44,10 @@ export PROJECT_HOME=$HOME/projects
 #if [[ $HAS_VIRTUALENV -eq 1 ]]; then
 #    source /usr/local/bin/virtualenvwrapper.sh
 #fi
+
+#export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+export WORDCHARS='*?.[]~&;!#$%^(){}<>'
+
+
+# remove duplicate entries
+typeset -U PATH
