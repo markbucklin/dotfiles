@@ -108,8 +108,8 @@ zplug "wfxr/forgit", defer:1
 zplug "zlsun/solarized-man"
 zplug "aramboi/zsh-ipfs"
 zplug "hcgraf/zsh-sudo ", from:oh-my-zsh, ignore:oh-my-zsh.sh, defer:2
-zplug "jedahan/ripz"
-zplug "zdharma/zsh-diff-so-fancy", as:command, use:bin/git-dsf
+# zplug "jedahan/ripz"
+# zplug "zdharma/zsh-diff-so-fancy", as:command, use:bin/git-dsf
 
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then

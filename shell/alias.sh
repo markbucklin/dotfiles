@@ -20,7 +20,6 @@ alias ......='cd ../../../../..'
 alias df='df -hT'
 alias ocaml='rlwrap ocaml'
 alias vi=vim
-alias make=pretty_make.py
 # Random aliases
 alias find_duplicate_names='find . -type f | sed "s#.*/##" | sort | uniq -c | sort -nr | egrep -v "\s+1\s+"'
 alias hh='history | grep -i '
@@ -31,3 +30,5 @@ alias rfind='find -regextype posix-extended -regex'
 # Fake pbcopy/paste
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+alias aguu='sudo apt-get update -y && sudo apt-get upgrade -y'
+alias agi='sudo apt-get install -y'
