@@ -252,7 +252,7 @@ setopt                       \
      NO_glob_assign          \
         glob_complete        \
      NO_glob_dots            \
-        glob_subst           \
+     NO_glob_subst           \
         hash_cmds            \
         hash_dirs            \
         hash_list_all        \
@@ -274,7 +274,7 @@ setopt                       \
         magic_equal_subst    \
      NO_mail_warning         \
      NO_mark_dirs            \
-        menu_complete        \
+     NO_menu_complete        \
         multios              \
         nomatch              \
         notify               \
@@ -362,7 +362,7 @@ zle -N fancy-ctrl-z
 bindkey '' fancy-ctrl-z
 
 # ctrl space complete
-bindkey '' expand-or-complete-with-indicator
+bindkey '^ ' expand-or-complete-with-indicator
 
 substitute-last() {
 # interpreted at start, not when leaving
@@ -370,7 +370,7 @@ BUFFER="!!:gs/"
 CURSOR=6
 }
 zle -N substitute-last
-bindkey '' substitute-last
+bindkey '^g' substitute-last
 
 
 
