@@ -3,7 +3,7 @@
 bindkey -e
 autoload -U compinit && compinit
 zmodload -i zsh/complist
-zmodload -i zsh/curses
+# zmodload -i zsh/curses
 # zmodload zsh/compctl
 # zmodload zsh/complete
 # zmodload zsh/complist
@@ -23,17 +23,13 @@ zmodload -i zsh/curses
 # zmodload zsh/zutil
 
 
-export DEFAULT_USER=mark
-export DOTDIR="/home/$DEFAULT_USER/dotfiles"
-
-
 # Source Local files in ~/.zsh/
 for file in $DOTDIR/shell/*.sh ; do
 	source $file
 done
 
 # Source Local files in ~/.zsh/
-for file in $HOME/dotfiles/zsh/*.zsh ; do
+for file in $DOTDIR/zsh/*.zsh ; do
 	source $file
 done
 
@@ -83,6 +79,13 @@ zplug "zplug/zplug"
 
 # Theme
 export ZSH_THEME=punctual
+export PUNCTUAL_CURRENT_DIR_COLOUR=yellow;
+export PUNCTUAL_SHOW_HOSTNAME=false;
+export PUNCTUAL_SHOW_USER="false";
+export PUNCTUAL_SHOW_TIMESTAMP="false";
+export PUNCTUAL_SHOW_CURRENT_DIR="true";
+export PUNCTUAL_SHOW_GIT="false";
+export PUNCTUAL_CURRENT_DIR_BOLD="true";
 zplug "dannynimmo/punctual-zsh-theme", use:punctual.zsh-theme, from:github, as:theme
 
 PUNCTUAL_PROMPT="$";
@@ -98,16 +101,16 @@ zplug "lukechilds/zsh-nvm"
 zplug "hkupty/ssh-agent"
 zplug "athityakumar/colorls"
 zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-history-substring-search"
-zplug "zsh-users/zsh-autosuggestions", defer:2
+zplug "zsh-users/zsh-syntax-highlighting", defer:3
+zplug "zsh-users/zsh-history-substring-search", defer:3
+zplug "zsh-users/zsh-autosuggestions", defer:3
 zplug "Schnouki/git-annex-zsh-completion"
-zplug "akoenig/gulp.plugin.zsh"
+zplug "akoenig/gulp.plugin.zsh", defer:3
 zplug "ytet5uy4/fzf-widgets"
 zplug "wfxr/forgit", defer:1
-zplug "zlsun/solarized-man"
-zplug "aramboi/zsh-ipfs"
-zplug "hcgraf/zsh-sudo ", from:oh-my-zsh, ignore:oh-my-zsh.sh, defer:2
+# zplug "zlsun/solarized-man"
+zplug "aramboi/zsh-ipfs", defer:3
+zplug "hcgraf/zsh-sudo ", from:oh-my-zsh, ignore:oh-my-zsh.sh, defer:3
 # zplug "jedahan/ripz"
 # zplug "zdharma/zsh-diff-so-fancy", as:command, use:bin/git-dsf
 
@@ -329,6 +332,9 @@ fi
 
 # hub
 fpath=(~/.zsh/completions $fpath)
+
+# grunt-cli
+eval "$(grunt --completion=zsh)"
 
 
 ##############################

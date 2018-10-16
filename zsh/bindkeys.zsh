@@ -50,3 +50,12 @@ bindkey '^[OH' beginning-of-line
 bindkey '^[[F' end-of-line
 bindkey '^[[4~' end-of-line
 bindkey '^[OF' end-of-line
+
+
+# mappings for ctrl-left-arrow and ctrl-right-arrow for word moving
+bindkey '\e[1;5C' forward-word
+bindkey '\e[1;5D' backward-word
+bindkey '\e[5C' forward-word
+bindkey '\e[5D' backward-word
+bindkey '\e\e[C' forward-word
+bindkey '\e\e[D' backward-word
