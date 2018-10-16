@@ -32,3 +32,28 @@ alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias aguu='sudo apt-get update -y && sudo apt-get upgrade -y'
 alias agi='sudo apt-get install -y'
+
+
+
+# git
+alias gitgraph="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+
+# tmux
+alias t="tmux -2"
+alias ta="tmux -2 a"
+
+# Keyboard qwerty with accent
+# and "," (leader) on Caps Lock
+alias rebind='setxkbmap -option compose:ralt ; xmodmap -e "keycode 66 = comma Escape NoSymbol NoSymbol" ; xmodmap -e "clear lock"'
+
+# Alias post command
+
+alias -g G="| grep"
+alias -g L="| less"
+alias -g T="| tee -a "
+alias -g S="| sed"
+alias -g V="| vim - "
+alias -g X="| xclip"
+alias -g XX="\`xclip -o\`"
+
+alias -s {txt,h,c,hpp,cpp,tex,bib,html,xml}=$EDITOR

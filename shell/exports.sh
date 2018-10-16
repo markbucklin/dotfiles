@@ -32,7 +32,7 @@ export ARCHFLAGS='-arch x86_64'
 
 export LESS='--ignore-case --raw-control-chars'
 export PAGER='less'
-export EDITOR='nano'
+export EDITOR='atom'
 
 # Set LC_ALL="UTF8"
 export LC_ALL=en_US.UTF-8

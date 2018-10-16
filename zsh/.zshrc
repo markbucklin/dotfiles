@@ -1,3 +1,10 @@
+# Follow the link (if any) to find the config folder
+if [ -L $HOME/.zshrc ]; then
+   export ZDOTDIR=$(dirname `readlink -f $HOME/.zshrc`)
+else
+   export ZDOTDIR=${HOME}/.config/zsh/
+fi
+
 
 
 bindkey -e
@@ -210,7 +217,7 @@ setopt                       \
         always_last_prompt   \
         always_to_end        \
         append_history       \
-     NO_auto_cd              \
+     		auto_cd              \
         auto_list            \
         auto_menu            \
         auto_name_dirs       \
@@ -335,6 +342,41 @@ fpath=(~/.zsh/completions $fpath)
 
 # grunt-cli
 eval "$(grunt --completion=zsh)"
+
+
+
+##############################
+# OTHER
+##############################
+# ctrl z back and forth
+fancy-ctrl-z () {
+if [[ $#BUFFER -eq 0 ]]; then
+   BUFFER="fg"
+   zle accept-line
+else
+   zle push-input
+   zle clear-screen
+fi
+}
+zle -N fancy-ctrl-z
+bindkey '' fancy-ctrl-z
+
+# ctrl space complete
+bindkey '' expand-or-complete-with-indicator
+
+substitute-last() {
+# interpreted at start, not when leaving
+BUFFER="!!:gs/"
+CURSOR=6
+}
+zle -N substitute-last
+bindkey '' substitute-last
+
+
+
+
+# automatically remove duplicates from these arrays
+typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 
 
 ##############################
