@@ -2,45 +2,46 @@
 if [ -L $HOME/.zshrc ]; then
    export ZDOTDIR=$(dirname `readlink -f $HOME/.zshrc`)
 else
-   export ZDOTDIR=${HOME}/.config/zsh/
+   export ZDOTDIR=${HOME}/.config/zsh
 fi
 
 
 
+# Set emacs keyboard bindings
 bindkey -e
-autoload -U compinit && compinit
+
+#  Run auto-load
+autoload -Uz compinit && compinit
+zmodload -i zsh/complete
 zmodload -i zsh/complist
-# zmodload -i zsh/curses
-# zmodload zsh/compctl
-# zmodload zsh/complete
-# zmodload zsh/complist
-# zmodload zsh/computil
-# zmodload zsh/curses
-# zmodload zsh/datetime
-# zmodload zsh/files
-# zmodload zsh/main
-# zmodload zsh/parameter
-# zmodload zsh/regex
-# zmodload zsh/stat
-# zmodload zsh/system
-# zmodload zsh/terminfo
-# zmodload zsh/zle
-# zmodload zsh/zleparameter
-# zmodload zsh/zpty
-# zmodload zsh/zutil
+# zmodload -i zsh/compctl
+# zmodload -i zsh/computil
+zmodload -i zsh/curses
+# zmodload -i zsh/datetime
+# zmodload -i zsh/files
+# zmodload -i zsh/main
+zmodload -i zsh/parameter
+# zmodload -i zsh/regex
+# zmodload -i zsh/stat
+# zmodload -i zsh/system
+# zmodload -i zsh/terminfo
+zmodload -i zsh/zle
+# zmodload -i zsh/zleparameter
+# zmodload -i zsh/zpty
+# zmodload -i zsh/zutil
 
 
-# Source Local files in ~/.zsh/
+# Source Local Dot-Files (common to all shells)
 for file in $DOTDIR/shell/*.sh ; do
 	source $file
 done
 
-# Source Local files in ~/.zsh/
-for file in $DOTDIR/zsh/*.zsh ; do
+# Source Local Dot-Files for ZSH
+for file in $ZDOTDIR/*.zsh ; do
 	source $file
 done
 
-# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+# Keep 10000 lines of history within the shell and save it to ~/.zsh_history:
 export HISTSIZE=10000
 export SAVEHIST=100000
 export HISTFILE=~/.zsh_history
@@ -82,9 +83,12 @@ fi
 source ~/.zplug/init.zsh
 
 # Add a bunch more of your favorite packages!
-zplug "zplug/zplug"
+zplug "zplug/zplug", hook-build:'zplug --self-manage'
+zplug "~/.zsh", from:local, use:"<->_*.zsh"
 
+##############################
 # Theme
+##############################
 export ZSH_THEME=punctual
 export PUNCTUAL_CURRENT_DIR_COLOUR=yellow;
 export PUNCTUAL_SHOW_HOSTNAME=false;
@@ -93,10 +97,36 @@ export PUNCTUAL_SHOW_TIMESTAMP="false";
 export PUNCTUAL_SHOW_CURRENT_DIR="true";
 export PUNCTUAL_SHOW_GIT="false";
 export PUNCTUAL_CURRENT_DIR_BOLD="true";
+# PUNCTUAL_TIMESTAMP_COLOUR="red";
+# PUNCTUAL_USER_COLOUR="green";
+# PUNCTUAL_ROOT_USER_COLOUR="yellow";
+# PUNCTUAL_HOSTNAME_COLOUR="blue";
+# PUNCTUAL_CURRENT_DIR_COLOUR="magenta";
+# PUNCTUAL_GIT_COLOUR="cyan";
+# PUNCTUAL_TIMESTAMP_BOLD="true";
+# PUNCTUAL_USER_BOLD="true";
+# PUNCTUAL_ROOT_USER_BOLD="true";
+# PUNCTUAL_HOSTNAME_BOLD="true";
+# PUNCTUAL_CURRENT_DIR_BOLD="true";
+# PUNCTUAL_GIT_BOLD="true";
+# PUNCTUAL_TIMESTAMP_FORMAT="%l:%M%P";
+
+# PUNCTUAL_GIT_SYMBOL_UNTRACKED="?";
+# PUNCTUAL_GIT_SYMBOL_ADDED="+";
+# PUNCTUAL_GIT_SYMBOL_MODIFIED="!";
+# PUNCTUAL_GIT_SYMBOL_RENAMED="!";
+# PUNCTUAL_GIT_SYMBOL_DELETED="!";
+# PUNCTUAL_GIT_SYMBOL_STASHED="*";
+# PUNCTUAL_GIT_SYMBOL_UNMERGED="M";
+# PUNCTUAL_GIT_SYMBOL_AHEAD="↑";
+# PUNCTUAL_GIT_SYMBOL_BEHIND="↓";
+# PUNCTUAL_GIT_SYMBOL_DIVERGED="~";
+export PUNCTUAL_PROMPT=" $";
 zplug "dannynimmo/punctual-zsh-theme", use:punctual.zsh-theme, from:github, as:theme
 
-PUNCTUAL_PROMPT="$";
-
+##############################
+# PLUGINS
+##############################
 zplug "mollifier/zload"
 zplug "mafredri/zsh-async"
 zplug "supercrabtree/k"
@@ -109,17 +139,20 @@ zplug "hkupty/ssh-agent"
 zplug "athityakumar/colorls"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
-zplug "zsh-users/zsh-history-substring-search", defer:3
-zplug "zsh-users/zsh-autosuggestions", defer:3
+zplug "zsh-users/zsh-history-substring-search", defer:2
+zplug "zsh-users/zsh-autosuggestions", defer:2
 zplug "Schnouki/git-annex-zsh-completion"
-zplug "akoenig/gulp.plugin.zsh", defer:3
+zplug "akoenig/gulp.plugin.zsh", defer:2
 zplug "ytet5uy4/fzf-widgets"
 zplug "wfxr/forgit", defer:1
 # zplug "zlsun/solarized-man"
-zplug "aramboi/zsh-ipfs", defer:3
-zplug "hcgraf/zsh-sudo ", from:oh-my-zsh, ignore:oh-my-zsh.sh, defer:3
-# zplug "jedahan/ripz"
+zplug "aramboi/zsh-ipfs", defer:2
+zplug "hcgraf/zsh-sudo ", from:oh-my-zsh, ignore:oh-my-zsh.sh, defer:2
+zplug "ogham/exa"
+zplug 'knqyf263/pet', as:command, hook-build:'go get -d && go build'
 # zplug "zdharma/zsh-diff-so-fancy", as:command, use:bin/git-dsf
+zplug "stedolan/jq", as:command, from:gh-r, rename-to:jq
+zplug "motemen/ghq", as:command, from:gh-r, rename-to:ghq
 
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then
@@ -133,25 +166,19 @@ fi
 
 
 ##############################
-# Zstyle
+# ZSTYLE
 ##############################
-zstyle ':completion:*' auto-description 'specify: %d'
-zstyle ':completion:*' completer _expand _complete _correct _approximate
-zstyle ':completion:*' format 'Completing %d'
+# zstyle ':completion:*' format 'Completing %d'
 # zstyle ':completion:*' group-name ''
-zstyle ':completion:*' menu select=2
-eval "$(dircolors -b)"
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' list-colors ''
+# eval "$(dircolors -b)"
+# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+# zstyle ':completion:*' list-colors ''
 # zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
-# zstyle ':completion:*' menu select=long
-# zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle ':completion:*' use-compctl false
-zstyle ':completion:*' verbose true
-
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+# zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+# zstyle ':completion:*' use-compctl false
+# zstyle ':completion:*' verbose false
+# zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+# zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 
 # Expansion options
@@ -202,7 +229,7 @@ zstyle ':completion:*:warnings' format '%B%U---- no match for: %d%u%b'
 
 # Describe options in full
 zstyle ':completion:*:options' description 'yes'
-# zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:options' auto-description '%d'
 
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:kill:*' list-colors '=%*=01;31'
@@ -308,14 +335,9 @@ setopt                       \
 ##############################
 # For individual Zplug loaded modules
 ##############################
-# enhancd and tmux
-if zplug check b4b4r07/enhancd; then
-    export ENHANCD_FILTER=fzf
-fi
-
 # Source fzf.zsh (fuzzy-finder)
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS="--extended --ansi --multi"
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# export FZF_DEFAULT_OPTS="--extended --ansi --multi"
 
 if zplug check "zsh-users/zsh-history-substring-search"; then
     bindkey '^[[A' history-substring-search-up
@@ -332,10 +354,10 @@ if [[ $(command -v npm) ]]; then
     . <(npm completion)
 fi
 
-# fasd
-if [[ $(command -v fasd) ]]; then
-    eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
-fi
+# # fasd
+# if [[ $(command -v fasd) ]]; then
+#     eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
+# fi
 
 # hub
 fpath=(~/.zsh/completions $fpath)
@@ -345,9 +367,13 @@ eval "$(grunt --completion=zsh)"
 
 
 
+
 ##############################
 # OTHER
 ##############################
+# yank
+alias yank='yank-cli -- xsel -b'
+
 # ctrl z back and forth
 fancy-ctrl-z () {
 if [[ $#BUFFER -eq 0 ]]; then
@@ -359,21 +385,7 @@ else
 fi
 }
 zle -N fancy-ctrl-z
-bindkey '' fancy-ctrl-z
-
-# ctrl space complete
-bindkey '^ ' expand-or-complete-with-indicator
-
-substitute-last() {
-# interpreted at start, not when leaving
-BUFFER="!!:gs/"
-CURSOR=6
-}
-zle -N substitute-last
-bindkey '^g' substitute-last
-
-
-
+bindkey '^z' fancy-ctrl-z
 
 # automatically remove duplicates from these arrays
 typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
@@ -384,57 +396,9 @@ typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 ##############################
 zplug load
 
+neofetch
 
 
-
-
-
-
-
-
-
-
-
-# if zplug check "creationix/nvm" && [[ $(command -v nvm) ]] && [[ $(nvm current) == "system" ]]; then
-#     echo "Installing nvm latest node.js version"
-#     nvm install node
-#     nvm alias default node
-# fi
-
-
-# export GOPATH=$HOME/go
-# export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
-
-# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
-# pure
-# zplug "AugustoQueiroz/asq-theme", use:asq.zsh-theme, as:theme
-# zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
-# zplug "themes/agnoster", from:oh-my-zsh
-
-# PUNCTUAL_TIMESTAMP_COLOUR="red";
-# PUNCTUAL_USER_COLOUR="green";
-# PUNCTUAL_ROOT_USER_COLOUR="yellow";
-# PUNCTUAL_HOSTNAME_COLOUR="blue";
-# PUNCTUAL_CURRENT_DIR_COLOUR="magenta";
-# PUNCTUAL_GIT_COLOUR="cyan";
-# PUNCTUAL_TIMESTAMP_BOLD="true";
-# PUNCTUAL_USER_BOLD="true";
-# PUNCTUAL_ROOT_USER_BOLD="true";
-# PUNCTUAL_HOSTNAME_BOLD="true";
-# PUNCTUAL_CURRENT_DIR_BOLD="true";
-# PUNCTUAL_GIT_BOLD="true";
-# PUNCTUAL_TIMESTAMP_FORMAT="%l:%M%P";
-
-# PUNCTUAL_GIT_SYMBOL_UNTRACKED="?";
-# PUNCTUAL_GIT_SYMBOL_ADDED="+";
-# PUNCTUAL_GIT_SYMBOL_MODIFIED="!";
-# PUNCTUAL_GIT_SYMBOL_RENAMED="!";
-# PUNCTUAL_GIT_SYMBOL_DELETED="!";
-# PUNCTUAL_GIT_SYMBOL_STASHED="*";
-# PUNCTUAL_GIT_SYMBOL_UNMERGED="M";
-# PUNCTUAL_GIT_SYMBOL_AHEAD="↑";
-# PUNCTUAL_GIT_SYMBOL_BEHIND="↓";
-# PUNCTUAL_GIT_SYMBOL_DIVERGED="~";
 
 # zplug "mollifier/anyframe"
 # zplug "peterhurford/up.zsh"
@@ -485,3 +449,28 @@ zplug load
 # setopt correct # spelling correction for commands
 # # unsetopt bg_nice                # no lower prio for background jobs
 # setopt list_ambiguous           # complete as much of a completion until it gets ambiguous.
+
+
+
+
+
+# zstyle ':prezto:module:prompt' theme 'pure'
+#
+# # The order matters.
+# zstyle ':prezto:load' pmodule \
+#   'environment' \
+#   'terminal' \
+#   'command-not-found' \
+#   'history' \
+#   'directory' \
+#   'spectrum' \
+#   'utility' \
+#   'completion' \
+#   'syntax-highlighting' \
+#   'history-substring-search' \
+#   'autosuggestions' \
+#   'prompt'
+
+
+# HIST_STAMPS="mm/dd/yyyy" # variable used in oh-my-zsh/lib/history.zsh
+# zplug "robbyrussell/oh-my-zsh", use:"lib/{clipboard,completion,directories,history,termsupport,key-bindings}.zsh"

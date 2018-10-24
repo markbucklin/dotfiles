@@ -19,6 +19,8 @@ bindkey '\ew' kill-region
 # [Ctrl-k] - Kill from cursor to end of line
 bindkey '^k' kill-line
 
+bindkey '^y' yank
+
 # [Esc-l] - run command: ls
 bindkey -s '\el' 'ls -lha\n'
 
@@ -59,3 +61,44 @@ bindkey '\e[5C' forward-word
 bindkey '\e[5D' backward-word
 bindkey '\e\e[C' forward-word
 bindkey '\e\e[D' backward-word
+
+
+# ctrl space complete
+# bindkey '^ ' expand-or-complete
+bindkey '^ ' autosuggest-accept
+
+bindkey '^ ^ ' autosuggest-execute
+
+
+
+
+# autosuggest-clear
+# autosuggest-enable
+# autosuggest-disable
+# autosuggest-execute
+# autosuggest-fetch
+
+# # clear bindings
+#   unbind C-b
+#   unbind '"'
+#   unbind %
+#   # nicer prefix
+#   set -g prefix C-Space
+#   bind Space send-prefix
+#   # splitting like spacemacs
+#   bind / split-window -h
+#   bind - split-window -v
+#   # do like terminator
+#   bind -n C-E split-window -h
+#   bind -n C-S-Left resize-pane -L 3
+#   bind -n C-S-Right resize-pane -R 3
+#   bind -n C-S-Up resize-pane -U 3
+#   bind -n C-S-Down resize-pane -D 3
+#   bind -n C-O split-window -v
+#   # move panes without prefix
+#   bind -n M-h select-pane -L
+#   bind -n M-l select-pane -R
+#   bind -n M-k select-pane -U
+#   bind -n M-j select-pane -D
+#   bind r source-file ~/.tmux.conf
+# bindkey ' ' magic-space

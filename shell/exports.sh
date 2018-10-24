@@ -53,3 +53,5 @@ export WORDCHARS='*?.[]~&;!#$%^(){}<>'
 typeset -U PATH
 export VDPAU_DRIVER=nvidia
 export LIBVA_DRIVER_NAME=vdpau
+export PATH=$HOME/gems/bin:$PATH
+export GEM_HOME=$HOME/gems
