@@ -60,4 +60,3 @@ alias -g XX="\`xclip -o\`"
 alias -s {txt,h,c,hpp,cpp,tex,bib,html,xml}=$EDITOR
 # alias npm-ls-bin='ls $HOME/.nvm/versions/node/v10.1.0/bin'
 alias npm-ls-bin="ls $(dirname $(which npm))"
-alias npm-ls-bin=ls /home/mark/.nvm/versions/node/v10.1.0/bin
