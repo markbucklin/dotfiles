@@ -322,72 +322,6 @@ join-lines() {
 
 
 
-
-# c - browse chrome history
-c() {
-  local cols sep google_history open
-  cols=$(( COLUMNS / 3 ))
-  sep='{::}'
-
-  if [ "$(uname)" = "Darwin" ]; then
-    google_history="$HOME/Library/Application Support/Google/Chrome/Default/History"
-    open=open
-  else
-    google_history="$HOME/.config/google-chrome/Default/History"
-    open=xdg-open
-  fi
-  cp -f "$google_history" /tmp/h
-  sqlite3 -separator $sep /tmp/h \
-    "select substr(title, 1, $cols), url
-     from urls order by last_visit_time desc" |
-  awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
-  fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
-}
-
-
-# function cd() {
-#     if [[ "$#" != 0 ]]; then
-#         builtin cd "$@";
-#         return
-#     fi
-#     while true; do
-#         local lsd=$(echo ".." && ls -p | grep '/$' | sed 's;/$;;')
-#         local dir="$(printf '%s\n' "${lsd[@]}" |
-#             fzf --reverse --preview '
-#                 __cd_nxt="$(echo {})";
-#                 __cd_path="$(echo $(pwd)/${__cd_nxt} | sed "s;//;/;")";
-#                 echo $__cd_path;
-#                 echo;
-#                 ls -p --color=always "${__cd_path}";
-#         ')"
-#         [[ ${#dir} != 0 ]] || return 0
-#         builtin cd "$dir" &> /dev/null
-#     done
-# }
-
-
-# fasd & fzf change directory - jump using `fasd` if given argument, filter output of `fasd` using `fzf` else
-z() {
-    [ $# -gt 0 ] && fasd_cd -d "$*" && return
-    local dir
-    dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
-}
-alias j=z
-
-
-# ALT-I - Paste the selected entry from locate output into the command line
-fzf-locate-widget() {
-  local selected
-  if selected=$(locate / | fzf -q "$LBUFFER"); then
-    LBUFFER=$selected
-  fi
-  zle redisplay
-}
-zle     -N    fzf-locate-widget
-bindkey '\ei' fzf-locate-widget
-
-
-
 # fbr - checkout git branch
 fbr() {
   local branches branch
@@ -395,3 +329,36 @@ fbr() {
   branch=$(echo "$branches" | fzf-tmux -d 15 +m) &&
   git checkout $(echo "$branch" | sed "s/.* //")
 }
+
+tx() {
+  tmux splitw "$*; echo -n Press enter to finish.; read"
+  tmux select-layout tiled
+  tmux last-pane
+}
+
+gitzip() {
+  git archive -o $(basename $PWD).zip HEAD
+}
+
+gittgz() {
+  git archive -o $(basename $PWD).tgz HEAD
+}
+
+gitdiffb() {
+  if [ $# -ne 2 ]; then
+    echo two branch names required
+    return
+  fi
+  git log --graph \
+  --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' \
+  --abbrev-commit --date=relative $1..$2
+}
+
+alias gitv='git log --graph --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+
+tail-until() (
+  pattern=$1
+  shift
+  grep -m 1 "$pattern" <(exec tail -F "$@"); kill $!
+)
