@@ -11,7 +11,7 @@ export FZF_COMPLETION_OPTS='+c -x'
 # Default
 # ---------
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export FZF_DEFAULT_OPTS='--no-reverse --inline-info --extended --no-height'
+# export FZF_DEFAULT_OPTS='--no-reverse --inline-info --extended --no-height'
 
 # CTRL-R: History Search
 # ---------
@@ -48,7 +48,8 @@ source "/home/mark/.fzf/shell/key-bindings.zsh"
 # Other Functions
 # ---------------
 fzf-down() {
-  fzf --height 50% "$@" --border
+  # fzf --height 50% "$@" --border
+  fzf
 }
 # Figlet font selector => copy to clipboard
 fgl() (
@@ -167,6 +168,23 @@ gs() {
   git stash list | fzf-down --reverse -d: --preview 'git show --color=always {1}' |
   cut -d: -f1
 }
+
+
+if [[ $- =~ i ]]; then
+  # bindkey "\er" redraw-current-line
+  zle -N gf
+  bindkey '^G^F' gf
+  zle -N gb
+  bindkey '^G^B' gb
+  zle -N gt
+  bindkey '^G^T' gt
+  zle -N gh
+  bindkey '^G^H' gh
+  zle -N gr
+  bindkey '^G^R' gr
+  zle -N gs
+  bindkey '^G^S' gs
+fi
 
 
 
