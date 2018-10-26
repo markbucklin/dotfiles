@@ -149,7 +149,7 @@ zplug "wfxr/forgit", defer:1
 zplug "aramboi/zsh-ipfs", defer:2
 zplug "hcgraf/zsh-sudo ", from:oh-my-zsh, ignore:oh-my-zsh.sh, defer:2
 zplug "ogham/exa"
-zplug 'knqyf263/pet', as:command, hook-build:'go get -d && go build'
+zplug 'knqyf263/pet', as:command, hotaok-build:'go get -d && go build'
 # zplug "zdharma/zsh-diff-so-fancy", as:command, use:bin/git-dsf
 zplug "stedolan/jq", as:command, from:gh-r, rename-to:jq
 zplug "motemen/ghq", as:command, from:gh-r, rename-to:ghq
@@ -192,7 +192,7 @@ zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
 
 # Use menu selection
-zstyle ':completion:*' menu select=2
+zstyle ':completion:*' menu select=1
 
 # Expand partial paths
 zstyle ':completion:*' expand 'yes'
