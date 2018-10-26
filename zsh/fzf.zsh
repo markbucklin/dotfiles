@@ -20,6 +20,11 @@ export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat 
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
+# Breadth first list directories
+# bash <(curl -fL https://raw.githubusercontent.com/junegunn/blsd/master/install)
+command -v blsd > /dev/null && export FZF_ALT_C_COMMAND='blsd'
+
+
 
 # Auto-completion
 # ---------------

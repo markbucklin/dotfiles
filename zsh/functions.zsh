@@ -385,3 +385,13 @@ fzf-locate-widget() {
 }
 zle     -N    fzf-locate-widget
 bindkey '\ei' fzf-locate-widget
+
+
+
+# fbr - checkout git branch
+fbr() {
+  local branches branch
+  branches=$(git branch) &&
+  branch=$(echo "$branches" | fzf-tmux -d 15 +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //")
+}
