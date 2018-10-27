@@ -65,9 +65,12 @@ bindkey '\e\e[D' backward-word
 
 # ctrl space complete
 # bindkey '^ ' expand-or-complete
-bindkey '^ ' autosuggest-accept
-
-bindkey '^ ^ ' autosuggest-execute
+# [ctrl + space]
+bindkey '^@' autosuggest-accept
+# [alt-super + space]
+bindkey '^[ ' autosuggest-fetch
+# [ctrl-alt-shift + space]
+bindkey '^[^@' autosuggest-execute
 
 
 
