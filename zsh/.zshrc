@@ -26,7 +26,7 @@ zmodload -i zsh/parameter
 # zmodload -i zsh/system
 # zmodload -i zsh/terminfo
 zmodload -i zsh/zle
-# zmodload -i zsh/zleparameter
+zmodload -i zsh/zleparameter
 # zmodload -i zsh/zpty
 # zmodload -i zsh/zutil
 
@@ -50,8 +50,8 @@ export HISTFILE=~/.zsh_history
 # Colors
 ##############################
 # ls command colors
-export LSCOLORS=exfxcxdxbxegedabagacad
-export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+# export LSCOLORS=exfxcxdxbxegedabagacad
+# export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
 eval `dircolors -b`
 export ZLS_COLORS=$LS_COLORS
@@ -138,16 +138,31 @@ zplug "lukechilds/zsh-nvm"
 zplug "hkupty/ssh-agent"
 zplug "athityakumar/colorls"
 zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:3
-zplug "zsh-users/zsh-history-substring-search", defer:2
 zplug "zsh-users/zsh-autosuggestions", defer:2
+zplug "zsh-users/zsh-history-substring-search", defer:3
+zplug "zsh-users/zsh-syntax-highlighting", defer:3
+# ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+
+
+
 zplug "Schnouki/git-annex-zsh-completion"
 zplug "akoenig/gulp.plugin.zsh", defer:2
 zplug "ytet5uy4/fzf-widgets"
 zplug "wfxr/forgit", defer:1
 # zplug "zlsun/solarized-man"
 zplug "aramboi/zsh-ipfs", defer:2
-zplug "hcgraf/zsh-sudo ", from:oh-my-zsh, ignore:oh-my-zsh.sh, defer:2
+zplug "hcgraf/zsh-sudo", from:oh-my-zsh
+#, ignore:oh-my-zsh.sh, defer:2
+zplug "plugins/colored-man-pages", from:oh-my-zsh
+
+zplug "plugins/git",    from:oh-my-zsh, if:"which git"
+zplug "plugins/go",     from:oh-my-zsh, if:"which go"
+zplug "plugins/golang", from:oh-my-zsh, if:"which go"
+zplug "plugins/nmap",   from:oh-my-zsh, if:"which nmap"
+zplug "plugins/sudo",   from:oh-my-zsh, if:"which sudo"
+zplug "plugins/tmux",   from:oh-my-zsh, if:"which tmux"
+
+
 zplug "ogham/exa"
 zplug 'knqyf263/pet', as:command, hook-build:'go get -d && go build'
 # zplug "zdharma/zsh-diff-so-fancy", as:command, use:bin/git-dsf
@@ -169,9 +184,66 @@ if ! zplug check --verbose; then
 fi
 
 
+export LESS="--tabs=4 --no-init --LONG-PROMPT --ignore-case --quit-if-one-screen --RAW-CONTROL-CHARS"
+
 ##############################
 # ZSTYLE
 ##############################
+# Add path to my completions
+fpath=(~/.zsh/completion.local $fpath)
+
+# man zshcontrib
+zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+zstyle ':vcs_info:*' enable git #svn cvs
+
+# Enable completion caching, use rehash to clear
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
+
+# Fallback to built in ls colors
+zstyle ':completion:*' list-colors ''
+
+# Make the list prompt friendly
+zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
+
+# Make the selection prompt friendly when there are a lot of choices
+zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+
+# Add simple colors to kill
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+
+# list of completers to use
+zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' menu select=1 _complete _ignored _approximate
+
+# insert all expansions for expand completer
+# zstyle ':completion:*:expand:*' tag-order all-expansions
+
+# match uppercase from lowercase
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# offer indexes before parameters in subscripts
+zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
+
+# formatting and messages
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
+zstyle ':completion:*' group-name ''
+
+# ignore completion functions (until the _ignored completer)
+zstyle ':completion:*:functions' ignored-patterns '_*'
+zstyle ':completion:*:scp:*' tag-order files users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
+zstyle ':completion:*:scp:*' group-order files all-files users hosts-domain hosts-host hosts-ipaddr
+zstyle ':completion:*:ssh:*' tag-order users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
+zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
+zstyle '*' single-ignored show
+
+
+
 # zstyle ':completion:*' format 'Completing %d'
 # zstyle ':completion:*' group-name ''
 # eval "$(dircolors -b)"
@@ -184,59 +256,59 @@ fi
 # zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 # zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-
-# Expansion options
-zstyle ':completion:*' completer _expand _complete _correct _prefix _approximate
-zstyle ':completion::prefix-1:*' completer _complete
-zstyle ':completion:incremental:*' completer _complete _correct
-zstyle ':completion:predict:*' completer _complete
-
-# Completion caching
-zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
-
-# Use menu selection
-zstyle ':completion:*' menu select=1
-
-# Expand partial paths
-zstyle ':completion:*' expand 'yes'
-zstyle ':completion:*' squeeze-slashes 'yes'
-
-# Include non-hidden directories in globbed file completions
-# for certain commands
-zstyle ':completion::complete:*' '\'
-
-# Use menuselection for pid completion
-zstyle ':completion:*:kill:*' force-list always
-zstyle ':completion:*:*:kill:*' menu yes select
-
-# tag-order 'globbed-files directories' all-files
-zstyle ':completion::complete:*:tar:directories' file-patterns '*~.*(-/)'
-
-# Don't complete backup files as executables
-zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
-
-# Separate matches into groups
-zstyle ':completion:*:matches' group 'yes'
-
-# With commands like rm, it's annoying if you keep getting offered the same
-# file multiple times. This fixes it. Also good for cp, et cetera..
-zstyle ':completion:*:rm:*' ignore-line yes
-zstyle ':completion:*:cp:*' ignore-line yes
-
-# Describe each match group.
-zstyle ':completion:*:descriptions' format "%B---- %d%b"
-
-# Messages/warnings format
-zstyle ':completion:*:messages' format '%B%U---- %d%u%b'
-zstyle ':completion:*:warnings' format '%B%U---- no match for: %d%u%b'
-
-# Describe options in full
-zstyle ':completion:*:options' description 'yes'
-zstyle ':completion:*:options' auto-description '%d'
-
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*:*:kill:*' list-colors '=%*=01;31'
+#
+# # Expansion options
+# zstyle ':completion:*' completer _expand _complete _correct _prefix _approximate
+# zstyle ':completion::prefix-1:*' completer _complete
+# zstyle ':completion:incremental:*' completer _complete _correct
+# zstyle ':completion:predict:*' completer _complete
+#
+# # Completion caching
+# zstyle ':completion::complete:*' use-cache 1
+# zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
+#
+# # Use menu selection
+# zstyle ':completion:*' menu select=2
+#
+# # Expand partial paths
+# zstyle ':completion:*' expand 'yes'
+# zstyle ':completion:*' squeeze-slashes 'yes'
+#
+# # Include non-hidden directories in globbed file completions
+# # for certain commands
+# zstyle ':completion::complete:*' '\'
+#
+# # Use menuselection for pid completion
+# zstyle ':completion:*:kill:*' force-list always
+# zstyle ':completion:*:*:kill:*' menu yes select
+#
+# # tag-order 'globbed-files directories' all-files
+# zstyle ':completion::complete:*:tar:directories' file-patterns '*~.*(-/)'
+#
+# # Don't complete backup files as executables
+# zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
+#
+# # Separate matches into groups
+# zstyle ':completion:*:matches' group 'yes'
+#
+# # With commands like rm, it's annoying if you keep getting offered the same
+# # file multiple times. This fixes it. Also good for cp, et cetera..
+# zstyle ':completion:*:rm:*' ignore-line yes
+# zstyle ':completion:*:cp:*' ignore-line yes
+#
+# # Describe each match group.
+# zstyle ':completion:*:descriptions' format "%B---- %d%b"
+#
+# # Messages/warnings format
+# zstyle ':completion:*:messages' format '%B%U---- %d%u%b'
+# zstyle ':completion:*:warnings' format '%B%U---- no match for: %d%u%b'
+#
+# # Describe options in full
+# zstyle ':completion:*:options' description 'yes'
+# zstyle ':completion:*:options' auto-description '%d'
+#
+# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+# zstyle ':completion:*:*:kill:*' list-colors '=%*=01;31'
 
 
 

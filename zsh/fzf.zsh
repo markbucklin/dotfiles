@@ -1,24 +1,34 @@
+# ---------
 # Setup fzf
 # ---------
 if [[ ! "$PATH" == */home/mark/.fzf/bin* ]]; then
   export PATH="$PATH:/home/mark/.fzf/bin"
 fi
 
+# ---------
 # Completion
 # ---------
 export FZF_COMPLETION_OPTS='+c -x'
 
+
+
+# ---------
 # Default
 # ---------
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-# export FZF_DEFAULT_OPTS='--no-reverse --inline-info --extended --no-height'
+export FZF_DEFAULT_OPTS="--extended --ansi --tabstop=4 --margin=1,4,2,1 --no-height"
 
+
+# --------------------------
 # CTRL-R: History Search
-# ---------
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+# --------------------------
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:hidden:wrap"
 
+
+
+# --------------------------
 # ALT-C: Change Directory
-# ---------
+# --------------------------
 if $(command -v blsd > /dev/null) ; then
   # Breadth first list directories
   # bash <(curl -fL https://raw.githubusercontent.com/junegunn/blsd/master/install)
@@ -26,22 +36,37 @@ if $(command -v blsd > /dev/null) ; then
 else
   export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
 fi
-export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+
+export FZF_ALT_C_COMMAND='print -D -l "${PWD}/.." ; blsd'
+export FZF_ALT_C_OPTS="--preview 'tree -C {}  2> /dev/null | head -300' --preview-window right:60% --reverse --bind=ctrl-space:replace-query"
 
 
+
+
+# --------------------------
 # CTRL-T: File Search
-# ---------
+# --------------------------
 export FZF_CTRL_T_COMMAND='fd --type f --type d --hidden --follow --exclude .git'
-export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -$LINES' --preview-window down"
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -$LINES' --preview-window right:60% --reverse"
 
 
+
+# ---------------
 # Auto-completion
 # ---------------
 [[ $- == *i* ]] && source "/home/mark/.fzf/shell/completion.zsh" 2> /dev/null
 
+
+
+# ------------
 # Key bindings
 # ------------
 source "/home/mark/.fzf/shell/key-bindings.zsh"
+
+
+
+
+
 
 
 # ---------------
@@ -163,11 +188,11 @@ gr() {
   cut -d$'\t' -f1
 }
 
-gs() {
-  is_in_git_repo || return
-  git stash list | fzf-down --reverse -d: --preview 'git show --color=always {1}' |
-  cut -d: -f1
-}
+# gs() {
+#   is_in_git_repo || return
+#   git stash list | fzf-down --reverse -d: --preview 'git show --color=always {1}' |
+#   cut -d: -f1
+# }
 
 
 if [[ $- =~ i ]]; then
@@ -268,3 +293,7 @@ bindkey '\ei' fzf-locate-widget
 # export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden --preview '[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file ||  (highlight -O ansi -l {} ||  coderay {} || rougify {} || cat {}) 2> /dev/null | head -$LINES' --preview-window down:1"
 # --preview='head -$LINES {}' --bind='alt-p:toggle-preview'
 # export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+ # --bind '?:toggle-preview'
+
+ # export FZF_DEFAULT_OPTS="--extended --ansi --multi"
+ # export FZF_DEFAULT_OPTS='--no-reverse --inline-info --extended --no-height'

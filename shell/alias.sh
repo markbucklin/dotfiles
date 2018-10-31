@@ -1,10 +1,15 @@
 
 
 # Some more basic aliases
-alias ls='ls --color'
+alias ls='ls --color -F'
 alias ll='ls -lh'
 alias la='ls -lAh'
 alias l='ls -lah'
+alias lh='ls -d .*'
+alias lsd="ls -ld *" # show directories
+alias ltree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
+alias 'dirdus=du -sckx * | sort -nr' #directories sorted by size
+alias 'dus=du -kx | sort -nr | less' #files sorted by size
 alias md='mkdir -p'
 alias rd='rmdir'
 alias cd..='cd ..'
@@ -35,6 +40,9 @@ alias aguu='sudo apt-get update -y && sudo apt-get upgrade -y'
 alias agi='sudo apt-get install -y'
 
 
+alias 'wordy=wc -w * | sort | tail -n10' # sort files in current directory by the number of words they contain
+alias 'filecount=find . -type f | wc -l' # number of files (not directories)
+
 
 # git
 alias gitgraph="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
@@ -61,3 +69,5 @@ alias -s {txt,h,c,hpp,cpp,tex,bib,html,xml}=$EDITOR
 # alias npm-ls-bin='ls $HOME/.nvm/versions/node/v10.1.0/bin'
 alias npm-ls-bin="ls $(dirname $(which npm))"
 eval $(thefuck --alias)
+alias apt-search='apt-cache search -n '
+alias lx='exa -F '
