@@ -18,41 +18,41 @@ source "/home/mark/.fzf/shell/key-bindings.zsh"
 
 
 
-# # ---------
-# # Completion
-# # ---------
-# export FZF_COMPLETION_OPTS='+c -x'
+# ---------
+# Completion
+# ---------
+export FZF_COMPLETION_OPTS='+c -x'
 
-# # ---------
-# # Default
-# # ---------
-# export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-# export FZF_DEFAULT_OPTS="--extended --ansi --tabstop=4 --margin=1,4,2,1 --no-height"
+# ---------
+# Default
+# ---------
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_DEFAULT_OPTS="--extended --ansi --tabstop=4 --margin=1,4,2,1 --no-height"
 
-# # --------------------------
-# # CTRL-R: History Search
-# # --------------------------
-# export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:hidden:wrap"
+# --------------------------
+# CTRL-R: History Search
+# --------------------------
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:hidden:wrap"
 
-# # --------------------------
-# # ALT-C: Change Directory
-# # --------------------------
-# if $(command -v blsd > /dev/null) ; then
-#   # Breadth first list directories
-#   # bash <(curl -fL https://raw.githubusercontent.com/junegunn/blsd/master/install)
-#   export FZF_ALT_C_COMMAND='blsd'
-# else
-#   export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
-# fi
+# --------------------------
+# ALT-C: Change Directory
+# --------------------------
+if $(command -v blsd > /dev/null) ; then
+  # Breadth first list directories
+  # bash <(curl -fL https://raw.githubusercontent.com/junegunn/blsd/master/install)
+  export FZF_ALT_C_COMMAND='blsd'
+else
+  export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+fi
 
-# export FZF_ALT_C_COMMAND='print -D -l "${PWD}/.." ; blsd  2>/dev/null'
-# export FZF_ALT_C_OPTS="--preview 'tree -C {}  2> /dev/null | head -300' --preview-window right:60% --reverse --bind=ctrl-space:replace-query"
+export FZF_ALT_C_COMMAND='print -D -l "${PWD}/.." ; blsd  2>/dev/null'
+export FZF_ALT_C_OPTS="--preview 'tree -C {}  2> /dev/null | head -300' --preview-window right:60% --reverse --bind=ctrl-space:replace-query"
 
-# # --------------------------
-# # CTRL-T: File Search
-# # --------------------------
-# export FZF_CTRL_T_COMMAND='fd --type f --type d --hidden --follow --exclude .git'
-# export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -$LINES' --preview-window right:60% --reverse"
+# --------------------------
+# CTRL-T: File Search
+# --------------------------
+export FZF_CTRL_T_COMMAND='fd --type f --type d --hidden --follow --exclude .git'
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} || cat {} || tree -C {}) 2> /dev/null | head -$LINES' --reverse --preview-window down:wrap"
 
 
 

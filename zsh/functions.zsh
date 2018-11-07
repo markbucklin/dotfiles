@@ -266,7 +266,7 @@ git-out() {
 
 # Query Wikipedia via console over DNS
 # http://www.commandlinefu.com/commands/view/2829
-wp() {
+wikipedia() {
     dig +short txt ${1}.wp.dg.cx
 }
 
@@ -277,11 +277,11 @@ translate() {
 }
 
 # cd to the root of the current vcs repository
-gr() {
-    # vcsroot=`echo $vcs_info_msg_0_ | cut -d "|" -f 5`
-    vcsroot=`/home/seebi/.vim/scripts/vcsroot.sh`
-    echo $vcsroot && cd $vcsroot
-}
+# gr() {
+#     # vcsroot=`echo $vcs_info_msg_0_ | cut -d "|" -f 5`
+#     vcsroot=`/home/seebi/.vim/scripts/vcsroot.sh`
+#     echo $vcsroot && cd $vcsroot
+# }
 
 # delete-to-previous-slash
 # http://www.zsh.org/mla/users/2005/msg01314.html
@@ -296,11 +296,12 @@ zle -N backward-delete-to-slash
 
 
 # Pet CLI snippet manager
-function prev() {
+function pet-new-from-previous-command() {
   PREV=$(fc -lrn | head -n 1)
   sh -c "pet new `printf %q "$PREV"`"
 }
-# bindkey '^s^n' pet-select
+zle -N pet-new-from-previous-command
+bindkey '^s^n' pet-new-from-previous-command
 
 function pet-select() {
   BUFFER=$(pet search --query "$LBUFFER")
