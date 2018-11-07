@@ -24,8 +24,6 @@ alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias df='df -hT'
 alias ocaml='rlwrap ocaml'
-alias vim=nvim
-alias vi=vim
 # Random aliases
 alias find_duplicate_names='find . -type f | sed "s#.*/##" | sort | uniq -c | sort -nr | egrep -v "\s+1\s+"'
 alias hh='history | grep -i '
@@ -71,3 +69,7 @@ alias npm-ls-bin="ls $(dirname $(which npm))"
 eval $(thefuck --alias)
 alias apt-search='apt-cache search -n '
 alias lx='exa -F '
+alias 'bk=cd /media/server/www/.nextcloud/docker'
+alias duc-index-root='sudo duc index -x -p -b -d /var/.duc.db /'
+alias find-executables-below-pwd="find ./ \( -type f -or -type l \) -wholename '**/bin/*' -perm /a+x"
+alias duc-gui-show-root='duc gui -d /var/.duc.db --dark --gradient --ring-gap=4 --levels=3 --fuzz=1 /'

@@ -5,57 +5,10 @@ if [[ ! "$PATH" == */home/mark/.fzf/bin* ]]; then
   export PATH="$PATH:/home/mark/.fzf/bin"
 fi
 
-# ---------
-# Completion
-# ---------
-export FZF_COMPLETION_OPTS='+c -x'
-
-
-
-# ---------
-# Default
-# ---------
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export FZF_DEFAULT_OPTS="--extended --ansi --tabstop=4 --margin=1,4,2,1 --no-height"
-
-
-# --------------------------
-# CTRL-R: History Search
-# --------------------------
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:hidden:wrap"
-
-
-
-# --------------------------
-# ALT-C: Change Directory
-# --------------------------
-if $(command -v blsd > /dev/null) ; then
-  # Breadth first list directories
-  # bash <(curl -fL https://raw.githubusercontent.com/junegunn/blsd/master/install)
-  export FZF_ALT_C_COMMAND='blsd'
-else
-  export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
-fi
-
-export FZF_ALT_C_COMMAND='print -D -l "${PWD}/.." ; blsd'
-export FZF_ALT_C_OPTS="--preview 'tree -C {}  2> /dev/null | head -300' --preview-window right:60% --reverse --bind=ctrl-space:replace-query"
-
-
-
-
-# --------------------------
-# CTRL-T: File Search
-# --------------------------
-export FZF_CTRL_T_COMMAND='fd --type f --type d --hidden --follow --exclude .git'
-export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -$LINES' --preview-window right:60% --reverse"
-
-
-
 # ---------------
 # Auto-completion
 # ---------------
 [[ $- == *i* ]] && source "/home/mark/.fzf/shell/completion.zsh" 2> /dev/null
-
 
 
 # ------------
@@ -64,6 +17,42 @@ export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat 
 source "/home/mark/.fzf/shell/key-bindings.zsh"
 
 
+
+# # ---------
+# # Completion
+# # ---------
+# export FZF_COMPLETION_OPTS='+c -x'
+
+# # ---------
+# # Default
+# # ---------
+# export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+# export FZF_DEFAULT_OPTS="--extended --ansi --tabstop=4 --margin=1,4,2,1 --no-height"
+
+# # --------------------------
+# # CTRL-R: History Search
+# # --------------------------
+# export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:hidden:wrap"
+
+# # --------------------------
+# # ALT-C: Change Directory
+# # --------------------------
+# if $(command -v blsd > /dev/null) ; then
+#   # Breadth first list directories
+#   # bash <(curl -fL https://raw.githubusercontent.com/junegunn/blsd/master/install)
+#   export FZF_ALT_C_COMMAND='blsd'
+# else
+#   export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+# fi
+
+# export FZF_ALT_C_COMMAND='print -D -l "${PWD}/.." ; blsd  2>/dev/null'
+# export FZF_ALT_C_OPTS="--preview 'tree -C {}  2> /dev/null | head -300' --preview-window right:60% --reverse --bind=ctrl-space:replace-query"
+
+# # --------------------------
+# # CTRL-T: File Search
+# # --------------------------
+# export FZF_CTRL_T_COMMAND='fd --type f --type d --hidden --follow --exclude .git'
+# export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -$LINES' --preview-window right:60% --reverse"
 
 
 
@@ -147,7 +136,7 @@ is_in_git_repo() {
   git rev-parse HEAD > /dev/null 2>&1
 }
 
-gf() {
+git-forward-diff-maybe() {
   is_in_git_repo || return
   git -c color.status=always status --short |
   fzf-down -m --ansi --nth 2..,.. \
@@ -155,7 +144,7 @@ gf() {
   cut -c4- | sed 's/.* -> //'
 }
 
-gb() {
+git-backward-diff-maybe() {
   is_in_git_repo || return
   git branch -a --color=always | grep -v '/HEAD\s' | sort |
   fzf-down --ansi --multi --tac --preview-window right:70% \
@@ -164,14 +153,14 @@ gb() {
   sed 's#^remotes/##'
 }
 
-gt() {
+git-tag-show() {
   is_in_git_repo || return
   git tag --sort -version:refname |
   fzf-down --multi --preview-window right:70% \
     --preview 'git show --color=always {} | head -200'
 }
 
-gh() {
+git-log-header() {
   is_in_git_repo || return
   git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
   fzf-down --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
@@ -180,7 +169,7 @@ gh() {
   grep -o "[a-f0-9]\{7,\}"
 }
 
-gr() {
+git-remote-log() {
   is_in_git_repo || return
   git remote -v | awk '{print $1 "\t" $2}' | uniq |
   fzf-down --tac \
@@ -188,33 +177,8 @@ gr() {
   cut -d$'\t' -f1
 }
 
-# gs() {
-#   is_in_git_repo || return
-#   git stash list | fzf-down --reverse -d: --preview 'git show --color=always {1}' |
-#   cut -d: -f1
-# }
-
-
-if [[ $- =~ i ]]; then
-  # bindkey "\er" redraw-current-line
-  zle -N gf
-  bindkey '^G^F' gf
-  zle -N gb
-  bindkey '^G^B' gb
-  zle -N gt
-  bindkey '^G^T' gt
-  zle -N gh
-  bindkey '^G^H' gh
-  zle -N gr
-  bindkey '^G^R' gr
-  zle -N gs
-  bindkey '^G^S' gs
-fi
-
-
-
 # c - browse chrome history
-c() {
+chrome-history() {
   local cols sep google_history open
   cols=$(( COLUMNS / 3 ))
   sep='{::}'
