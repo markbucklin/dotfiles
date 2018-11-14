@@ -32,7 +32,7 @@ export ARCHFLAGS='-arch x86_64'
 
 export LESS='--ignore-case --raw-control-chars'
 export PAGER='less'
-export EDITOR='atom'
+export EDITOR='sublime'
 
 # Set LC_ALL="UTF8"
 export LC_ALL=en_US.UTF-8
@@ -55,3 +55,4 @@ export VDPAU_DRIVER=nvidia
 export LIBVA_DRIVER_NAME=vdpau
 export PATH=$HOME/gems/bin:$PATH
 export GEM_HOME=$HOME/gems
+

@@ -264,12 +264,6 @@ git-out() {
     done
 }
 
-# Query Wikipedia via console over DNS
-# http://www.commandlinefu.com/commands/view/2829
-wikipedia() {
-    dig +short txt ${1}.wp.dg.cx
-}
-
 # translate via google language tools (more lightweight than leo)
 # http://www.commandlinefu.com/commands/view/5034/
 translate() {
