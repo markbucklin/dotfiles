@@ -1,6 +1,8 @@
 # To see the key combo you want to use just do:
 # cat > /dev/null
 # And press it
+#  OR
+# showkey -a
 
 # ^G     	ctrl-G	
 # ^[g		alt-G
@@ -8,6 +10,10 @@
 # ^[^G		ctrl-alt-G
 # ^[g		super-alt-G
 # ^[G		alt-shift-G
+
+
+# Set emacs keyboard bindings
+bindkey -e
 
 
 bindkey "^K"      kill-whole-line                      # ctrl-k
@@ -80,6 +86,39 @@ bindkey '^[ ' autosuggest-fetch
 # [ctrl-alt-shift + space]
 bindkey '^[^@' autosuggest-execute
 
+# Execute the current suggestion (using zsh-autosuggestions)
+# Alt+Enter = '^[^M' on recent VTE and '^[^J' for older (Lxterminal)
+bindkey '^[^M' autosuggest-execute
+bindkey '^[^J' autosuggest-execute
+
+
+# Edit command line by pressing Ctrl+x Ctrl+e
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
+
+
+# alt-x : insert last command result
+zmodload -i zsh/parameter
+insert-last-command-output() {
+  LBUFFER+="$(eval $history[$((HISTCMD-1))])"
+}
+zle -N insert-last-command-output
+bindkey '^[x' insert-last-command-output
+
+
+# ctrl z back and forth
+fancy-ctrl-z () {
+if [[ $#BUFFER -eq 0 ]]; then
+   BUFFER="fg"
+   zle accept-line
+else
+   zle push-input
+   zle clear-screen
+fi
+}
+zle -N fancy-ctrl-z
+bindkey '^z' fancy-ctrl-z
 
 
 

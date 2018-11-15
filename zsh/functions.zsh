@@ -357,3 +357,8 @@ tail-until() (
   shift
   grep -m 1 "$pattern" <(exec tail -F "$@"); kill $!
 )
+
+
+# Create directory and move into
+mdcd() { [ -n "$1" ] && mkdir -p "$1" && cd "$1"}
+

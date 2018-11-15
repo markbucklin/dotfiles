@@ -30,7 +30,7 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 # This resolves issues install the mysql, postgres, and other gems with native non universal binary extensions
 export ARCHFLAGS='-arch x86_64'
 
-export LESS='--ignore-case --raw-control-chars'
+export LESS='--ignore-case --raw-control-chars --hilite-unread'
 # export LESS="--tabs=4 --no-init --LONG-PROMPT --ignore-case --quit-if-one-screen --RAW-CONTROL-CHARS"
 export PAGER='less'
 export EDITOR='sublime'

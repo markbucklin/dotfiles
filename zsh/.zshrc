@@ -7,11 +7,11 @@ fi
 
 
 
-# Set emacs keyboard bindings
-bindkey -e
+
 
 #  Run auto-load
-autoload -U compinit && compinit
+autoload zmv
+autoload -Uz compinit && compinit
 zmodload -i zsh/complete
 zmodload -i zsh/complist
 # zmodload -i zsh/compctl
@@ -29,6 +29,7 @@ zmodload -i zsh/zle
 zmodload -i zsh/zleparameter
 # zmodload -i zsh/zpty
 # zmodload -i zsh/zutil
+
 
 
 # Source Local Dot-Files (common to all shells)
@@ -463,18 +464,6 @@ eval "$(grunt --completion=zsh)"
 # yank
 alias yank='yank-cli -- xsel -b'
 
-# ctrl z back and forth
-fancy-ctrl-z () {
-if [[ $#BUFFER -eq 0 ]]; then
-   BUFFER="fg"
-   zle accept-line
-else
-   zle push-input
-   zle clear-screen
-fi
-}
-zle -N fancy-ctrl-z
-bindkey '^z' fancy-ctrl-z
 
 # automatically remove duplicates from these arrays
 typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
