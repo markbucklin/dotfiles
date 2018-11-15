@@ -20,7 +20,7 @@ export FFF_COL2=7
 export FFF_COL3=6
 
 # Text Editor
-export FFF_EDITOR="nano" # alternative: export EDITOR="vim"
+export FFF_EDITOR="nvim" # alternative: export EDITOR="vim"
 
 # File Opener
 export FFF_OPENER="xdg-open"

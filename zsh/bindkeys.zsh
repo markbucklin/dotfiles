@@ -2,6 +2,14 @@
 # cat > /dev/null
 # And press it
 
+# ^G     	ctrl-G	
+# ^[g		alt-G
+# ^[g		esc,G
+# ^[^G		ctrl-alt-G
+# ^[g		super-alt-G
+# ^[G		alt-shift-G
+
+
 bindkey "^K"      kill-whole-line                      # ctrl-k
 bindkey "^R"      history-incremental-search-backward  # ctrl-r
 bindkey "^A"      beginning-of-line                    # ctrl-a

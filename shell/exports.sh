@@ -31,8 +31,10 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 export ARCHFLAGS='-arch x86_64'
 
 export LESS='--ignore-case --raw-control-chars'
+# export LESS="--tabs=4 --no-init --LONG-PROMPT --ignore-case --quit-if-one-screen --RAW-CONTROL-CHARS"
 export PAGER='less'
 export EDITOR='sublime'
+export VISUAL='nvim'
 
 # Set LC_ALL="UTF8"
 export LC_ALL=en_US.UTF-8

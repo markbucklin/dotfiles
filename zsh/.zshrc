@@ -11,7 +11,7 @@ fi
 bindkey -e
 
 #  Run auto-load
-autoload -Uz compinit && compinit
+autoload -U compinit && compinit
 zmodload -i zsh/complete
 zmodload -i zsh/complist
 # zmodload -i zsh/compctl
@@ -184,8 +184,6 @@ if ! zplug check --verbose; then
 fi
 
 
-export LESS="--tabs=4 --no-init --LONG-PROMPT --ignore-case --quit-if-one-screen --RAW-CONTROL-CHARS"
-
 ##############################
 # ZSTYLE
 ##############################
@@ -214,14 +212,14 @@ zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 
 # list of completers to use
-zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
-zstyle ':completion:*' menu select=1 _complete _ignored _approximate
+# zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
+# zstyle ':completion:*' menu select=1 _complete _ignored _approximate
 
 # insert all expansions for expand completer
 # zstyle ':completion:*:expand:*' tag-order all-expansions
 
 # match uppercase from lowercase
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
@@ -241,6 +239,23 @@ zstyle ':completion:*:scp:*' group-order files all-files users hosts-domain host
 zstyle ':completion:*:ssh:*' tag-order users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
 zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
 zstyle '*' single-ignored show
+
+# forces zsh to realize new commands
+zstyle ':completion:*' completer _oldlist _expand _complete _match _ignored _correct
+zstyle ':completion:*' group-order original corrections
+# _approximate
+
+# matches case insensitive for lowercase
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# pasting with tabs doesn't perform completion
+zstyle ':completion:*' insert-tab pending
+
+# rehash if command not found (possibly recently installed)
+zstyle ':completion:*' rehash true
+
+# menu if nb items > 2
+zstyle ':completion:*' menu select=2
 
 
 
@@ -317,10 +332,10 @@ zstyle '*' single-ignored show
 ##############################
 setopt                       \
      NO_all_export           \
-        always_last_prompt   \
+     NO_always_last_prompt   \
         always_to_end        \
         append_history       \
-     		auto_cd              \
+     	auto_cd              \
         auto_list            \
         auto_menu            \
         auto_name_dirs       \
@@ -330,10 +345,8 @@ setopt                       \
         auto_remove_slash    \
      NO_auto_resume          \
         bad_pattern          \
-     NO_bang_hist            \
      NO_beep                 \
         brace_ccl            \
-        correct_all          \
      NO_bsd_echo             \
         cdable_vars          \
      NO_chase_links          \
@@ -341,7 +354,6 @@ setopt                       \
         complete_aliases     \
         complete_in_word     \
         correct              \
-     NO_correct_all          \
      NO_csh_junkie_history   \
      NO_csh_junkie_loops     \
      NO_csh_junkie_quotes    \
@@ -370,7 +382,7 @@ setopt                       \
      NO_ignore_eof           \
         interactive_comments \
       	inc_append_history   \
-     NO_list_ambiguous       \
+        list_ambiguous       \
      NO_list_beep            \
         list_types           \
         long_list_jobs       \
@@ -405,6 +417,7 @@ setopt                       \
         unset                \
      NO_verbose              \
         zle
+
 
 
 
