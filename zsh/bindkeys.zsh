@@ -88,8 +88,8 @@ bindkey '^[^@' autosuggest-execute
 
 # Execute the current suggestion (using zsh-autosuggestions)
 # Alt+Enter = '^[^M' on recent VTE and '^[^J' for older (Lxterminal)
+bindkey '^[^J' autosuggest-accept
 bindkey '^[^M' autosuggest-execute
-bindkey '^[^J' autosuggest-execute
 
 
 # Edit command line by pressing Ctrl+x Ctrl+e
