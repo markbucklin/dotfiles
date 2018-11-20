@@ -30,11 +30,23 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 # This resolves issues install the mysql, postgres, and other gems with native non universal binary extensions
 export ARCHFLAGS='-arch x86_64'
 
-export LESS='--ignore-case --raw-control-chars --hilite-unread --quit-if-one-screen'
-# export LESS="--tabs=4 --no-init --LONG-PROMPT --ignore-case --quit-if-one-screen --RAW-CONTROL-CHARS"
-export PAGER='less'
-export EDITOR='sublime'
-export VISUAL='nvim'
+# Set less options
+if [[ -x $(which less 2> /dev/null) ]]; then
+    export PAGER="less"
+    export LESS="--ignore-case --LONG-PROMPT --QUIET --chop-long-lines -Sm --RAW-CONTROL-CHARS --quit-if-one-screen --no-init"
+    export LESSHISTFILE='-'
+    if [[ -x $(which lesspipe 2> /dev/null) ]]; then
+	LESSOPEN="| lesspipe %s"
+	export LESSOPEN
+    fi
+fi
+
+# Set default editor
+if [[ -x $(which sublime 2> /dev/null) ]]; then
+    export EDITOR="sublime"
+    export USE_EDITOR=$EDITOR
+    export VISUAL=$EDITOR
+fi
 
 # Set LC_ALL="UTF8"
 export LC_ALL=en_US.UTF-8
@@ -57,4 +69,3 @@ export VDPAU_DRIVER=nvidia
 export LIBVA_DRIVER_NAME=vdpau
 export PATH=$HOME/gems/bin:$PATH
 export GEM_HOME=$HOME/gems
-
