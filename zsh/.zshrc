@@ -258,6 +258,49 @@ zstyle ':completion:*' rehash true
 # menu if nb items > 2
 zstyle ':completion:*' menu select=2
 
+# Quote stuff that looks like URLs automatically.
+autoload -U url-quote-magic
+zstyle ':urlglobber' url-other-schema ftp git gopher http https magnet
+zstyle ':url-quote-magic:*' url-metas '*?[]^(|)~#='
+zle -N self-insert url-quote-magic
+
+# File/directory completion, for cd command
+zstyle ':completion:*:cd:*' ignored-patterns '(*/)#lost+found' '(*/)#CVS'
+#  and for all commands taking file arguments
+zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
+
+# Prevent offering a file (process, etc) that's already in the command line.
+zstyle ':completion:*:(rm|cp|kill|diff|scp):*' ignore-line yes
+# (Use Alt-Comma to do something like "mv abcd.efg abcd.efg.old")
+
+# Completion selection by menu for kill
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:kill:*' force-list always
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+
+# Filename suffixes to ignore during completion (except after rm command)
+# This doesn't seem to work
+zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' '*?.old' '*?.pro' '*~'
+zstyle ':completion:*:(^rm):*' ignored-patterns '*?.o' '*?.c~' '*?.old' '*?.pro' '*~'
+zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
+#zstyle ':completion:*:(all-|)files' file-patterns '(*~|\\#*\\#):backup-files' 'core(|.*):core\ files' '*:all-files'
+
+zstyle ':completion:*:*:rmdir:*' file-sort time
+
+
+autoload zsh/sched
+
+# # Copys word from earlier in the current command line
+# # or previous line if it was chosen with ^[. etc
+# autoload copy-earlier-word
+# zle -N copy-earlier-word
+# bindkey '^[,' copy-earlier-word
+#
+# # Cycle between positions for ambigous completions
+# autoload cycle-completion-positions
+# zle -N cycle-completion-positions
+# bindkey '^[z' cycle-completion-positions
 
 
 # zstyle ':completion:*' format 'Completing %d'

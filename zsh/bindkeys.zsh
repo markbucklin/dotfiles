@@ -4,7 +4,7 @@
 #  OR
 # showkey -a
 
-# ^G     	ctrl-G	
+# ^G     	ctrl-G
 # ^[g		alt-G
 # ^[g		esc,G
 # ^[^G		ctrl-alt-G
@@ -82,9 +82,9 @@ bindkey '\e\e[D' backward-word
 # [ctrl + space]
 bindkey '^@' autosuggest-accept
 # [alt-super + space]
-bindkey '^[ ' autosuggest-fetch
+# bindkey '^[ ' autosuggest-fetch
 # [ctrl-alt-shift + space]
-bindkey '^[^@' autosuggest-execute
+# bindkey '^[^@' autosuggest-execute
 
 # Execute the current suggestion (using zsh-autosuggestions)
 # Alt+Enter = '^[^M' on recent VTE and '^[^J' for older (Lxterminal)
