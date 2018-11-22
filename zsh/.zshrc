@@ -43,8 +43,8 @@ for file in $ZDOTDIR/*.zsh ; do
 done
 
 # Keep 10000 lines of history within the shell and save it to ~/.zsh_history:
-export HISTSIZE=10000
-export SAVEHIST=100000
+export HISTSIZE=30000
+export SAVEHIST=200000
 export HISTFILE=~/.zsh_history
 
 ##############################
