@@ -4,9 +4,11 @@ if [ -L $HOME/.zshrc ]; then
 else
    export ZDOTDIR=${HOME}/.config/zsh
 fi
+# todo: also pull entire .zshrc file into dotfiles
 
-
-
+# symbolic link to dir in local dotfiles dir:
+# ~/.zsh/completions -> ~/$DOTDIR/completions/zsh
+fpath=(~/.zsh/completions $fpath)
 
 
 #  Run auto-load
@@ -202,6 +204,8 @@ zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
 
 # Fallback to built in ls colors
 zstyle ':completion:*' list-colors ''
+# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
 
 # Make the list prompt friendly
 zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
@@ -211,16 +215,6 @@ zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %
 
 # Add simple colors to kill
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
-
-# list of completers to use
-# zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
-# zstyle ':completion:*' menu select=1 _complete _ignored _approximate
-
-# insert all expansions for expand completer
-# zstyle ':completion:*:expand:*' tag-order all-expansions
-
-# match uppercase from lowercase
-# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
@@ -248,6 +242,8 @@ zstyle ':completion:*' group-order original corrections
 
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+# list-colors '=(#b) #([0-9]#)*=0=01;31'
 
 # pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
@@ -289,58 +285,8 @@ zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
 zstyle ':completion:*:*:rmdir:*' file-sort time
 
 
-autoload zsh/sched
 
-# # Copys word from earlier in the current command line
-# # or previous line if it was chosen with ^[. etc
-# autoload copy-earlier-word
-# zle -N copy-earlier-word
-# bindkey '^[,' copy-earlier-word
-#
-# # Cycle between positions for ambigous completions
-# autoload cycle-completion-positions
-# zle -N cycle-completion-positions
-# bindkey '^[z' cycle-completion-positions
-
-
-# zstyle ':completion:*' format 'Completing %d'
-# zstyle ':completion:*' group-name ''
-# eval "$(dircolors -b)"
-# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-# zstyle ':completion:*' list-colors ''
-# zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-# zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
-# zstyle ':completion:*' use-compctl false
-# zstyle ':completion:*' verbose false
-# zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-# zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-
-#
-# # Expansion options
-# zstyle ':completion:*' completer _expand _complete _correct _prefix _approximate
-# zstyle ':completion::prefix-1:*' completer _complete
-# zstyle ':completion:incremental:*' completer _complete _correct
-# zstyle ':completion:predict:*' completer _complete
-#
-# # Completion caching
-# zstyle ':completion::complete:*' use-cache 1
-# zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
-#
-# # Use menu selection
-# zstyle ':completion:*' menu select=2
-#
-# # Expand partial paths
-# zstyle ':completion:*' expand 'yes'
-# zstyle ':completion:*' squeeze-slashes 'yes'
-#
-# # Include non-hidden directories in globbed file completions
-# # for certain commands
-# zstyle ':completion::complete:*' '\'
-#
-# # Use menuselection for pid completion
-# zstyle ':completion:*:kill:*' force-list always
-# zstyle ':completion:*:*:kill:*' menu yes select
-#
+# WAS COMMENTED OUT BELOW HERE
 # # tag-order 'globbed-files directories' all-files
 # zstyle ':completion::complete:*:tar:directories' file-patterns '*~.*(-/)'
 #
@@ -354,17 +300,6 @@ autoload zsh/sched
 # # file multiple times. This fixes it. Also good for cp, et cetera..
 # zstyle ':completion:*:rm:*' ignore-line yes
 # zstyle ':completion:*:cp:*' ignore-line yes
-#
-# # Describe each match group.
-# zstyle ':completion:*:descriptions' format "%B---- %d%b"
-#
-# # Messages/warnings format
-# zstyle ':completion:*:messages' format '%B%U---- %d%u%b'
-# zstyle ':completion:*:warnings' format '%B%U---- no match for: %d%u%b'
-#
-# # Describe options in full
-# zstyle ':completion:*:options' description 'yes'
-# zstyle ':completion:*:options' auto-description '%d'
 #
 # zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # zstyle ':completion:*:*:kill:*' list-colors '=%*=01;31'
@@ -472,6 +407,10 @@ setopt                       \
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # export FZF_DEFAULT_OPTS="--extended --ansi --multi"
 
+# ------------
+# Key bindings
+# ------------
+source "/home/mark/.fzf/shell/key-bindings.zsh"
 if zplug check "zsh-users/zsh-history-substring-search"; then
     bindkey '^[[A' history-substring-search-up
     bindkey '^[[B' history-substring-search-down
@@ -487,13 +426,10 @@ if [[ $(command -v npm) ]]; then
     . <(npm completion)
 fi
 
-# # fasd
-# if [[ $(command -v fasd) ]]; then
-#     eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
-# fi
-
-# hub
-fpath=(~/.zsh/completions $fpath)
+# fasd
+if [[ $(command -v fasd) ]]; then
+    eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
+fi
 
 # grunt-cli
 eval "$(grunt --completion=zsh)"
@@ -518,80 +454,3 @@ typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 zplug load
 
 neofetch
-
-
-
-# zplug "mollifier/anyframe"
-# zplug "peterhurford/up.zsh"
-# zplug "vifon/deer", use:deer
-# zplug "psprint/zsh-select", defer:3
-# zplug qoomon/zjump
-# zplug "plugins/golang", from:oh-my-zsh, ignore:oh-my-zsh.sh, defer:2
-# zplug 'plugins/git', from:oh-my-zsh
-# zplug "trapd00r/zsh-syntax-highlighting-filetypes"
-# zplug "zpm-zsh/dircolors-material"
-# zplug "zpm-zsh/ls"
-# zplug "zpm-zsh/colors"
-# zplug "zpm-zsh/linuxbrew"
-# zplug "bbenne10/goenv"
-# zplug "momo-lab/zsh-abbrev-alias"
-# zplug "peterhurford/up.zsh"
-# zplug "zakariaGatter/MarkEdit"
-# zplug "b4b4r07/enhancd", use:init.sh
-# zplug "wfxr/forgit", defer:1
-# zplug "chipsenkbeil/zsh-notes"
-# zplug "zlsun/solarized-man"
-# zplug "aramboi/zsh-ipfs"
-# zplug "hcgraf/zsh-sudo ", from:oh-my-zsh, ignore:oh-my-zsh.sh, defer:2
-# zplug "mollifier/anyframe"
-# zplug "psprint/zsh-select", defer:3
-# DEER
-# zplug "vifon/deer", use:deer
-# zle -N deer
-# bindkey '\ek' deer
-
-
-
-# setopt extended_glob
-# # setopt glob_dots                # include dotfiles in globbing
-# setopt append_history
-# setopt extended_history
-# setopt inc_append_history
-# setopt hist_expire_dups_first
-# setopt hist_ignore_space
-# setopt hist_reduce_blanks
-# setopt hist_verify
-# setopt always_to_end # When completing from the middle of a word, move the cursor to the end of the word
-# # setopt auto_name_dirs # any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
-# setopt complete_in_word # Allow completion from within a word/phrase
-# # setopt auto_menu # show completion menu on successive tab press. needs unsetop menu_complete to work
-# # unsetopt menu_complete # do not autoselect the first completion entry
-# unsetopt correct_all # spelling correction for arguments
-# setopt correct # spelling correction for commands
-# # unsetopt bg_nice                # no lower prio for background jobs
-# setopt list_ambiguous           # complete as much of a completion until it gets ambiguous.
-
-
-
-
-
-# zstyle ':prezto:module:prompt' theme 'pure'
-#
-# # The order matters.
-# zstyle ':prezto:load' pmodule \
-#   'environment' \
-#   'terminal' \
-#   'command-not-found' \
-#   'history' \
-#   'directory' \
-#   'spectrum' \
-#   'utility' \
-#   'completion' \
-#   'syntax-highlighting' \
-#   'history-substring-search' \
-#   'autosuggestions' \
-#   'prompt'
-
-
-# HIST_STAMPS="mm/dd/yyyy" # variable used in oh-my-zsh/lib/history.zsh
-# zplug "robbyrussell/oh-my-zsh", use:"lib/{clipboard,completion,directories,history,termsupport,key-bindings}.zsh"
