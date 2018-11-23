@@ -5,6 +5,8 @@
 *.jpg
 *.png
 *.pdf
+*.tiff
+*.tif
 *.aux
 *.bbl
 *.blg
@@ -17,3 +19,5 @@
 /tmp
 /node_modules
 /bower_components
+/~snapshot
+/.gx

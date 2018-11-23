@@ -1,5 +1,7 @@
 
-npm i -g diff-so-fancy
+if [ ! -x diff-so-fancy ] ; then
+	npm i -g diff-so-fancy
+fi
 
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 

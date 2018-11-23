@@ -1,0 +1,6 @@
+[submodule "git/gitignore"]
+	path = git/gitignore
+	url = https://github.com/github/gitignore.git
+[submodule "tmux/.tmux"]
+	path = tmux/.tmux
+	url = https://github.com/gpakosz/.tmux.git

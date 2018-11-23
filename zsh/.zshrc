@@ -1,8 +1,12 @@
 # Follow the link (if any) to find the config folder
-if [ -L $HOME/.zshrc ]; then
-   export ZDOTDIR=$(dirname `readlink -f $HOME/.zshrc`)
+if [[ ! -e $DOTDIR ]]; then
+    export DOTDIR=../
+fi
+
+if [[ -L $HOME/.zshrc ]]; then
+    export ZDOTDIR=$(dirname `readlink -f $HOME/.zshrc`)
 else
-   export ZDOTDIR=${HOME}/.config/zsh
+    export ZDOTDIR=${HOME}/.config/zsh
 fi
 # todo: also pull entire .zshrc file into dotfiles
 
@@ -12,17 +16,17 @@ fpath=(~/.zsh/completions $fpath)
 
 
 #  Run auto-load
-autoload zmv
+# autoload zmv
 autoload -Uz compinit && compinit
-zmodload -i zsh/complete
-zmodload -i zsh/complist
+# zmodload -i zsh/complete
+# zmodload -i zsh/complist
 # zmodload -i zsh/compctl
 # zmodload -i zsh/computil
-zmodload -i zsh/curses
+# zmodload -i zsh/curses
 # zmodload -i zsh/datetime
 # zmodload -i zsh/files
 # zmodload -i zsh/main
-zmodload -i zsh/parameter
+# zmodload -i zsh/parameter
 # zmodload -i zsh/regex
 # zmodload -i zsh/stat
 # zmodload -i zsh/system
@@ -35,18 +39,18 @@ zmodload -i zsh/zleparameter
 
 
 # Source Local Dot-Files (common to all shells)
-for file in $DOTDIR/shell/*.sh ; do
-	source $file
+for file in $DOTDIR/profile.d/*.sh ; do
+    source $file
 done
 
 # Source Local Dot-Files for ZSH
 for file in $ZDOTDIR/*.zsh ; do
-	source $file
+    source $file
 done
 
 # Keep 10000 lines of history within the shell and save it to ~/.zsh_history:
 export HISTSIZE=30000
-export SAVEHIST=200000
+export SAVEHIST=400000
 export HISTFILE=~/.zsh_history
 
 ##############################
@@ -78,8 +82,8 @@ compdef gsync=git
 ##############################
 # Check if zplug is installed
 if [[ ! -d ~/.zplug ]]; then
-  git clone https://github.com/zplug/zplug ~/.zplug
-  source ~/.zplug/init.zsh && zplug update --self
+    git clone https://github.com/zplug/zplug ~/.zplug
+    source ~/.zplug/init.zsh && zplug update --self
 fi
 
 # Essential
@@ -186,13 +190,12 @@ if ! zplug check --verbose; then
     fi
 fi
 
+echo '>>>>>   [~/.zshrc]: finished with zplug section'
+
 
 ##############################
 # ZSTYLE
 ##############################
-# Add path to my completions
-fpath=(~/.zsh/completion.local $fpath)
-
 # man zshcontrib
 zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
 zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
@@ -310,92 +313,93 @@ zstyle ':completion:*:*:rmdir:*' file-sort time
 # Options
 ##############################
 setopt                       \
-     NO_all_export           \
-     NO_always_last_prompt   \
-        always_to_end        \
-        append_history       \
-     	auto_cd              \
-        auto_list            \
-        auto_menu            \
-        auto_name_dirs       \
-        auto_param_keys      \
-        auto_param_slash     \
-     NO_auto_pushd           \
-        auto_remove_slash    \
-     NO_auto_resume          \
-        bad_pattern          \
-     NO_beep                 \
-        brace_ccl            \
-     NO_bsd_echo             \
-        cdable_vars          \
-     NO_chase_links          \
-        clobber              \
-        complete_aliases     \
-        complete_in_word     \
-        correct              \
-     NO_csh_junkie_history   \
-     NO_csh_junkie_loops     \
-     NO_csh_junkie_quotes    \
-     NO_csh_null_glob        \
-        equals               \
-        extended_glob        \
-        extended_history     \
-	 NO_flow_control         \
-        function_argzero     \
-        glob                 \
-     NO_glob_assign          \
-        glob_complete        \
-     NO_glob_dots            \
-     NO_glob_subst           \
-        hash_cmds            \
-        hash_dirs            \
-        hash_list_all        \
-        hist_allow_clobber   \
-        hist_beep            \
-        hist_ignore_dups     \
-        hist_ignore_space    \
-        hist_no_store        \
-        hist_verify          \
-     NO_hup                  \
-     NO_ignore_braces        \
-     NO_ignore_eof           \
-        interactive_comments \
-      	inc_append_history   \
-        list_ambiguous       \
-     NO_list_beep            \
-        list_types           \
-        long_list_jobs       \
-        magic_equal_subst    \
-     NO_mail_warning         \
-     NO_mark_dirs            \
-     NO_menu_complete        \
-        multios              \
-        nomatch              \
-        notify               \
-     NO_null_glob            \
-        numeric_glob_sort    \
-     NO_overstrike           \
-        path_dirs            \
-        posix_builtins       \
-     NO_print_exit_value     \
-        prompt_cr            \
-        prompt_subst         \
-        pushd_ignore_dups    \
-     NO_pushd_minus          \
-        pushd_silent         \
-        pushd_to_home        \
-        rc_expand_param      \
-     NO_rc_quotes            \
-     NO_rm_star_silent       \
-     NO_sh_file_expansion    \
-        sh_option_letters    \
-        short_loops          \
-     NO_sh_word_split        \
-     NO_single_line_zle      \
-     NO_sun_keyboard_hack    \
-        unset                \
-     NO_verbose              \
-        zle
+noall_export           \
+noalways_last_prompt   \
+noalways_to_end        \
+append_history       \
+auto_cd              \
+auto_list            \
+auto_menu            \
+auto_name_dirs       \
+auto_param_keys      \
+auto_param_slash     \
+auto_pushd           \
+auto_remove_slash    \
+noauto_resume          \
+nobad_pattern          \
+nobeep                 \
+brace_ccl            \
+nobsd_echo             \
+cdable_vars          \
+nochase_links          \
+noclobber              \
+complete_aliases     \
+complete_in_word     \
+correct              \
+nocsh_junkie_history   \
+nocsh_junkie_loops     \
+nocsh_junkie_quotes    \
+nocsh_null_glob        \
+equals               \
+extended_glob        \
+extended_history     \
+noflow_control         \
+function_argzero     \
+glob                 \
+noglob_assign          \
+glob_complete        \
+noglob_dots            \
+noglob_subst           \
+hash_cmds            \
+hash_dirs            \
+hash_list_all        \
+hist_allow_clobber   \
+hist_beep            \
+hist_ignore_dups     \
+hist_ignore_space    \
+hist_no_store        \
+hist_verify          \
+nohup                  \
+noignore_braces        \
+noignore_eof           \
+interactive_comments \
+inc_append_history   \
+list_ambiguous       \
+nolist_beep            \
+list_types           \
+long_list_jobs       \
+magic_equal_subst    \
+nomail_warning         \
+nomark_dirs            \
+nomenu_complete        \
+multios              \
+nomatch              \
+notify               \
+nonull_glob            \
+numeric_glob_sort    \
+nooverstrike           \
+path_dirs            \
+posix_builtins       \
+noprint_exit_value     \
+prompt_cr            \
+prompt_subst         \
+pushd_ignore_dups    \
+nopushd_minus          \
+pushd_silent         \
+pushd_to_home        \
+rc_expand_param      \
+norc_quotes            \
+norm_star_silent       \
+nosh_file_expansion    \
+sh_option_letters    \
+short_loops          \
+nosh_word_split        \
+nosingle_line_zle      \
+nosun_keyboard_hack    \
+
+unset                \
+noverbose              \
+zle
 
 
 

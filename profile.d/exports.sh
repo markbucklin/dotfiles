@@ -6,7 +6,7 @@
 
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
+if [[ -d "$HOME/bin" ]] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
@@ -66,5 +66,5 @@ export WORDCHARS='*?.[]~&;!#$%^(){}<>'
 typeset -U PATH
 export VDPAU_DRIVER=nvidia
 export LIBVA_DRIVER_NAME=vdpau
-export PATH=$HOME/gems/bin:$PATH
+export PATH=$PATH:$HOME/gems/bin
 export GEM_HOME=$HOME/gems

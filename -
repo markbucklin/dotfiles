@@ -1,0 +1,2 @@
+bindkey | grep fzf
+which fzf-history-widget
