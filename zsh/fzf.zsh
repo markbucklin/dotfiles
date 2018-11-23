@@ -213,14 +213,14 @@ zle -N chrome-history
 # }
 
 
-# fasd & fzf change directory - jump using `fasd` if given argument, filter output of `fasd` using `fzf` else
-z() {
+# ALT-SHIFT-I - fasd & fzf change directory - jump using `fasd` if given argument, filter output of `fasd` using `fzf` else
+cd-fast-recent-or-fzf-select() {
     [ $# -gt 0 ] && fasd_cd -d "$*" && return
     local dir
     dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
 }
-alias j=z
-
+zle -N cd-fast-recent-or-fzf-select
+bindkey '^[I' cd-fast-recent-or-fzf-select
 
 # ALT-I - Paste the selected entry from locate output into the command line
 fzf-locate-widget() {

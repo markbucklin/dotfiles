@@ -77,38 +77,39 @@ bindkey '\e\e[C' forward-word
 bindkey '\e\e[D' backward-word
 
 
-# ctrl space complete
+# [Ctrl-Space] : ctrl space complete
 # bindkey '^ ' expand-or-complete
-# [ctrl + space]
-bindkey '^@' autosuggest-accept
 # [alt-super + space]
 # bindkey '^[ ' autosuggest-fetch
 # [ctrl-alt-shift + space]
 # bindkey '^[^@' autosuggest-execute
+# bindkey '^@' autosuggest-accept
 
-# Execute the current suggestion (using zsh-autosuggestions)
-# Alt+Enter = '^[^M' on recent VTE and '^[^J' for older (Lxterminal)
-bindkey '^[^J' autosuggest-accept
-bindkey '^[^M' autosuggest-execute
+# [Alt-J] : Accept current suggestion (using zsh-autosuggestions)
+bindkey '\ej' autosuggest-accept
 
+# [Alt-Enter] : Autosuggest Execute
+bindkey '\em' autosuggest-execute
 
-# Edit command line by pressing Ctrl+x Ctrl+e
+# [Ctrl-Alt-J] = '^[^J'
+
+# [Ctrl+x Ctrl+e] : Edit command line by pressing Ctrl+x Ctrl+e
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 
 
-# alt-x : insert last command result
+# [Alt-Shift-P] : insert last command result
 zmodload -i zsh/parameter
 insert-last-command-output() {
   LBUFFER+="$(eval $history[$((HISTCMD-1))])"
 }
 zle -N insert-last-command-output
-bindkey '^[x' insert-last-command-output
+bindkey '^[P' insert-last-command-output
 
 
-# ctrl z back and forth
-fancy-ctrl-z () {
+# [Alt-Shift-J] : back and forth
+cd-last-dir-fancy () {
 if [[ $#BUFFER -eq 0 ]]; then
    BUFFER="fg"
    zle accept-line
@@ -117,8 +118,8 @@ else
    zle clear-screen
 fi
 }
-zle -N fancy-ctrl-z
-bindkey '^z' fancy-ctrl-z
+zle -N cd-last-dir-fancy
+bindkey '^[J' cd-last-dir-fancy
 
 
 
@@ -127,28 +128,3 @@ bindkey '^z' fancy-ctrl-z
 # autosuggest-disable
 # autosuggest-execute
 # autosuggest-fetch
-
-# # clear bindings
-#   unbind C-b
-#   unbind '"'
-#   unbind %
-#   # nicer prefix
-#   set -g prefix C-Space
-#   bind Space send-prefix
-#   # splitting like spacemacs
-#   bind / split-window -h
-#   bind - split-window -v
-#   # do like terminator
-#   bind -n C-E split-window -h
-#   bind -n C-S-Left resize-pane -L 3
-#   bind -n C-S-Right resize-pane -R 3
-#   bind -n C-S-Up resize-pane -U 3
-#   bind -n C-S-Down resize-pane -D 3
-#   bind -n C-O split-window -v
-#   # move panes without prefix
-#   bind -n M-h select-pane -L
-#   bind -n M-l select-pane -R
-#   bind -n M-k select-pane -U
-#   bind -n M-j select-pane -D
-#   bind r source-file ~/.tmux.conf
-# bindkey ' ' magic-space
