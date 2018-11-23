@@ -150,12 +150,20 @@ zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 # ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
-
+export FORGIT_NO_ALIASES
+zplug "wfxr/forgit", defer:1
+# Define them before sourcing the plugin if you don't use any plugin manager.
+forgit_log=glo
+forgit_diff=gd
+forgit_add=ga
+forgit_ignore=gi
+forgit_restore=gcf
+forgit_clean=gclean
+forgit_stash_show=gss
 
 zplug "Schnouki/git-annex-zsh-completion"
 zplug "akoenig/gulp.plugin.zsh", defer:2
 zplug "ytet5uy4/fzf-widgets"
-zplug "wfxr/forgit", defer:1
 # zplug "zlsun/solarized-man"
 zplug "aramboi/zsh-ipfs", defer:2
 zplug "hcgraf/zsh-sudo", from:oh-my-zsh

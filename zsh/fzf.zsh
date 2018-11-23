@@ -59,15 +59,15 @@ fzf-down() {
   fzf
 }
 # Figlet font selector => copy to clipboard
-fgl() (
+fzf-figlet-font-selector() (
   [ $# -eq 0 ] && return
   cd /usr/local/Cellar/figlet/*/share/figlet/fonts
   local font=$(ls *.flf | sort | fzf --no-multi --reverse --preview "figlet -f {} $@") &&
-  figlet -f "$font" "$@" | pbcopy
+  figlet -f "$font" "$@" | xclip
 )
 
 # fco - checkout git branch/tag
-fco() {
+fzf-git-checkout-branch-tag() {
   local tags branches target
   tags=$(git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
   branches=$(
@@ -79,9 +79,11 @@ fco() {
     fzf-down --no-hscroll --reverse --ansi +m -d "\t" -n 2 -q "$*") || return
   git checkout $(echo "$target" | awk '{print $2}')
 }
+alias fco='fzf-git-checkout-branch-tag'
+
 
 # ftags - search ctags
-ftags() {
+find-c-tags() {
   local line
   [ -e tags ] &&
   line=$(
@@ -90,20 +92,22 @@ ftags() {
   ) && $EDITOR $(cut -f3 <<< "$line") -c "set nocst" \
                                       -c "silent tag $(cut -f2 <<< "$line")"
 }
+alias ftags=find-c-tags
 
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-0)
-fe() {
+fzf-select-file-then-open-editor() {
   local file
   file=$(fzf-tmux --query="$1" --select-1 --exit-0)
   [ -n "$file" ] && ${EDITOR:-vim} "$file"
 }
+alias fe=fzf-select-file-then-open-editor
 
 # Modified version where you can press
 #   - CTRL-O to open with `open` command,
 #   - CTRL-E or Enter key to open with the $EDITOR
-fo() {
+fzf-select-file-open-or-edit() {
   local out file key n
   IFS=$'\n' read -d '' -rA out < <(fzf-tmux -m --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)
   key=${out[1]}
@@ -246,8 +250,7 @@ bindkey '\ei' fzf-locate-widget
 #    find . -path "*/\.*" -prune -o -type f -print -o -type l -print |
 #       sed s/^..//) 2> /dev/null'
 
-
-# export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden --preview '[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file ||  (highlight -O ansi -l {} ||  coderay {} || rougify {} || cat {}) 2> /dev/null | head -$LINES' --preview-window down:1"
+# export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden | fzf --preview '[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file ||  (highlight -O ansi -l {} ||  coderay {} || rougify {} || cat {}) 2> /dev/null | head -$LINES' --preview-window down:1"
 # --preview='head -$LINES {}' --bind='alt-p:toggle-preview'
 # export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
  # --bind '?:toggle-preview'

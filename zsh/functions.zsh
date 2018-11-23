@@ -255,6 +255,22 @@ shebang() {
     rehash
 }
 
+# Same function but using atom
+new-script() {
+    if i=$(which $1);
+    then
+        printf '#!/usr/bin/env %s\n\n' $1 > $2 && \
+        chmod 755 $2 && \
+        atom -n $2 && \
+        chmod 755 $2;
+    else
+        echo "'which' could not find $1, is it in your \$PATH?";
+    fi;
+    # in case the new script is in path, this throw out the command hash table and
+    # start over  (man zshbuiltins)
+    rehash
+}
+
 # a rough equivalent to "hg out"
 # http://www.doof.me.uk/2011/01/08/list-outgoing-changesets-in-git/
 git-out() {
@@ -361,4 +377,3 @@ tail-until() (
 
 # Create directory and move into
 mdcd() { [ -n "$1" ] && mkdir -p "$1" && cd "$1"}
-

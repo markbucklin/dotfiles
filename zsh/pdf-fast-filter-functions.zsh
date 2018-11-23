@@ -1,7 +1,8 @@
 
-if [[! -x fast-p]]; do
-    go get github.com/bellecp/fast-p
-done
+if ! [[ $(command -v fast-p) ]] ; then
+    echo 'installing fast-p for pdf extraction'
+    $( go get -u github.com/bellecp/fast-p )
+fi
 
 pdf-find-fzf-filter-select-then-open () {
     open=xdg-open   # this will open pdf file withthe default PDF viewer on KDE, xfce, LXDE and perhaps on other desktops.
