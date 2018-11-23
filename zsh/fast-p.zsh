@@ -1,11 +1,12 @@
 
+if [[! -x fast-p]]; do
+    go get github.com/bellecp/fast-p
+done
 
-# go get github.com/bellecp/fast-p
-
-p () {
+pdf-find-fzf-filter-select-then-open () {
     open=xdg-open   # this will open pdf file withthe default PDF viewer on KDE, xfce, LXDE and perhaps on other desktops.
 
-    ag -U -g ".pdf$" \
+    ag -U -g "\.pdf$" \
     | fast-p \
     | fzf --read0 --reverse -e -d $'\t'  \
         --preview-window down:80% --preview '
