@@ -51,7 +51,8 @@ alias ta="tmux -2 a"
 
 # Keyboard qwerty with accent
 # and "," (leader) on Caps Lock
-alias rebind='setxkbmap -option compose:ralt ; xmodmap -e "keycode 66 = comma Escape NoSymbol NoSymbol" ; xmodmap -e "clear lock"'
+# causes keyboard issues (maps 'super' key to 'ctrl' ??)
+# alias rebind='setxkbmap -option compose:ralt ; xmodmap -e "keycode 66 = comma Escape NoSymbol NoSymbol" ; xmodmap -e "clear lock"'
 
 # Alias post command
 
@@ -69,7 +70,7 @@ alias npm-ls-bin="ls $(dirname $(which npm))"
 eval $(thefuck --alias)
 alias apt-search='apt-cache search -n '
 alias lx='exa -F '
-alias 'bk=cd /media/server/www/.nextcloud/docker'
+# alias bk='cd /media/server/www/.nextcloud/docker'
 alias duc-index-root='sudo duc index -x -p -b -d /var/.duc.db /'
 alias find-executables-below-pwd="find ./ \( -type f -or -type l \) -wholename '**/bin/*' -perm /a+x"
 alias duc-gui-show-root='duc gui -d /var/.duc.db --dark --gradient --ring-gap=4 --levels=3 --fuzz=1 /'

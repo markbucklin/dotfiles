@@ -42,7 +42,7 @@ fi
 
 # Set default editor
 if [[ -x $(which sublime 2> /dev/null) ]]; then
-    export EDITOR="sublime"
+    export EDITOR="atom"
     export USE_EDITOR=$EDITOR
     export VISUAL=$EDITOR
 fi

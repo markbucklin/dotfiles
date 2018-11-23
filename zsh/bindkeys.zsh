@@ -4,7 +4,7 @@
 #  OR
 # showkey -a
 
-# ^G     	ctrl-G
+# ^G		ctrl-G
 # ^[g		alt-G
 # ^[g		esc,G
 # ^[^G		ctrl-alt-G
@@ -16,7 +16,7 @@
 bindkey -e
 
 
-bindkey "^K"      kill-whole-line                      # ctrl-k
+bindkey "^[K"     kill-whole-line                      # alt-shift-k
 bindkey "^R"      history-incremental-search-backward  # ctrl-r
 bindkey "^A"      beginning-of-line                    # ctrl-a
 bindkey "^E"      end-of-line                          # ctrl-e
@@ -31,9 +31,9 @@ bindkey "^B"      backward-char                        # ctrl-b
 bindkey '\ew' kill-region
 
 # [Ctrl-k] - Kill from cursor to end of line
-bindkey '^k' kill-line
+bindkey "^K" kill-line
 
-bindkey '^y' yank
+bindkey "^Y" yank
 
 # [Esc-l] - run command: ls
 bindkey -s '\el' 'ls -lha\n'
@@ -128,3 +128,4 @@ bindkey '^[J' cd-last-dir-fancy
 # autosuggest-disable
 # autosuggest-execute
 # autosuggest-fetch
+bindkey -s '^[^/' 'pushd /\n'
