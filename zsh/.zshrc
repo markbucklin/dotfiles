@@ -31,8 +31,8 @@ autoload -Uz compinit && compinit
 # zmodload -i zsh/stat
 # zmodload -i zsh/system
 # zmodload -i zsh/terminfo
-zmodload -i zsh/zle
-zmodload -i zsh/zleparameter
+# zmodload -i zsh/zle
+# zmodload -i zsh/zleparameter
 # zmodload -i zsh/zpty
 # zmodload -i zsh/zutil
 
@@ -198,8 +198,6 @@ if ! zplug check --verbose; then
     fi
 fi
 
-echo '>>>>>   [~/.zshrc]: finished with zplug section'
-
 
 ##############################
 # ZSTYLE
@@ -267,8 +265,8 @@ zstyle ':completion:*' menu select=2
 
 # Quote stuff that looks like URLs automatically.
 autoload -U url-quote-magic
-zstyle ':urlglobber' url-other-schema ftp git gopher http https magnet
 zstyle ':url-quote-magic:*' url-metas '*?[]^(|)~#='
+zstyle ':urlglobber' url-other-schema ftp git gopher http https magnet
 zle -N self-insert url-quote-magic
 
 # File/directory completion, for cd command
@@ -320,94 +318,94 @@ zstyle ':completion:*:*:rmdir:*' file-sort time
 ##############################
 # Options
 ##############################
-setopt                       \
-noall_export           \
-noalways_last_prompt   \
-noalways_to_end        \
-append_history       \
-auto_cd              \
-auto_list            \
-auto_menu            \
-auto_name_dirs       \
-auto_param_keys      \
-auto_param_slash     \
-auto_pushd           \
-auto_remove_slash    \
-noauto_resume          \
-nobad_pattern          \
-nobeep                 \
-brace_ccl            \
-nobsd_echo             \
-cdable_vars          \
-nochase_links          \
-noclobber              \
-complete_aliases     \
-complete_in_word     \
-correct              \
-nocsh_junkie_history   \
-nocsh_junkie_loops     \
-nocsh_junkie_quotes    \
-nocsh_null_glob        \
-equals               \
-extended_glob        \
-extended_history     \
-noflow_control         \
-function_argzero     \
-glob                 \
-noglob_assign          \
-glob_complete        \
-noglob_dots            \
-noglob_subst           \
-hash_cmds            \
-hash_dirs            \
-hash_list_all        \
-hist_allow_clobber   \
-hist_beep            \
-hist_ignore_dups     \
-hist_ignore_space    \
-hist_no_store        \
-hist_verify          \
-nohup                  \
-noignore_braces        \
-noignore_eof           \
-interactive_comments \
-inc_append_history   \
-list_ambiguous       \
-nolist_beep            \
-list_types           \
-long_list_jobs       \
-magic_equal_subst    \
-nomail_warning         \
-nomark_dirs            \
-nomenu_complete        \
-multios              \
-nomatch              \
-notify               \
-nonull_glob            \
-numeric_glob_sort    \
-nooverstrike           \
-path_dirs            \
-posix_builtins       \
-noprint_exit_value     \
-prompt_cr            \
-prompt_subst         \
-pushd_ignore_dups    \
-nopushd_minus          \
-pushd_silent         \
-pushd_to_home        \
-rc_expand_param      \
-norc_quotes            \
-norm_star_silent       \
-nosh_file_expansion    \
-sh_option_letters    \
-short_loops          \
-nosh_word_split        \
-nosingle_line_zle      \
-nosun_keyboard_hack    \
-
-unset                \
-noverbose              \
-zle
+# setopt                       \
+# noall_export           \
+# noalways_last_prompt   \
+# noalways_to_end        \
+# append_history       \
+# auto_cd              \
+# auto_list            \
+# auto_menu            \
+# auto_name_dirs       \
+# auto_param_keys      \
+# auto_param_slash     \
+# auto_pushd           \
+# auto_remove_slash    \
+# noauto_resume          \
+# nobad_pattern          \
+# nobeep                 \
+# brace_ccl            \
+# nobsd_echo             \
+# cdable_vars          \
+# nochase_links          \
+# noclobber              \
+# complete_aliases     \
+# complete_in_word     \
+# correct              \
+# nocsh_junkie_history   \
+# nocsh_junkie_loops     \
+# nocsh_junkie_quotes    \
+# nocsh_null_glob        \
+# equals               \
+# extended_glob        \
+# extended_history     \
+# noflow_control         \
+# function_argzero     \
+# glob                 \
+# noglob_assign          \
+# glob_complete        \
+# noglob_dots            \
+# noglob_subst           \
+# hash_cmds            \
+# hash_dirs            \
+# hash_list_all        \
+# hist_allow_clobber   \
+# hist_beep            \
+# hist_ignore_dups     \
+# hist_ignore_space    \
+# hist_no_store        \
+# hist_verify          \
+# nohup                  \
+# noignore_braces        \
+# noignore_eof           \
+# interactive_comments \
+# inc_append_history   \
+# list_ambiguous       \
+# nolist_beep            \
+# list_types           \
+# long_list_jobs       \
+# magic_equal_subst    \
+# nomail_warning         \
+# nomark_dirs            \
+# nomenu_complete        \
+# multios              \
+# nomatch              \
+# notify               \
+# nonull_glob            \
+# numeric_glob_sort    \
+# nooverstrike           \
+# path_dirs            \
+# posix_builtins       \
+# noprint_exit_value     \
+# prompt_cr            \
+# prompt_subst         \
+# pushd_ignore_dups    \
+# nopushd_minus          \
+# pushd_silent         \
+# pushd_to_home        \
+# rc_expand_param      \
+# norc_quotes            \
+# norm_star_silent       \
+# nosh_file_expansion    \
+# sh_option_letters    \
+# short_loops          \
+# nosh_word_split        \
+# nosingle_line_zle      \
+# nosun_keyboard_hack    \
+#
+# unset                \
+# noverbose              \
+# zle
 
 
 

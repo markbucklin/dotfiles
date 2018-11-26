@@ -41,7 +41,7 @@ if [[ -x $(which less 2> /dev/null) ]]; then
 fi
 
 # Set default editor
-if [[ -x $(which sublime 2> /dev/null) ]]; then
+if [[ -x $(which atom 2> /dev/null) ]]; then
     export EDITOR="atom"
     export USE_EDITOR=$EDITOR
     export VISUAL=$EDITOR

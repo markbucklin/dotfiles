@@ -2,7 +2,8 @@
 	name = Mark Bucklin
 	email = markbucklin@gmail.com
 [core]
-	editor = subl --wait
+	# editor = subl --wait
+	editor = atom -w
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [color]
 	ui = true
