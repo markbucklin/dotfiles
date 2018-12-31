@@ -1,13 +1,13 @@
 
 
 # Some more basic aliases
-alias ls='ls --color -F'
-alias ll='ls -d -1 *'
-alias la='ls -lAh'
-alias l='ls -Ah'
-alias lh='ls -d .*'
-alias lsd="ls -ld *" # show directories
-alias ltree='ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/''
+alias lsf='ls --color -F'
+alias ll='/bin/ls --color -d -1 *'
+alias la='/bin/ls -lAh --color'
+alias l='/bin/ls -Ah --color'
+alias lh='/bin/ls -d --color .*'
+alias lsd="/bin/ls --color -ld *" # show directories
+alias ltree="/bin/ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 alias dirdus='du -sckx * | sort -nr' #directories sorted by size
 alias dus='du -kx | sort -nr | less' #files sorted by size
 alias md='mkdir -p'
