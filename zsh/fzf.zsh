@@ -1,3 +1,9 @@
+
+
+# This command works well for selecting a directory with preview
+# find / -ignore_readdir_race -type d 2>/dev/null | eval "'fzf' --preview '(highlight -O ansi -l {} || cat {} || tree -C {}) 2> /dev/null | head -73' --reverse --preview-window right:wrap"
+
+
 # ---------
 # Setup fzf
 # ---------
@@ -10,6 +16,7 @@ fi
 # ---------------
 [[ $- == *i* ]] && source "/home/mark/.fzf/shell/completion.zsh" 2> /dev/null
 
+
 # ---------
 # Completion
 # ---------
@@ -18,14 +25,20 @@ export FZF_COMPLETION_OPTS='+c -x'
 # ---------
 # Default
 # ---------
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export FZF_DEFAULT_OPTS="--extended --ansi --tabstop=4 --margin=1,4,2,1 --no-height"
+# export FZF_DEFAULT_PREVIEW='[[ $(file --mime {}) =~ 'charset=binary' ]] && [[ $(file --mime {}) =~ 'application/pdf' ]] && (pdftotext -nopgbrk -q -layout {} - | rougify highlight) || (highlight -O ansi -l {} || cat {} || tree -C {}) 2> /dev/null | head -$LINES'
+# TODO: pdf preview
+
+export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude ".git" --exclude ".gz" --exclude "node_modules" --exclude "~snapshot" --exclude ".Trash*" --exclude "lost+found"'
+export FZF_DEFAULT_OPTS="--extended --ansi --tabstop=4 --margin=1,4,2,1 --no-height --preview '(highlight -O ansi -l {} || cat {} || tree -C {}) 2> /dev/null | head -800' --preview-window right:wrap"
+
+# head -$LINES
+# "--extended --ansi --tabstop=4 --margin=1,4,2,1 --no-height --preview $FZF_DEFAULT_PREVIEW --preview-window right:wrap"
 # export FZF_DEFAULT_OPTS='--height=50% --reverse --multi --preview="[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (highlight -O ansi -l {} || coderay {} || rougify {} || cat {}) 2> /dev/null | head -500"'
 
 # --------------------------
 # CTRL-R: History Search
 # --------------------------
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:hidden:wrap"
+export FZF_CTRL_R_OPTS="--preview '(echo {} | highlight --syntax=bash -O ansi || echo {})' --preview-window down:wrap:6"
 
 # --------------------------
 # ALT-C: Change Directory
@@ -33,19 +46,24 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:hidden:wrap"
 if $(command -v blsd > /dev/null) ; then
   # Breadth first list directories
   # bash <(curl -fL https://raw.githubusercontent.com/junegunn/blsd/master/install)
-  export FZF_ALT_C_COMMAND='blsd'
+  export FZF_ALT_C_COMMAND='blsd $(print -D -l -i "${PWD}")'
 else
-  export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+  # export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude ".git" --exclude ".gz" --exclude "node_modules"'
+  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
 fi
-
-export FZF_ALT_C_COMMAND='print -D -l "${PWD}/.." ; blsd  2>/dev/null'
-export FZF_ALT_C_OPTS="--preview 'tree -C {}  2> /dev/null | head -300' --preview-window right:60% --reverse --bind=ctrl-space:replace-query"
+export FZF_ALT_C_OPTS="--bind=ctrl-space:replace-query --reverse $FZF_DEFAULT_OPTS"
+# export FZF_ALT_C_OPTS="--preview '(highlight -O ansi -l {} || cat {} || tree -C {}) 2> /dev/null | head -400' --preview-window right:wrap --reverse --bind=ctrl-space:replace-query"
 
 # --------------------------
 # CTRL-T: File Search
 # --------------------------
-export FZF_CTRL_T_COMMAND='fd --type f --type d --hidden --follow --exclude .git'
-export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} || cat {} || tree -C {}) 2> /dev/null | head -$LINES' --reverse --preview-window down:wrap"
+# export FZF_CTRL_T_COMMAND='fd --type f --type d --hidden --follow --exclude ".git" --exclude ".gz" --exclude "node_modules"'
+export FZF_CTRL_T_OPTS="--multi --reverse $FZF_DEFAULT_OPTS"
+
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --type f"
+
+# --type d 
+# export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} || cat {} || tree -C {}) 2> /dev/null | head -$LINES' --reverse --preview-window right:wrap"
 
 
 
@@ -195,6 +213,29 @@ chrome-history() {
   fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
 }
 zle -N chrome-history
+
+# c - browse chrome history
+vivaldi-history() {
+  local cols sep vivaldi_history open
+  cols=$(( COLUMNS / 3 ))
+  sep='{::}'
+
+  if [ "$(uname)" = "Darwin" ]; then
+    vivaldi_history="$HOME/Library/Application Support/Google/Vivaldi/Default/History"
+    open=open
+  else
+    google_history="$HOME/.config/vivaldi/Default/History"
+    open=xdg-open
+  fi
+  cp -f "$google_history" /tmp/h
+  sqlite3 -separator $sep /tmp/h \
+    "select substr(title, 1, $cols), url
+     from urls order by last_visit_time desc" |
+  awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
+  fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
+}
+zle -N vivaldi-history
+
 
 # function cd() {
 #     if [[ "$#" != 0 ]]; then
