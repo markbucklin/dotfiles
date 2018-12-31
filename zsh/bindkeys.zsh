@@ -35,10 +35,13 @@ bindkey "^K" kill-line
 
 bindkey "^Y" yank
 
-# [Esc-l] - run command: ls
-bindkey -s '\el' 'ls -lha\n'
+# [Alt-L] - run command: ls
+bindkey -s '^[l' 'ls -h --color\n'
 
-# [Esc-.] - run command: cd ~
+# [Ctrl-Alt-L] - run command: ls with hidden-files
+bindkey -s '^[^L' 'ls -Ah --color\n'
+
+# [Alt-.] - run command: cd ~
 bindkey -s '\e.' 'cd ~\n'
 
 # [Ctrl-r] - Search backward incrementally for a specified string. The string
