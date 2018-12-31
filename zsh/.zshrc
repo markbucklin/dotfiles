@@ -188,7 +188,7 @@ zplug "stedolan/jq", as:command, from:gh-r, rename-to:jq
 zplug "motemen/ghq", as:command, from:gh-r, rename-to:ghq
 
 # Local plugins
-zplug "~/.zsh", from:local
+zplug "~/.zsh/plugins", from:local
 
 
 # Install packages that have not been installed yet
