@@ -41,11 +41,11 @@ if [[ -x $(which less 2> /dev/null) ]]; then
 fi
 
 # Set default editor
-if [[ -x $(which atom 2> /dev/null) ]]; then
-    export EDITOR="atom"
-    export USE_EDITOR=$EDITOR
-    export VISUAL=$EDITOR
-fi
+# if [[ -x $(which  2> /dev/null) ]]; then
+export EDITOR=vim
+export USE_EDITOR=$EDITOR
+export VISUAL=$EDITOR
+# fi
 
 # Set LC_ALL="UTF8"
 export LC_ALL=en_US.UTF-8
@@ -68,3 +68,7 @@ export VDPAU_DRIVER=nvidia
 export LIBVA_DRIVER_NAME=vdpau
 export PATH=$PATH:$HOME/gems/bin
 export GEM_HOME=$HOME/gems
+
+# Set a backup directory on university server
+export BACKUP_DIR="/hanlab/People/Mark Bucklin/backup"
+

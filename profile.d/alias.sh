@@ -2,14 +2,14 @@
 
 # Some more basic aliases
 alias ls='ls --color -F'
-alias ll='ls -lh'
+alias ll='ls -d -1 *'
 alias la='ls -lAh'
-alias l='ls -lah'
+alias l='ls -Ah'
 alias lh='ls -d .*'
 alias lsd="ls -ld *" # show directories
-alias ltree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
-alias 'dirdus=du -sckx * | sort -nr' #directories sorted by size
-alias 'dus=du -kx | sort -nr | less' #files sorted by size
+alias ltree='ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/''
+alias dirdus='du -sckx * | sort -nr' #directories sorted by size
+alias dus='du -kx | sort -nr | less' #files sorted by size
 alias md='mkdir -p'
 alias rd='rmdir'
 alias cd..='cd ..'
@@ -38,9 +38,10 @@ alias aguu='sudo apt-get update -y && sudo apt-get upgrade -y'
 alias agi='sudo apt-get install -y'
 
 
-alias 'wordy=wc -w * | sort | tail -n10' # sort files in current directory by the number of words they contain
-alias 'filecount=find . -type f | wc -l' # number of files (not directories)
-
+alias wordy='wc -w * | sort | tail -n10' # sort files in current directory by the number of words they contain
+alias count-words-in-files=wordy
+alias filecount='find . -type f | wc -l' # number of files (not directories)
+alias count-files-in-dirs=filecount
 
 # git
 alias gitgraph="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
@@ -66,7 +67,7 @@ alias -g XX="\`xclip -o\`"
 
 alias -s {txt,h,c,hpp,cpp,tex,bib,html,xml}=$EDITOR
 # alias npm-ls-bin='ls $HOME/.nvm/versions/node/v10.1.0/bin'
-alias npm-ls-bin="ls $(dirname $(which npm))"
+alias npm-ls-bin="ls $(npm bin -g)"
 eval $(thefuck --alias)
 alias apt-search='apt-cache search -n '
 alias lx='exa -F '
@@ -74,3 +75,10 @@ alias lx='exa -F '
 alias duc-index-root='sudo duc index -x -p -b -d /var/.duc.db /'
 alias find-executables-below-pwd="find ./ \( -type f -or -type l \) -wholename '**/bin/*' -perm /a+x"
 alias duc-gui-show-root='duc gui -d /var/.duc.db --dark --gradient --ring-gap=4 --levels=3 --fuzz=1 /'
+alias apmi='apm install '
+alias split-right='tilix -a session-add-right'
+alias split-down='tilix -a session-add-down'
+alias split-left='tilix -a session-add-left'
+alias split-up='tilix -a session-add-up'
+alias b='buku --suggest'
+alias ncp='cat ~/.nnncp'

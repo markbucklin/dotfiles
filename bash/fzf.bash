@@ -12,3 +12,4 @@ fi
 # ------------
 source "/home/mark/.fzf/shell/key-bindings.bash"
 
+typeset -U PATH

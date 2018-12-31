@@ -1,3 +1,5 @@
+zmodload zsh/zprof
+
 # Follow the link (if any) to find the config folder
 if [[ ! -e $DOTDIR ]]; then
     export DOTDIR=../
@@ -464,3 +466,5 @@ typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 zplug load
 
 neofetch
+
+export PATH="/home/mark/.zplug/repos/paulirish/git-open:/home/mark/.zplug/bin:/home/mark/.nvm/versions/node/v10.1.0/bin:/home/mark/.linuxbrew/bin:/home/mark/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/cuda/bin:/home/mark/gems/bin:/usr/local/go/bin:/home/mark/go/bin:/home/mark/.fzf/bin:/home/mark/.vimpkg/bin"
