@@ -5,7 +5,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig:/usr/
 
 # Setup linux brew
 export LINUXBREWHOME=$HOME/.linuxbrew
-export PATH=$LINUXBREWHOME/bin:$PATH
+export PATH=$PATH:$LINUXBREWHOME/bin
 export MANPATH=$MANPATH:$LINUXBREWHOME/share/man
 export INFOPATH=$INFOPATH:$LINUXBREWHOME/share/info
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$LINUXBREWHOME/lib/pkgconfig
