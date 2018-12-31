@@ -8,8 +8,8 @@ alias l='/bin/ls -Ah --color'
 alias lh='/bin/ls -d --color .*'
 alias lsd="/bin/ls --color -ld *" # show directories
 alias ltree="/bin/ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
-alias dirdus='du -sckx * | sort -nr' #directories sorted by size
-alias dus='du -kx | sort -nr | less' #files sorted by size
+alias du_dirs='du -sckx * | sort -nr' #directories sorted by size
+alias du_files='du -kx | sort -nr | less' #files sorted by size
 alias md='mkdir -p'
 alias rd='rmdir'
 alias cd..='cd ..'
@@ -22,7 +22,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
-alias df='df -hT'
+alias df_human='df -hT'
 alias ocaml='rlwrap ocaml'
 # Random aliases
 alias find_duplicate_names='find . -type f | sed "s#.*/##" | sort | uniq -c | sort -nr | egrep -v "\s+1\s+"'
@@ -36,7 +36,7 @@ alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias aguu='sudo apt-get update -y && sudo apt-get upgrade -y'
 alias agi='sudo apt-get install -y'
-
+alias aguui='aguu && agi'
 
 alias wordy='wc -w * | sort | tail -n10' # sort files in current directory by the number of words they contain
 alias count-words-in-files=wordy
@@ -67,6 +67,9 @@ alias -g XX="\`xclip -o\`"
 
 alias -s {txt,h,c,hpp,cpp,tex,bib,html,xml}=$EDITOR
 # alias npm-ls-bin='ls $HOME/.nvm/versions/node/v10.1.0/bin'
+if [[ !$(command -v npm) ]] && [[ -f ./nvm.sh ]] ; then
+	source ./nvm.sh
+fi
 alias npm-ls-bin="ls $(npm bin -g)"
 eval $(thefuck --alias)
 alias apt-search='apt-cache search -n '
