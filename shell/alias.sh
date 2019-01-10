@@ -1,12 +1,15 @@
 
 
 # Some more basic aliases
-alias lsf='ls --color -F'
-alias ll='/bin/ls --color -d -1 *'
-alias la='/bin/ls -lAh --color'
-alias l='/bin/ls -Ah --color'
-alias lh='/bin/ls -d --color .*'
-alias lsd="/bin/ls --color -ld *" # show directories
+alias ls='ls --color=auto'
+alias lst='ls -F'
+alias lsv='ls -1'
+alias lsa='ls -A'
+alias lsl='ls -lh'
+alias 'ls/'='ls -p'
+alias lss='ls -S'
+alias lsq='ls -Q'
+alias lsd="ls --group-directories-first" # show directories
 alias ltree="/bin/ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 alias du_dirs='du -sckx * | sort -nr' #directories sorted by size
 alias du_files='du -kx | sort -nr | less' #files sorted by size
@@ -25,7 +28,7 @@ alias ......='cd ../../../../..'
 alias df_human='df -hT'
 alias ocaml='rlwrap ocaml'
 # Random aliases
-alias find_duplicate_names='find . -type f | sed "s#.*/##" | sort | uniq -c | sort -nr | egrep -v "\s+1\s+"'
+alias find_duplicate_names='find . -type f 2>/dev/null | sed "s#.*/##" | sort | uniq -c | sort -nr | egrep -v "\s+1\s+"'
 alias hh='history | grep -i '
 alias tododiff='git diff develop | grep -E -A8 "((JPADS)FSW.[0-9]+.*)|(todo.*)" --color=always | cut -c 2- | less -r'
 alias sshutdown='sudo shutdown -P 0'
@@ -79,10 +82,21 @@ alias duc-index-root='sudo duc index -x -p -b -d /var/.duc.db /'
 alias find-executables-below-pwd="find ./ \( -type f -or -type l \) -wholename '**/bin/*' -perm /a+x"
 alias duc-gui-show-root='duc gui -d /var/.duc.db --dark --gradient --ring-gap=4 --levels=3 --fuzz=1 /'
 alias apmi='apm install '
-alias split-right='tilix -a session-add-right'
-alias split-down='tilix -a session-add-down'
-alias split-left='tilix -a session-add-left'
-alias split-up='tilix -a session-add-up'
+
+# tilix
+alias vsplit='tilix -a session-add-right'
+alias hsplit='tilix -a session-add-down'
+alias vsplitleft='tilix -a session-add-left'
+alias vsplitup='tilix -a session-add-up'
+
+# buku
 alias b='buku --suggest'
+
+# cat
 alias ncp='cat ~/.nnncp'
 alias cat='ccat'
+
+# fzf
+alias fzf-select-directories-from-current='ls -d */ | fzf -m'
+alias copy_last_command_to_clipboard='fc -nlr | head -n 1 | tee >(xclip -i -selection primary) | xclip -i -selection clipboard'
+

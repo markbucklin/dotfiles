@@ -1,0 +1,16 @@
+
+
+# Node Version Manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# NPM Global Binary (via NVM)
+#export PATH="$PATH:`npm bin -g`"
+export PATH="$PATH:$(dirname $(nvm which current))"
+
+# alias npm-ls-bin='ls $HOME/.nvm/versions/node/v10.1.0/bin'
+if [[ !$(command -v npm) ]] && [[ -f ./nvm.sh ]] ; then
+        source ./nvm.sh
+fi
+alias npm-ls-bin="ls $(npm bin -g)"

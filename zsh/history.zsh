@@ -27,7 +27,7 @@ esac
 
 ## History file configuration
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
-HISTSIZE=250000
+HISTSIZE=400000
 SAVEHIST=50000
 
 ## History command configuration

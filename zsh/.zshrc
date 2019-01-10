@@ -1,21 +1,30 @@
-# zmodload zsh/zprof
+#!/usr/bin/env zsh
 
-# Follow the link (if any) to find the config folder
-if [[ ! -e $DOTDIR ]]; then
-    export DOTDIR=../
-fi
 
+# Source Local Dot-Files (common to all shells)
+shelldir=$HOME/dotfiles/shell
+for file in $shelldir/*.sh ; do
+    source $file
+done
+
+
+# Source Local Dot-Files for ZSH
 if [[ -L $HOME/.zshrc ]]; then
 	export ZDOTDIR="$(dirname $(readlink -f $HOME/.zshrc))"
 else
     export ZDOTDIR=${HOME}/.config/zsh
 fi
+for file in $ZDOTDIR/*.zsh ; do
+    source $file
+done
+
 # todo: also pull entire .zshrc file into dotfiles
 
 # symbolic link to dir in local dotfiles dir:
 # ~/.zsh/completions -> ~/$DOTDIR/completions/zsh
-fpath=(~/.zsh/completions $fpath)
-
+if [[ -d $ZDOTDIR/completions ]]; then
+	fpath=($ZDOTDIR/completions $fpath)
+fi
 
 #  Run auto-load
 # autoload zmv
@@ -40,21 +49,6 @@ autoload -U +X bashcompinit && bashcompinit
 # zmodload -i zsh/zutil
 
 
-
-# Source Local Dot-Files (common to all shells)
-for file in $DOTDIR/profile.d/*.sh ; do
-    source $file
-done
-
-# Source Local Dot-Files for ZSH
-for file in $ZDOTDIR/*.zsh ; do
-    source $file
-done
-
-# Keep 10000 lines of history within the shell and save it to ~/.zsh_history:
-export HISTSIZE=30000
-export SAVEHIST=400000
-export HISTFILE=~/.zsh_history
 
 ##############################
 # Colors
@@ -140,13 +134,14 @@ zplug "dannynimmo/punctual-zsh-theme", use:punctual.zsh-theme, from:github, as:t
 zplug "mollifier/zload"
 zplug "mafredri/zsh-async"
 zplug "supercrabtree/k"
-zplug "desyncr/auto-ls"
+# zplug "desyncr/auto-ls"
 zplug "joepvd/zsh-hints"
 zplug "srijanshetty/zsh-pandoc-completion"
 zplug "chipsenkbeil/zsh-notes"
 zplug "lukechilds/zsh-nvm"
 zplug "hkupty/ssh-agent"
 zplug "athityakumar/colorls"
+zplug "wfxr/formarks", defer:1
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:3
@@ -182,13 +177,13 @@ zplug "plugins/tmux",   from:oh-my-zsh, if:"which tmux"
 
 
 zplug "ogham/exa"
-zplug 'knqyf263/pet', as:command, hook-build:'go get -d && go build'
+# zplug 'knqyf263/pet', as:command, hook-build:'go get -d && go build'
 # zplug "zdharma/zsh-diff-so-fancy", as:command, use:bin/git-dsf
-zplug "stedolan/jq", as:command, from:gh-r, rename-to:jq
-zplug "motemen/ghq", as:command, from:gh-r, rename-to:ghq
+# zplug "stedolan/jq", as:command, from:gh-r, rename-to:jq
+# zplug "motemen/ghq", as:command, from:gh-r, rename-to:ghq
 
 # Local plugins
-zplug "~/.zsh/plugins", from:local
+# zplug "~/.zsh/plugins", from:local
 
 
 # Install packages that have not been installed yet
@@ -468,4 +463,5 @@ zplug load
 
 # neofetch
 
-# export PATH="/home/mark/.zplug/repos/paulirish/git-open:/home/mark/.zplug/bin:/home/mark/.nvm/versions/node/v10.1.0/bin:/home/mark/.linuxbrew/bin:/home/mark/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/cuda/bin:/home/mark/gems/bin:/usr/local/go/bin:/home/mark/go/bin:/home/mark/.fzf/bin:/home/mark/.vimpkg/bin"
+# export PATH="/home/mark/.zplug/repos/paulirish/
+#/home/mark/.zplug/bin:/home/mark/.nvm/versions/node/v10.1.0/bin:/home/mark/.linuxbrew/bin:/home/mark/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/cuda/bin:/home/mark/gems/bin:/usr/local/go/bin:/home/mark/go/bin:/home/mark/.fzf/bin:/home/mark/.vimpkg/bin"

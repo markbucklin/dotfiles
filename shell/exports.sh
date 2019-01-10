@@ -81,4 +81,4 @@ export GEM_HOME=$HOME/gems
 
 # Set a backup directory on university server
 export BACKUP_DIR="/hanlab/People/Mark Bucklin/backup"
-
+# todo: check backup path exists
