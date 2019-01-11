@@ -40,7 +40,7 @@ if [[ -x $(which less 2> /dev/null) ]]; then
     fi
 fi
 
-export PAGER='most'
+export PAGER='less'
 export LESS_TERMCAP_mb="$'\e[1;32m'"
 export LESS_TERMCAP_md="$'\e[1;32m'"
 export LESS_TERMCAP_me="$'\e[0m'"

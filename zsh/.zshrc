@@ -1,12 +1,6 @@
 #!/usr/bin/env zsh
 
 
-# Source Local Dot-Files (common to all shells)
-shelldir=$HOME/dotfiles/shell
-for file in $shelldir/*.sh ; do
-    source $file
-done
-
 
 # Source Local Dot-Files for ZSH
 if [[ -L $HOME/.zshrc ]]; then
