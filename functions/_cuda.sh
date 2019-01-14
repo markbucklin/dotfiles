@@ -1,9 +1,11 @@
-export PATH=/usr/local/cuda/bin:$PATH
-export CUDADIR=/usr/local/cuda
-export GLPATH=/usr/lib
-export CUDA_HOME=/usr/local/cuda
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64
 
+function cuda-env(){
+    export PATH=$PATH:/usr/local/cuda/bin
+    export CUDADIR=/usr/local/cuda
+    export GLPATH=/usr/lib
+    export CUDA_HOME=/usr/local/cuda
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64
+}
 
 
 # from https://www.pugetsystems.com/labs/hpc/NAMD-Custom-Build-for-Better-Performance-on-your-Modern-GPU-Accelerated-Workstation----Ubuntu-16-04-18-04-CentOS-7-1196/

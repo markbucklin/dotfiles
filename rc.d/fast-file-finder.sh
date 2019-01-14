@@ -1,7 +1,7 @@
 
 
-
-if ! $(command -v fff >| /dev/null) ; then                             
+# todo make bash compatible (command is zsh only)
+if ! $(command -v fff >| /dev/null) ; then
   wget -P ~/bin https://raw.githubusercontent.com/dylanaraps/fff/master/fff
   chmod ug+x ~/bin/fff
 fi
@@ -35,4 +35,3 @@ export FFF_FAV6=
 export FFF_FAV7=
 export FFF_FAV8=
 export FFF_FAV9=
-

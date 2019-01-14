@@ -1,4 +1,4 @@
-
+# todo: check if used programs are actually installed
 
 # Some more basic aliases
 alias ls='ls --color=auto'
