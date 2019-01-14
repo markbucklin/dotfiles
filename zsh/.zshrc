@@ -1,5 +1,12 @@
 #!/usr/bin/env zsh
 
+export PATH="$HOME/bin:$PATH"
+
+#  Run auto-load
+# autoload zmv
+autoload -Uz +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+#
 
 
 # Source Local Dot-Files for ZSH
@@ -20,10 +27,6 @@ if [[ -d $ZDOTDIR/completions ]]; then
 	fpath=($ZDOTDIR/completions $fpath)
 fi
 
-#  Run auto-load
-# autoload zmv
-autoload -Uz +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
 # zmodload -i zsh/complete
 # zmodload -i zsh/complist
 # zmodload -i zsh/compctl
@@ -138,8 +141,8 @@ zplug "athityakumar/colorls"
 zplug "wfxr/formarks", defer:1
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions", defer:2
-zplug "zsh-users/zsh-history-substring-search", defer:3
-zplug "zsh-users/zsh-syntax-highlighting", defer:3
+zplug "zsh-users/zsh-history-substring-search", defer:2
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
 # ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 export FORGIT_NO_ALIASES
