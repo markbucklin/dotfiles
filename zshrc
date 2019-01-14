@@ -1,50 +1,18 @@
 #!/usr/bin/env zsh
 
-export PATH="$HOME/bin:$PATH"
-
 #  Run auto-load
-# autoload zmv
 autoload -Uz +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-#
+# autoload -U +X bashcompinit && bashcompinit
 
 
-# Source Local Dot-Files for ZSH
-if [[ -L $HOME/.zshrc ]]; then
-	export ZDOTDIR="$(dirname $(readlink -f $HOME/.zshrc))"
-else
-    export ZDOTDIR=${HOME}/.config/zsh
-fi
-for file in $ZDOTDIR/*.zsh ; do
-    source $file
-done
 
 # todo: also pull entire .zshrc file into dotfiles
 
 # symbolic link to dir in local dotfiles dir:
 # ~/.zsh/completions -> ~/$DOTDIR/completions/zsh
-if [[ -d $ZDOTDIR/completions ]]; then
-	fpath=($ZDOTDIR/completions $fpath)
+if [[ -d $zshrc_dir/completions ]]; then
+	fpath=($zshrc_dir/completions $fpath)
 fi
-
-# zmodload -i zsh/complete
-# zmodload -i zsh/complist
-# zmodload -i zsh/compctl
-# zmodload -i zsh/computil
-# zmodload -i zsh/curses
-# zmodload -i zsh/datetime
-# zmodload -i zsh/files
-# zmodload -i zsh/main
-# zmodload -i zsh/parameter
-# zmodload -i zsh/regex
-# zmodload -i zsh/stat
-# zmodload -i zsh/system
-# zmodload -i zsh/terminfo
-# zmodload -i zsh/zle
-# zmodload -i zsh/zleparameter
-# zmodload -i zsh/zpty
-# zmodload -i zsh/zutil
-
 
 
 ##############################
@@ -54,22 +22,8 @@ fi
 # export LSCOLORS=exfxcxdxbxegedabagacad
 # export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
-eval `dircolors -b`
-export ZLS_COLORS=$LS_COLORS
-
-
-
-##############################
-# Aliases
-##############################
-# Git Aliases
-alias gup='git pull --rebase origin $(current_branch)'
-compdef gup=git
-alias gpush='git push origin $(current_branch)'
-compdef gpush=git
-alias gsync='git pull --rebase origin $(current_branch) && git push origin $(current_branch)'
-compdef gsync=git
-
+# eval `dircolors -b`
+# export ZLS_COLORS=$LS_COLORS
 
 ##############################
 # Zplug
@@ -85,7 +39,6 @@ source ~/.zplug/init.zsh
 
 # Add a bunch more of your favorite packages!
 zplug "zplug/zplug", hook-build:'zplug --self-manage'
-zplug "~/.zsh", from:local, use:"<->_*.zsh"
 
 ##############################
 # Theme
@@ -98,30 +51,6 @@ export PUNCTUAL_SHOW_TIMESTAMP="false";
 export PUNCTUAL_SHOW_CURRENT_DIR="true";
 export PUNCTUAL_SHOW_GIT="false";
 export PUNCTUAL_CURRENT_DIR_BOLD="true";
-# PUNCTUAL_TIMESTAMP_COLOUR="red";
-# PUNCTUAL_USER_COLOUR="green";
-# PUNCTUAL_ROOT_USER_COLOUR="yellow";
-# PUNCTUAL_HOSTNAME_COLOUR="blue";
-# PUNCTUAL_CURRENT_DIR_COLOUR="magenta";
-# PUNCTUAL_GIT_COLOUR="cyan";
-# PUNCTUAL_TIMESTAMP_BOLD="true";
-# PUNCTUAL_USER_BOLD="true";
-# PUNCTUAL_ROOT_USER_BOLD="true";
-# PUNCTUAL_HOSTNAME_BOLD="true";
-# PUNCTUAL_CURRENT_DIR_BOLD="true";
-# PUNCTUAL_GIT_BOLD="true";
-# PUNCTUAL_TIMESTAMP_FORMAT="%l:%M%P";
-
-# PUNCTUAL_GIT_SYMBOL_UNTRACKED="?";
-# PUNCTUAL_GIT_SYMBOL_ADDED="+";
-# PUNCTUAL_GIT_SYMBOL_MODIFIED="!";
-# PUNCTUAL_GIT_SYMBOL_RENAMED="!";
-# PUNCTUAL_GIT_SYMBOL_DELETED="!";
-# PUNCTUAL_GIT_SYMBOL_STASHED="*";
-# PUNCTUAL_GIT_SYMBOL_UNMERGED="M";
-# PUNCTUAL_GIT_SYMBOL_AHEAD="↑";
-# PUNCTUAL_GIT_SYMBOL_BEHIND="↓";
-# PUNCTUAL_GIT_SYMBOL_DIVERGED="~";
 export PUNCTUAL_PROMPT=" $";
 zplug "dannynimmo/punctual-zsh-theme", use:punctual.zsh-theme, from:github, as:theme
 
@@ -131,7 +60,7 @@ zplug "dannynimmo/punctual-zsh-theme", use:punctual.zsh-theme, from:github, as:t
 zplug "mollifier/zload"
 zplug "mafredri/zsh-async"
 zplug "supercrabtree/k"
-# zplug "desyncr/auto-ls"
+zplug "desyncr/auto-ls"
 zplug "joepvd/zsh-hints"
 zplug "srijanshetty/zsh-pandoc-completion"
 zplug "chipsenkbeil/zsh-notes"
@@ -159,10 +88,7 @@ forgit_stash_show=gss
 zplug "Schnouki/git-annex-zsh-completion"
 zplug "akoenig/gulp.plugin.zsh", defer:2
 zplug "ytet5uy4/fzf-widgets"
-# zplug "zlsun/solarized-man"
 zplug "aramboi/zsh-ipfs", defer:2
-zplug "hcgraf/zsh-sudo", from:oh-my-zsh
-#, ignore:oh-my-zsh.sh, defer:2
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 
 zplug "plugins/git",    from:oh-my-zsh, if:"which git"
@@ -178,9 +104,6 @@ zplug "ogham/exa"
 # zplug "zdharma/zsh-diff-so-fancy", as:command, use:bin/git-dsf
 # zplug "stedolan/jq", as:command, from:gh-r, rename-to:jq
 # zplug "motemen/ghq", as:command, from:gh-r, rename-to:ghq
-
-# Local plugins
-# zplug "~/.zsh/plugins", from:local
 
 
 # Install packages that have not been installed yet
@@ -289,128 +212,24 @@ zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
 zstyle ':completion:*:*:rmdir:*' file-sort time
 
 
-
-# WAS COMMENTED OUT BELOW HERE
-# # tag-order 'globbed-files directories' all-files
-# zstyle ':completion::complete:*:tar:directories' file-patterns '*~.*(-/)'
-#
-# # Don't complete backup files as executables
-# zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
-#
-# # Separate matches into groups
-# zstyle ':completion:*:matches' group 'yes'
-#
-# # With commands like rm, it's annoying if you keep getting offered the same
-# # file multiple times. This fixes it. Also good for cp, et cetera..
-# zstyle ':completion:*:rm:*' ignore-line yes
-# zstyle ':completion:*:cp:*' ignore-line yes
-#
-# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-# zstyle ':completion:*:*:kill:*' list-colors '=%*=01;31'
-
-
-
-##############################
-# Options
-##############################
-# setopt                       \
-# noall_export           \
-# noalways_last_prompt   \
-# noalways_to_end        \
-# append_history       \
-# auto_cd              \
-# auto_list            \
-# auto_menu            \
-# auto_name_dirs       \
-# auto_param_keys      \
-# auto_param_slash     \
-# auto_pushd           \
-# auto_remove_slash    \
-# noauto_resume          \
-# nobad_pattern          \
-# nobeep                 \
-# brace_ccl            \
-# nobsd_echo             \
-# cdable_vars          \
-# nochase_links          \
-# noclobber              \
-# complete_aliases     \
-# complete_in_word     \
-# correct              \
-# nocsh_junkie_history   \
-# nocsh_junkie_loops     \
-# nocsh_junkie_quotes    \
-# nocsh_null_glob        \
-# equals               \
-# extended_glob        \
-# extended_history     \
-# noflow_control         \
-# function_argzero     \
-# glob                 \
-# noglob_assign          \
-# glob_complete        \
-# noglob_dots            \
-# noglob_subst           \
-# hash_cmds            \
-# hash_dirs            \
-# hash_list_all        \
-# hist_allow_clobber   \
-# hist_beep            \
-# hist_ignore_dups     \
-# hist_ignore_space    \
-# hist_no_store        \
-# hist_verify          \
-# nohup                  \
-# noignore_braces        \
-# noignore_eof           \
-# interactive_comments \
-# inc_append_history   \
-# list_ambiguous       \
-# nolist_beep            \
-# list_types           \
-# long_list_jobs       \
-# magic_equal_subst    \
-# nomail_warning         \
-# nomark_dirs            \
-# nomenu_complete        \
-# multios              \
-# nomatch              \
-# notify               \
-# nonull_glob            \
-# numeric_glob_sort    \
-# nooverstrike           \
-# path_dirs            \
-# posix_builtins       \
-# noprint_exit_value     \
-# prompt_cr            \
-# prompt_subst         \
-# pushd_ignore_dups    \
-# nopushd_minus          \
-# pushd_silent         \
-# pushd_to_home        \
-# rc_expand_param      \
-# norc_quotes            \
-# norm_star_silent       \
-# nosh_file_expansion    \
-# sh_option_letters    \
-# short_loops          \
-# nosh_word_split        \
-# nosingle_line_zle      \
-# nosun_keyboard_hack    \
-#
-# unset                \
-# noverbose              \
-# zle
-
-
-
-
 ##############################
 # For individual Zplug loaded modules
 ##############################
 # Source fzf.zsh (fuzzy-finder)
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # export FZF_DEFAULT_OPTS="--extended --ansi --multi"
+
+
+rc_dir="$HOME/dotfiles/rc.d"
+for file in $rc_dir/*.sh ; do
+    source $file
+done
+
+zshrc_dir="$HOME/dotfiles/zshrc.d"
+for file in $zshrc_dir/*.zsh ; do
+    source $file
+done
+
 
 # ------------
 # Key bindings
@@ -446,11 +265,11 @@ eval "$(grunt --completion=zsh)"
 # OTHER
 ##############################
 # yank
-alias yank='yank-cli -- xsel -b'
+# alias yank='yank-cli -- xsel -b'
 
 
 # automatically remove duplicates from these arrays
-typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
+# typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 
 
 ##############################

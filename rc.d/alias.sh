@@ -99,4 +99,3 @@ alias cat='ccat'
 # fzf
 alias fzf-select-directories-from-current='ls -d */ | fzf -m'
 alias copy_last_command_to_clipboard='fc -nlr | head -n 1 | tee >(xclip -i -selection primary) | xclip -i -selection clipboard'
-

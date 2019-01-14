@@ -1,4 +1,4 @@
-export PATH=$PATH:/usr/local/cuda/bin
+export PATH=/usr/local/cuda/bin:$PATH
 export CUDADIR=/usr/local/cuda
 export GLPATH=/usr/lib
 export CUDA_HOME=/usr/local/cuda

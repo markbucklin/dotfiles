@@ -14,10 +14,12 @@ fi
 
 
 # Setup terminal, and turn on colors
-#export TERM=xterm-256color
-export TERM=screen-256color
-export CLICOLOR=1
-export LSCOLORS=Gxfxcxdxbxegedabagacad
+export TERM=xterm-256color
+# export TERM=screen-256color
+# export CLICOLOR=1
+# export LSCOLORS=Gxfxcxdxbxegedabagacad
+eval `dircolors -b`
+
 
 # Enable color in grep
 #export GREP_OPTIONS='--color=auto'
@@ -72,13 +74,12 @@ export PROJECT_HOME=$HOME/projects
 export WORDCHARS='*?.[]~&;!#$%^(){}<>'
 
 
-# remove duplicate entries
-typeset -U PATH
 export VDPAU_DRIVER=nvidia
 export LIBVA_DRIVER_NAME=vdpau
-export PATH=$PATH:$HOME/gems/bin
-export GEM_HOME=$HOME/gems
 
 # Set a backup directory on university server
 export BACKUP_DIR="/hanlab/People/Mark Bucklin/backup"
 # todo: check backup path exists
+
+# remove duplicate entries
+# typeset -U PATH
