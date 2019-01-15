@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-# zmodload zsh/zprof
+zmodload zsh/zprof
 
 #  Run auto-load
 autoload -Uz compinit && compinit
@@ -240,7 +240,7 @@ done
 # ------------
 
 # TODO: fzf keybindings
-source "$HOME/.fzf/shell/key-bindings.zsh"
+# source "$HOME/.fzf/shell/key-bindings.zsh"
 # if zplug check "zsh-users/zsh-history-substring-search"; then
     # bindkey '^[[A' history-substring-search-up
     # bindkey '^[[B' history-substring-search-down
@@ -286,4 +286,4 @@ zplug load
 
 
 
-# zprof
+zprof
