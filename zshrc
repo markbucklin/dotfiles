@@ -1,10 +1,12 @@
 #!/usr/bin/env zsh
 
+# zmodload zsh/zprof
+
 #  Run auto-load
-autoload -Uz +X compinit && compinit
+autoload -Uz compinit && compinit
 
 
-# autoload -U +X bashcompinit && bashcompinit
+# autoload -U bashcompinit && bashcompinit
 # todo: test bashcompinit is necessary
 
 
@@ -12,9 +14,9 @@ autoload -Uz +X compinit && compinit
 
 # symbolic link to dir in local dotfiles dir:
 # ~/.zsh/completions -> ~/$DOTDIR/completions/zsh
-if [[ -d $zshrc_dir/completions ]]; then
-	fpath=($zshrc_dir/completions $fpath)
-fi
+# if [[ -d $zshrc_dir/completions ]]; then
+# 	fpath=($zshrc_dir/completions $fpath)
+# fi
 
 
 ##############################
@@ -66,7 +68,7 @@ zplug "desyncr/auto-ls"
 zplug "joepvd/zsh-hints"
 zplug "srijanshetty/zsh-pandoc-completion"
 zplug "chipsenkbeil/zsh-notes"
-zplug "lukechilds/zsh-nvm"
+# zplug "lukechilds/zsh-nvm"
 zplug "hkupty/ssh-agent"
 zplug "athityakumar/colorls"
 zplug "wfxr/formarks", defer:1
@@ -101,6 +103,7 @@ zplug "plugins/sudo",   from:oh-my-zsh, if:"which sudo"
 zplug "plugins/tmux",   from:oh-my-zsh, if:"which tmux"
 
 
+
 zplug "ogham/exa"
 # zplug 'knqyf263/pet', as:command, hook-build:'go get -d && go build'
 # zplug "zdharma/zsh-diff-so-fancy", as:command, use:bin/git-dsf
@@ -109,14 +112,14 @@ zplug "ogham/exa"
 
 
 # Install packages that have not been installed yet
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    else
-        echo
-    fi
-fi
+# if ! zplug check --verbose; then
+#     printf "Install? [y/N]: "
+#     if read -q; then
+#         echo; zplug install
+#     else
+#         echo
+#     fi
+# fi
 
 
 ##############################
@@ -222,12 +225,12 @@ zstyle ':completion:*:*:rmdir:*' file-sort time
 # export FZF_DEFAULT_OPTS="--extended --ansi --multi"
 
 
-zshrc_dir="$HOME/dotfiles/zshrc.d"
+zshrc_dir="$HOME/.zshrc.d"
 for file in $zshrc_dir/*.zsh ; do
     source $file
 done
 
-rc_dir="$HOME/dotfiles/rc.d"
+rc_dir="$HOME/.rc.d"
 for file in $rc_dir/*.sh ; do
 	source $file
 done
@@ -235,11 +238,13 @@ done
 # ------------
 # Key bindings
 # ------------
-source "/home/mark/.fzf/shell/key-bindings.zsh"
-if zplug check "zsh-users/zsh-history-substring-search"; then
-    bindkey '^[[A' history-substring-search-up
-    bindkey '^[[B' history-substring-search-down
-fi
+
+# TODO: fzf keybindings
+source "$HOME/.fzf/shell/key-bindings.zsh"
+# if zplug check "zsh-users/zsh-history-substring-search"; then
+    # bindkey '^[[A' history-substring-search-up
+    # bindkey '^[[B' history-substring-search-down
+# fi
 
 # rbenv
 if [[ $(command -v rbenv) ]]; then
@@ -279,7 +284,6 @@ fi
 ##############################
 zplug load
 
-# neofetch
 
-# export PATH="/home/mark/.zplug/repos/paulirish/
-#/home/mark/.zplug/bin:/home/mark/.nvm/versions/node/v10.1.0/bin:/home/mark/.linuxbrew/bin:/home/mark/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/usr/local/cuda/bin:/home/mark/gems/bin:/usr/local/go/bin:/home/mark/go/bin:/home/mark/.fzf/bin:/home/mark/.vimpkg/bin"
+
+# zprof

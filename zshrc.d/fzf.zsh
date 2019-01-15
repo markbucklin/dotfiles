@@ -7,20 +7,21 @@
 # ---------
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == */home/mark/.fzf/bin* ]]; then
-  export PATH="$PATH:/home/mark/.fzf/bin"
+if [[ ! "$PATH" == *$HOME/.fzf/bin* ]]; then
+  export PATH="$PATH:$HOME/.fzf/bin"
 fi
 
 # ---------------
-# Auto-completion
-# ---------------
-[[ $- == *i* ]] && source "/home/mark/.fzf/shell/completion.zsh" 2> /dev/null
-
-
-# ---------
 # Completion
-# ---------
+# ---------------
 export FZF_COMPLETION_OPTS='+c -x'
+[[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
+
+# ---------------
+# Keybindings
+# ---------------
+source "$HOME/.fzf/shell/key-bindings.zsh"
+
 
 # ---------
 # Default
@@ -62,7 +63,7 @@ export FZF_CTRL_T_OPTS="--multi --reverse $FZF_DEFAULT_OPTS"
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --type f"
 
-# --type d 
+# --type d
 # export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} || cat {} || tree -C {}) 2> /dev/null | head -$LINES' --reverse --preview-window right:wrap"
 
 
