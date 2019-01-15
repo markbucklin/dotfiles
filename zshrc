@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-zmodload zsh/zprof
+# zmodload zsh/zprof
 
 #  Run auto-load
 autoload -Uz compinit && compinit
@@ -286,4 +286,4 @@ zplug load
 
 
 
-zprof
+# zprof
