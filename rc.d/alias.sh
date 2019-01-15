@@ -69,10 +69,8 @@ alias -g X="| xclip"
 alias -g XX="\`xclip -o\`"
 
 alias -s {txt,h,c,hpp,cpp,tex,bib,html,xml}=$EDITOR
-# alias npm-ls-bin='ls $HOME/.nvm/versions/node/v10.1.0/bin'
-if [[ !$(command -v npm) ]] && [[ -f ./nvm.sh ]] ; then
-	source ./nvm.sh
-fi
+
+
 alias npm-ls-bin="ls $(npm bin -g)"
 eval $(thefuck --alias)
 alias apt-search='apt-cache search -n '
