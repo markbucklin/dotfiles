@@ -2,8 +2,10 @@
 
 #  Run auto-load
 autoload -Uz +X compinit && compinit
-# autoload -U +X bashcompinit && bashcompinit
 
+
+# autoload -U +X bashcompinit && bashcompinit
+# todo: test bashcompinit is necessary
 
 
 # todo: also pull entire .zshrc file into dotfiles
@@ -71,8 +73,8 @@ zplug "wfxr/formarks", defer:1
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:2
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
-# ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 export FORGIT_NO_ALIASES
 zplug "wfxr/forgit", defer:1
@@ -220,16 +222,15 @@ zstyle ':completion:*:*:rmdir:*' file-sort time
 # export FZF_DEFAULT_OPTS="--extended --ansi --multi"
 
 
-rc_dir="$HOME/dotfiles/rc.d"
-for file in $rc_dir/*.sh ; do
-    source $file
-done
-
 zshrc_dir="$HOME/dotfiles/zshrc.d"
 for file in $zshrc_dir/*.zsh ; do
     source $file
 done
 
+rc_dir="$HOME/dotfiles/rc.d"
+for file in $rc_dir/*.sh ; do
+	source $file
+done
 
 # ------------
 # Key bindings
@@ -256,8 +257,9 @@ if [[ $(command -v fasd) ]]; then
 fi
 
 # grunt-cli
-eval "$(grunt --completion=zsh)"
-
+if [[ $(command -v grunt) ]]; then
+		eval "$(grunt --completion=zsh)"
+fi
 
 
 
