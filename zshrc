@@ -122,99 +122,99 @@ zplug "ogham/exa"
 # fi
 
 
-##############################
-# ZSTYLE
-##############################
-# man zshcontrib
-zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
-zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
-zstyle ':vcs_info:*' enable git #svn cvs
-
-# Enable completion caching, use rehash to clear
-zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
-
-# Fallback to built in ls colors
-zstyle ':completion:*' list-colors ''
-# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-
-
-# Make the list prompt friendly
-zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
-
-# Make the selection prompt friendly when there are a lot of choices
-zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
-
-# Add simple colors to kill
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
-
-# offer indexes before parameters in subscripts
-zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
-
-# formatting and messages
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format '%B%d%b'
-zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*:warnings' format 'No matches for: %d'
-zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
-zstyle ':completion:*' group-name ''
-
-# ignore completion functions (until the _ignored completer)
-zstyle ':completion:*:functions' ignored-patterns '_*'
-zstyle ':completion:*:scp:*' tag-order files users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
-zstyle ':completion:*:scp:*' group-order files all-files users hosts-domain hosts-host hosts-ipaddr
-zstyle ':completion:*:ssh:*' tag-order users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
-zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
-zstyle '*' single-ignored show
-
-# forces zsh to realize new commands
-zstyle ':completion:*' completer _oldlist _expand _complete _match _ignored _correct
-zstyle ':completion:*' group-order original corrections
-# _approximate
-
-# matches case insensitive for lowercase
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-# matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
-# list-colors '=(#b) #([0-9]#)*=0=01;31'
-
-# pasting with tabs doesn't perform completion
-zstyle ':completion:*' insert-tab pending
-
-# rehash if command not found (possibly recently installed)
-zstyle ':completion:*' rehash true
-
-# menu if nb items > 2
-zstyle ':completion:*' menu select=2
-
-# Quote stuff that looks like URLs automatically.
-autoload -U url-quote-magic
-zstyle ':url-quote-magic:*' url-metas '*?[]^(|)~#='
-zstyle ':urlglobber' url-other-schema ftp git gopher http https magnet
-zle -N self-insert url-quote-magic
-
-# File/directory completion, for cd command
-zstyle ':completion:*:cd:*' ignored-patterns '(*/)#lost+found' '(*/)#CVS'
-#  and for all commands taking file arguments
-zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
-
-# Prevent offering a file (process, etc) that's already in the command line.
-zstyle ':completion:*:(rm|cp|kill|diff|scp):*' ignore-line yes
-# (Use Alt-Comma to do something like "mv abcd.efg abcd.efg.old")
-
-# Completion selection by menu for kill
-zstyle ':completion:*:*:kill:*' menu yes select
-zstyle ':completion:*:kill:*' force-list always
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-
-# Filename suffixes to ignore during completion (except after rm command)
-# This doesn't seem to work
-zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' '*?.old' '*?.pro' '*~'
-zstyle ':completion:*:(^rm):*' ignored-patterns '*?.o' '*?.c~' '*?.old' '*?.pro' '*~'
-zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
-#zstyle ':completion:*:(all-|)files' file-patterns '(*~|\\#*\\#):backup-files' 'core(|.*):core\ files' '*:all-files'
-
-zstyle ':completion:*:*:rmdir:*' file-sort time
+# ##############################
+# # ZSTYLE
+# ##############################
+# # man zshcontrib
+# zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+# zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+# zstyle ':vcs_info:*' enable git #svn cvs
+#
+# # Enable completion caching, use rehash to clear
+# zstyle ':completion::complete:*' use-cache on
+# zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
+#
+# # Fallback to built in ls colors
+# zstyle ':completion:*' list-colors ''
+# # zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+#
+#
+# # Make the list prompt friendly
+# zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
+#
+# # Make the selection prompt friendly when there are a lot of choices
+# zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+#
+# # Add simple colors to kill
+# zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+#
+# # offer indexes before parameters in subscripts
+# zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
+#
+# # formatting and messages
+# zstyle ':completion:*' verbose yes
+# zstyle ':completion:*:descriptions' format '%B%d%b'
+# zstyle ':completion:*:messages' format '%d'
+# zstyle ':completion:*:warnings' format 'No matches for: %d'
+# zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
+# zstyle ':completion:*' group-name ''
+#
+# # ignore completion functions (until the _ignored completer)
+# zstyle ':completion:*:functions' ignored-patterns '_*'
+# zstyle ':completion:*:scp:*' tag-order files users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
+# zstyle ':completion:*:scp:*' group-order files all-files users hosts-domain hosts-host hosts-ipaddr
+# zstyle ':completion:*:ssh:*' tag-order users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
+# zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
+# zstyle '*' single-ignored show
+#
+# # forces zsh to realize new commands
+# zstyle ':completion:*' completer _oldlist _expand _complete _match _ignored _correct
+# zstyle ':completion:*' group-order original corrections
+# # _approximate
+#
+# # matches case insensitive for lowercase
+# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# # matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+# # list-colors '=(#b) #([0-9]#)*=0=01;31'
+#
+# # pasting with tabs doesn't perform completion
+# zstyle ':completion:*' insert-tab pending
+#
+# # rehash if command not found (possibly recently installed)
+# zstyle ':completion:*' rehash true
+#
+# # menu if nb items > 2
+# zstyle ':completion:*' menu select=2
+#
+# # Quote stuff that looks like URLs automatically.
+# autoload -U url-quote-magic
+# zstyle ':url-quote-magic:*' url-metas '*?[]^(|)~#='
+# zstyle ':urlglobber' url-other-schema ftp git gopher http https magnet
+# zle -N self-insert url-quote-magic
+#
+# # File/directory completion, for cd command
+# zstyle ':completion:*:cd:*' ignored-patterns '(*/)#lost+found' '(*/)#CVS'
+# #  and for all commands taking file arguments
+# zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
+#
+# # Prevent offering a file (process, etc) that's already in the command line.
+# zstyle ':completion:*:(rm|cp|kill|diff|scp):*' ignore-line yes
+# # (Use Alt-Comma to do something like "mv abcd.efg abcd.efg.old")
+#
+# # Completion selection by menu for kill
+# zstyle ':completion:*:*:kill:*' menu yes select
+# zstyle ':completion:*:kill:*' force-list always
+# zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+# zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+#
+# # Filename suffixes to ignore during completion (except after rm command)
+# # This doesn't seem to work
+# zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' '*?.old' '*?.pro' '*~'
+# zstyle ':completion:*:(^rm):*' ignored-patterns '*?.o' '*?.c~' '*?.old' '*?.pro' '*~'
+# zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
+# #zstyle ':completion:*:(all-|)files' file-patterns '(*~|\\#*\\#):backup-files' 'core(|.*):core\ files' '*:all-files'
+#
+# zstyle ':completion:*:*:rmdir:*' file-sort time
 
 
 ##############################
@@ -256,10 +256,6 @@ if [[ $(command -v npm) ]]; then
     . <(npm completion)
 fi
 
-# fasd
-if [[ $(command -v fasd) ]]; then
-    eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
-fi
 
 # grunt-cli
 if [[ $(command -v grunt) ]]; then
