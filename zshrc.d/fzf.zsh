@@ -17,10 +17,6 @@ fi
 export FZF_COMPLETION_OPTS='+c -x'
 [[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
 
-# ---------------
-# Keybindings
-# ---------------
-source "$HOME/.fzf/shell/key-bindings.zsh"
 
 
 # ---------
@@ -299,3 +295,10 @@ bindkey '\ei' fzf-locate-widget
 
  # export FZF_DEFAULT_OPTS="--extended --ansi --multi"
  # export FZF_DEFAULT_OPTS='--no-reverse --inline-info --extended --no-height'
+
+
+
+ # ---------------
+ # Keybindings
+ # ---------------
+ source "$HOME/.fzf/shell/key-bindings.zsh"

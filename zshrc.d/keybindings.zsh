@@ -17,7 +17,7 @@ bindkey -e
 
 
 bindkey "^[K"     kill-whole-line                      # alt-shift-k
-bindkey "^R"      history-incremental-search-backward  # ctrl-r
+# bindkey "^R"      history-incremental-search-backward  # ctrl-r
 bindkey "^A"      beginning-of-line                    # ctrl-a
 bindkey "^E"      end-of-line                          # ctrl-e
 bindkey "[B"      history-search-forward               # down arrow
@@ -46,7 +46,7 @@ bindkey -s '\e.' 'cd ~\n'
 
 # [Ctrl-r] - Search backward incrementally for a specified string. The string
 # may begin with ^ to anchor the search to the beginning of the line.
-bindkey '^r' history-incremental-search-backward
+# bindkey '^r' history-incremental-search-backward
 
 # [PageUp] - Up a line of history
 bindkey '^[[5~' up-line-or-history

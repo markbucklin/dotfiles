@@ -4,7 +4,7 @@
 alias ls='ls --color=auto'
 alias lst='ls -F'
 alias lsv='ls -1'
-alias lsa='ls -A'
+alias la='ls -A'
 alias lsl='ls -lh'
 alias 'ls/'='ls -p'
 alias lss='ls -S'
