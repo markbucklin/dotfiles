@@ -25,8 +25,8 @@ export FZF_COMPLETION_OPTS='+c -x'
 # export FZF_DEFAULT_PREVIEW='[[ $(file --mime {}) =~ 'charset=binary' ]] && [[ $(file --mime {}) =~ 'application/pdf' ]] && (pdftotext -nopgbrk -q -layout {} - | rougify highlight) || (highlight -O ansi -l {} || cat {} || tree -C {}) 2> /dev/null | head -$LINES'
 # TODO: pdf preview
 
-export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude ".git" --exclude ".gz" --exclude "node_modules" --exclude "~snapshot" --exclude ".Trash*" --exclude "lost+found"'
-export FZF_DEFAULT_OPTS="--extended --ansi --tabstop=4 --margin=1,4,2,1 --no-height --preview '(highlight -O ansi -l {} || cat {} || tree -C {}) 2> /dev/null | head -800' --preview-window right:wrap"
+export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude ".git" --exclude ".gz" --exclude "node_modules" --exclude "~snapshot" --exclude ".Trash*" --exclude "lost+found" '
+export FZF_DEFAULT_OPTS="--extended --ansi --tabstop=4 --margin=1,4,2,1 --no-height --preview '(highlight -O ansi -l {} 2>/dev/null || cat {} 2>/dev/null || tree -C {} 2>/dev/null) | head -800 2>/dev/null' --preview-window right:wrap"
 
 # head -$LINES
 # "--extended --ansi --tabstop=4 --margin=1,4,2,1 --no-height --preview $FZF_DEFAULT_PREVIEW --preview-window right:wrap"
@@ -43,10 +43,10 @@ export FZF_CTRL_R_OPTS="--preview '(echo {} | highlight --syntax=bash -O ansi ||
 if $(command -v blsd > /dev/null) ; then
   # Breadth first list directories
   # bash <(curl -fL https://raw.githubusercontent.com/junegunn/blsd/master/install)
-  export FZF_ALT_C_COMMAND='blsd $(print -D -l -i "${PWD}")'
+  export FZF_ALT_C_COMMAND='blsd $(print -D -l -i "${PWD}" 2>/dev/null) 2>/dev/null'
 else
   # export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude ".git" --exclude ".gz" --exclude "node_modules"'
-  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
+  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d 2>/dev/null"
 fi
 export FZF_ALT_C_OPTS="--bind=ctrl-space:replace-query --reverse $FZF_DEFAULT_OPTS"
 # export FZF_ALT_C_OPTS="--preview '(highlight -O ansi -l {} || cat {} || tree -C {}) 2> /dev/null | head -400' --preview-window right:wrap --reverse --bind=ctrl-space:replace-query"
@@ -57,7 +57,7 @@ export FZF_ALT_C_OPTS="--bind=ctrl-space:replace-query --reverse $FZF_DEFAULT_OP
 # export FZF_CTRL_T_COMMAND='fd --type f --type d --hidden --follow --exclude ".git" --exclude ".gz" --exclude "node_modules"'
 export FZF_CTRL_T_OPTS="--multi --reverse $FZF_DEFAULT_OPTS"
 
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --type f"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --type f 2>/dev/null"
 
 # --type d
 # export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} || cat {} || tree -C {}) 2> /dev/null | head -$LINES' --reverse --preview-window right:wrap"
