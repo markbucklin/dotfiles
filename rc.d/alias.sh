@@ -2,9 +2,9 @@
 
 # Some more basic aliases
 alias ls='ls --color=auto'
-alias lst='ls -F'
+alias l='ls -h '
 alias lsv='ls -1'
-alias la='ls -A'
+alias la='ls -Al'
 alias lsl='ls -lh'
 alias 'ls/'='ls -p'
 alias lss='ls -S'
