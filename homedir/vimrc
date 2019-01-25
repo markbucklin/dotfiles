@@ -25,15 +25,25 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
 
+" Set leader key to comma
+let mapleader = ","
 
-"" PLUGINS
+
+"" PLUGINS BEGIN
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
       autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
     endif
 call plug#begin()
+"" ====================
+" Sensible Defaults
+Plug 'tpope/vim-sensible'
+
+
+" Go 
 Plug 'fatih/vim-go'
+
 
 " fzf
 Plug 'junegunn/fzf',  { 'dir': '~/.fzf' }
@@ -79,7 +89,36 @@ let g:UltiSnipsEditSplit="vertical"
 " far
 Plug 'brooth/far.vim'
 
+" Markdown
+Plug 'tpope/vim-markdown'
+" macro to add a link to text
+autocmd filetype markdown nnoremap <Leader>e :normal "wya]}[ "wpa: <https://example.com><Esc>vi>
+" can force markdown without plugin above using: autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
+" Commenting
+Plug 'tpope/vim-commentary'
+autocmd FileType matlab setlocal commentstring=\% %s
+
+
+
+" PLUG-END
 call plug#end()
+
+
+“ Reloads vimrc after saving but keep cursor position
+if !exists(‘*ReloadVimrc’)
+   fun! ReloadVimrc()
+       let save_cursor = getcurpos()
+       source $MYVIMRC
+       call setpos(‘.’, save_cursor)
+   endfun
+endif
+autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
+
+"jump to another file using 'gf'
+set hidden
+set path+=**
+
 
 
