@@ -11,21 +11,6 @@ jsconfig.json
 
 # End of https://www.gitignore.io/api/code
 
-# Created by https://www.gitignore.io/api/code
-# Edit at https://www.gitignore.io/?templates=code
-
-### Code ###
-# Visual Studio Code - https://code.visualstudio.com/
-.settings/
-.vscode/
-tsconfig.json
-jsconfig.json
-
-# End of https://www.gitignore.io/api/code
-
-# Created by https://www.gitignore.io/api/archives
-# Edit at https://www.gitignore.io/?templates=archives
-
 ### Archives ###
 # It's better to unpack these files and commit the raw source because
 # git has its own built in compression methods.
@@ -58,112 +43,8 @@ jsconfig.json
 
 # End of https://www.gitignore.io/api/archives
 
-# Created by https://www.gitignore.io/api/code
-# Edit at https://www.gitignore.io/?templates=code
-
-### Code ###
-# Visual Studio Code - https://code.visualstudio.com/
-.settings/
-.vscode/
-tsconfig.json
-jsconfig.json
-
-# End of https://www.gitignore.io/api/code
-
-# Created by https://www.gitignore.io/api/code
-# Edit at https://www.gitignore.io/?templates=code
-
-### Code ###
-# Visual Studio Code - https://code.visualstudio.com/
-.settings/
-.vscode/
-tsconfig.json
-jsconfig.json
-
-# End of https://www.gitignore.io/api/code
-
-# Created by https://www.gitignore.io/api/code
-# Edit at https://www.gitignore.io/?templates=code
-
-### Code ###
-# Visual Studio Code - https://code.visualstudio.com/
-.settings/
-.vscode/
-tsconfig.json
-jsconfig.json
-
-# End of https://www.gitignore.io/api/code
-
-# Created by https://www.gitignore.io/api/code
-# Edit at https://www.gitignore.io/?templates=code
-
-### Code ###
-# Visual Studio Code - https://code.visualstudio.com/
-.settings/
-.vscode/
-tsconfig.json
-jsconfig.json
-
-# End of https://www.gitignore.io/api/code
-
-# Created by https://www.gitignore.io/api/code
-# Edit at https://www.gitignore.io/?templates=code
-
-### Code ###
-# Visual Studio Code - https://code.visualstudio.com/
-.settings/
-.vscode/
-tsconfig.json
-jsconfig.json
-
-# End of https://www.gitignore.io/api/code
-
-# Created by https://www.gitignore.io/api/code
-# Edit at https://www.gitignore.io/?templates=code
-
-### Code ###
-# Visual Studio Code - https://code.visualstudio.com/
-.settings/
-.vscode/
-tsconfig.json
-jsconfig.json
-
-# End of https://www.gitignore.io/api/code
-
-# Created by https://www.gitignore.io/api/code
-# Edit at https://www.gitignore.io/?templates=code
-
-### Code ###
-# Visual Studio Code - https://code.visualstudio.com/
-.settings/
-.vscode/
-tsconfig.json
-jsconfig.json
-
-# End of https://www.gitignore.io/api/code
-
-# Created by https://www.gitignore.io/api/code
-# Edit at https://www.gitignore.io/?templates=code
-
-### Code ###
-# Visual Studio Code - https://code.visualstudio.com/
-.settings/
-.vscode/
-tsconfig.json
-jsconfig.json
-
-# End of https://www.gitignore.io/api/code
-
-# Created by https://www.gitignore.io/api/code
-# Edit at https://www.gitignore.io/?templates=code
-
-### Code ###
-# Visual Studio Code - https://code.visualstudio.com/
-.settings/
-.vscode/
-tsconfig.json
-jsconfig.json
-
-# End of https://www.gitignore.io/api/code
-.cache
+# Custom dotfiles
+.cache/
 .zcompdump
+*.bak
+
