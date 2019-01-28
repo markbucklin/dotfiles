@@ -21,22 +21,13 @@ zplug "zplug/zplug", hook-build:'zplug --self-manage'
 ##############################
 # Theme
 ##############################
-export ZSH_THEME=punctual
-export PUNCTUAL_CURRENT_DIR_COLOUR=yellow;
-export PUNCTUAL_SHOW_HOSTNAME=false;
-export PUNCTUAL_SHOW_USER="false";
-export PUNCTUAL_SHOW_TIMESTAMP="false";
-export PUNCTUAL_SHOW_CURRENT_DIR="true";
-export PUNCTUAL_SHOW_GIT="false";
-export PUNCTUAL_CURRENT_DIR_BOLD="true";
-export PUNCTUAL_PROMPT=" $";
-zplug "dannynimmo/punctual-zsh-theme", use:punctual.zsh-theme, from:github, as:theme
+zplug mafredri/zsh-async, from:github
+zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 
 ##############################
 # PLUGINS
 ##############################
 zplug "mollifier/zload"
-zplug "mafredri/zsh-async"
 zplug "supercrabtree/k"
 zplug "desyncr/auto-ls"
 zplug "joepvd/zsh-hints"
