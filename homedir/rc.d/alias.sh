@@ -30,7 +30,6 @@ alias ocaml='rlwrap ocaml'
 # Random aliases
 alias find_duplicate_names='find . -type f 2>/dev/null | sed "s#.*/##" | sort | uniq -c | sort -nr | egrep -v "\s+1\s+"'
 alias hh='history | grep -i '
-alias tododiff='git diff develop | grep -E -A8 "((JPADS)FSW.[0-9]+.*)|(todo.*)" --color=always | cut -c 2- | less -r'
 alias sshutdown='sudo shutdown -P 0'
 # Find aliases
 alias rfind='find -regextype posix-extended -regex'
@@ -71,7 +70,7 @@ alias -g XX="\`xclip -o\`"
 alias -s {txt,h,c,hpp,cpp,tex,bib,html,xml}=$EDITOR
 
 
-alias npm-ls-bin="ls $(npm bin -g)"
+alias npm-ls-bin="eval 'ls $(npm bin -g)'"
 eval $(thefuck --alias)
 alias apt-search='apt-cache search -n '
 alias lx='exa -F '
@@ -88,12 +87,13 @@ alias vsplitleft='tilix -a session-add-left'
 alias vsplitup='tilix -a session-add-up'
 
 # buku
-alias b='buku --suggest'
+#alias b='buku --suggest'
 
 # cat
-alias ncp='cat ~/.nnncp'
-alias cat='ccat'
+[ -e ~/.nnncp ] && alias ncp='cat ~/.nnncp'
+[ -x ccat ] && alias cat='ccat'
 
 # fzf
 alias fzf-select-directories-from-current='ls -d */ | fzf -m'
 alias copy_last_command_to_clipboard='fc -nlr | head -n 1 | tee >(xclip -i -selection primary) | xclip -i -selection clipboard'
+alias copy_last_command_to_primary='fc -nlr | head -n 1 | tee >(xclip -i -selection primary) | xclip -i -selection primary'

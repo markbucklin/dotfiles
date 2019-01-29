@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 #  Run auto-load
-autoload -Uz compinit && compinit
+#autoload -Uz compinit && compinit
 
 ##############################
 # Zplug
@@ -29,7 +29,6 @@ zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 ##############################
 zplug "mollifier/zload"
 zplug "supercrabtree/k"
-zplug "desyncr/auto-ls"
 zplug "joepvd/zsh-hints"
 zplug "srijanshetty/zsh-pandoc-completion"
 zplug "chipsenkbeil/zsh-notes"
@@ -55,8 +54,9 @@ forgit_clean=gclean
 forgit_stash_show=gss
 
 zplug "Schnouki/git-annex-zsh-completion"
-zplug "akoenig/gulp.plugin.zsh", defer:2
+#zplug "akoenig/gulp.plugin.zsh", defer:2
 zplug "ytet5uy4/fzf-widgets"
+zplug "mollifier/anyframe"
 zplug "aramboi/zsh-ipfs", defer:2
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 
@@ -201,5 +201,5 @@ typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 
 
 # zprof
-source ~/.fzf/shell/key-bindings.zsh
-source ~/.fzf/shell/completion.zsh
+# source ~/.fzf/shell/key-bindings.zsh
+# source ~/.fzf/shell/completion.zsh

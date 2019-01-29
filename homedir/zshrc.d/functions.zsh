@@ -190,6 +190,7 @@ buf () {
         cp -R ${oldname} ${newname};
     fi
 }
+alias backup-file-withdate-time-stamp=buf
 dobz2 () {
     name=$1;
     if [ "$name" != "" ]; then
@@ -389,3 +390,6 @@ tail-until() (
 
 # Create directory and move into
 mdcd() { [ -n "$1" ] && mkdir -p "$1" && cd "$1"}
+
+
+
