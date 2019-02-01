@@ -60,7 +60,7 @@ zplug "mollifier/anyframe"
 zplug "aramboi/zsh-ipfs", defer:2
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 
-zplug load
+#zplug load
 
  ##############################
  # ZSTYLE
@@ -196,7 +196,7 @@ typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 ##############################
 # ZPLUG LOAD
 ##############################
-#zplug load
+zplug load
 
 
 
