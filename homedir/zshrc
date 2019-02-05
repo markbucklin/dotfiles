@@ -3,6 +3,8 @@
 #  Run auto-load
 #autoload -Uz compinit && compinit
 
+bindkey -e
+
 ##############################
 # Zplug
 ##############################
@@ -54,9 +56,7 @@ forgit_clean=gclean
 forgit_stash_show=gss
 
 zplug "Schnouki/git-annex-zsh-completion"
-#zplug "akoenig/gulp.plugin.zsh", defer:2
 zplug "ytet5uy4/fzf-widgets"
-zplug "mollifier/anyframe"
 zplug "aramboi/zsh-ipfs", defer:2
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 
