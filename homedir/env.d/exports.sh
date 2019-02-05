@@ -40,8 +40,10 @@ export PROJECT_HOME=$HOME/projects
 #fi
 
 #export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
-export WORDCHARS='*?.[]~&;!#$%^(){}<>'
-
+WORDCHARS='?_-~&;!$%^'
+WORDCHARS=${WORDCHARS}\'
+WORDCHARS=${WORDCHARS}\"
+export WORDCHARS
 
 export VDPAU_DRIVER=nvidia
 export LIBVA_DRIVER_NAME=vdpau
