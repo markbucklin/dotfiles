@@ -1,0 +1,27 @@
+
+
+alias npm-ls-bin="eval 'ls $(npm bin -g)'"
+eval $(thefuck --alias)
+alias apt-search='apt-cache search -n '
+alias lx='exa -F '
+# alias bk='cd /media/server/www/.nextcloud/docker'
+alias duc-index-root='sudo duc index -x -p -b -d /var/.duc.db /'
+alias find-executables-below-pwd="find ./ \( -type f -or -type l \) -wholename '**/bin/*' -perm /a+x"
+alias duc-gui-show-root='duc gui -d /var/.duc.db --dark --gradient --ring-gap=4 --levels=3 --fuzz=1 /'
+alias apmi='apm install '
+
+# tilix
+alias vsplit='tilix -a session-add-right'
+alias hsplit='tilix -a session-add-down'
+alias vsplitleft='tilix -a session-add-left'
+alias vsplitup='tilix -a session-add-up'
+
+# buku
+#alias b='buku --suggest'
+
+# cat
+[ -e ~/.nnncp ] && alias ncp='cat ~/.nnncp'
+[ -x ccat ] && alias cat='ccat'
+
+# fzf
+alias fzf-select-directories-from-current='ls -d */ | fzf -m'

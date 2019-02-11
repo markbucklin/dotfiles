@@ -1,0 +1,12 @@
+pushd ~/dotfiles/homedir
+for D in {env.d,rc.d,zshrc.d}
+do
+pushd $D
+for F in {*.zsh,*.sh}
+do
+echo "$D/$F"
+source $F
+done
+popd
+done
+popd

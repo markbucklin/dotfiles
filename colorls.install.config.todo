@@ -1,0 +1,2 @@
+cp $(dirname $(gem which colorls))/yaml ~/.config/colorls/ 
+cp $(dirname $(gem which colorls))/yaml/* ~/.config/colorls/ 

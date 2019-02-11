@@ -1,0 +1,2 @@
+$(dirname $(gem which colorls))/tab_complete.sh
+cp $(dirname $(gem which colorls))/../zsh/_colorls $ZSH_COMPLETION_DIR/
