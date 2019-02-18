@@ -1,0 +1,9 @@
+[submodule "setup/dotbot"]
+	path = setup/dotbot
+	url = https://github.com/anishathalye/dotbot
+[submodule "src/shell/zsh/plugin/fast-syntax-highlighting"]
+	path = src/shell/zsh/plugin/fast-syntax-highlighting
+	url = https://github.com/zdharma/fast-syntax-highlighting
+[submodule "src/shell/zsh/plugin/pure"]
+	path = src/shell/zsh/plugin/pure
+	url = https://github.com/sindresorhus/pure.git

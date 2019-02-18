@@ -1,0 +1,23 @@
+
+function set-default-path()
+{
+if [ "`id -u`" -eq 0 ]; then
+  PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+else
+  PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games"
+fi
+export PATH
+}
+
+prepend-path() {
+    local bin_dir="${1}"
+    
+    # Get real path to given dir (if symlink given)
+    [[ -L $bin_dir ]] && bin_dir=$(realpath $bin_dir)
+    
+    # Check if whether bin_dir is in current PATH
+    if [[ -n $bin_dir ]] && [[ ":$PATH:" != *":$bin_dir:"* ]]; then
+        PATH="${bin_dir}:${PATH}"
+        export PATH
+    fi
+}

@@ -1,0 +1,128 @@
+# FFMPEG
+export VDPAU_DRIVER=nvidia
+export LIBVA_DRIVER_NAME=vdpau
+
+
+# Golang
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+prepend-path "${GOROOT}/bin"
+prepend-path "${GOPATH}/bin"
+
+# GHQ
+export GHQ_ROOT=$HOME/.ghq:$HOME/repo
+##### nvm (node version manager) #####
+# placeholder nvm shell function
+# On first use, it will set nvm up properly which will replace the `nvm`
+# shell function with the real one
+# [ -n $NVM_DIR ] || source "$(dirname ${0})/nvm.env"
+
+NVM_DIR="$HOME/.nvm"
+export NVM_DIR
+
+# Get path to bin directory for default node version
+local alias_name='default'
+local alias_root="${NVM_DIR}/alias"
+local version_root="${NVM_DIR}/versions/node"
+local alias_file="$alias_root/$alias_name"
+local version_bin_dir=""
+
+# Allow for multiple alias pointers (e.g. default -> latest -> v11.6.0)
+while ! [[ -d $version_bin_dir ]] && [[ -f $alias_file ]]
+do
+  alias_value=`cat $alias_file`
+  alias_file="$alias_root/$alias_value"
+  version_bin_dir="$version_root/$alias_value/bin"
+done
+
+# Set PATH to default node-version/bin
+# PATH="${version_bin_dir}:${PATH}"
+prepend-path "${version_bin_dir}"
+
+
+nvm() {
+  if [[ -d "${NVM_DIR}" ]]; then
+    
+    # Source original file
+   if [[ -f "$NVM_DIR/nvm.sh" ]]
+   then
+     . "${NVM_DIR}/nvm.sh"
+    fi
+        
+    # invoke the real nvm function now
+    nvm "$@"
+  else
+    echo "nvm is not installed" >&2
+    return 1
+  fi
+}
+# Intel Python
+local intelpython_bin="/opt/intel/intelpython3/bin"
+prepend-path "${intelpython_bin}"
+# CUDA
+    export CUDADIR=/usr/local/cuda
+    export GLPATH=/usr/lib
+    export CUDA_HOME=/usr/local/cuda
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64
+
+prepend-path "${CUDADIR}/bin"
+
+
+
+# from https://www.pugetsystems.com/labs/hpc/NAMD-Custom-Build-for-Better-Performance-on-your-Modern-GPU-Accelerated-Workstation----Ubuntu-16-04-18-04-CentOS-7-1196/
+#CUDAINCL=-I$(CUDADIR)/include
+#CUBDIR=.rootdir/cub
+#CUBINCL=-I$(CUBDIR)
+#CUDALIB=-L$(CUDADIR)/lib64 -lcufft_static -lculibos -lcudart_static -lrt
+#CUDASODIR=$(CUDADIR)/lib64
+#LIBCUDARTSO=
+#CUDAFLAGS=-DNAMD_CUDA
+#CUDAOBJS=$(CUDAOBJSRAWSTATIC)
+#CUDA=$(CUDAFLAGS) -I. $(CUDAINCL) $(CUBINCL)
+#CUDACC=$(CUDADIR)/bin/nvcc -Xcompiler "-m64"
+
+#CUDACCOPTS=-O3 --maxrregcount 48 $(CUDAGENCODE) $(CUDA)
+
+# limit CUDADLINKOPTS to architectures available in libcufft_static
+
+#CUDADLINKOPTS=-gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_60,\
+#code=sm_60 -gencode arch=compute_60,code=compute_60 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_70,code=compute_70
+
+#CUDAGENCODE=-gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,co\
+#de=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_61,code=\
+#compute_61 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_70,code=compute_70
+# Ruby
+export GEM_HOME=$HOME/gems
+prepend-path "${GEM_HOME}/bin"# Rust
+prepend-path "${HOME}/.cargo/bin"
+
+# Setup terminal, and turn on colors
+export CLICOLOR=1
+# eval `dircolors -b`
+
+# Virtual Environment Stuff
+export PROJECT_HOME=$HOME/projects
+#if [[ $HAS_VIRTUALENV -eq 1 ]]; then
+#    source /usr/local/bin/virtualenvwrapper.sh
+#fi
+
+# WORDCHARS='?_-~&;!$%^'
+# WORDCHARS=${WORDCHARS}\'
+# WORDCHARS=${WORDCHARS}\"
+export WORDCHARS=''
+
+
+# This resolves issues install the mysql, postgres, and other gems with native non universal binary extensions
+export ARCHFLAGS='-arch x86_64'
+
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# Set a backup directory on university server
+export BACKUP_DIR="/hanlab/People/Mark Bucklin/backup"
+# todo: check backup path exists
+
+export PROJECT_HOME=$HOME/projects
+# automatically remove duplicates from these arrays
+typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH

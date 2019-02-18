@@ -1,0 +1,30 @@
+vimpager
+colorls
+ghq
+xdg_config_home
+commitizen
+extraterm
+kitty icat
+fzf or fzy
+nvm quickload
+kakoune
+evervim
+everdev
+hhighlighter
+ls colorls exa k
+ccat bat
+nvm reinstall
+scripts
+bminor/bash
+howdoi how2 cheat borg
+bup shallow_backup
+ipfs
+intelpython3 conda
+msee mdcat
+vscode (update and separate environements)
+history (remove small cmds, collapse some to snippets)
+remove /snap/bin from path where it's being set in .profile??
+remove duplicate entries from path (typeset -U PATH)
+remove entries that link to same directory from path
+
+https://github.com/lyokha/vim-publish-helper

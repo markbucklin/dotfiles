@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+prepend-path() {
+    local bin_dir="${1}"
+    
+    # Get real path to given dir (if symlink given)
+    [[ -L $bin_dir ]] && bin_dir=$(realpath $bin_dir)
+    
+    # Check if whether bin_dir is in current PATH
+    if [[ -n $bin_dir ]] && [[ ":$PATH:" != *":$bin_dir:"* ]]; then
+        PATH="${bin_dir}:${PATH}"
+        export PATH
+    fi
+    echo "prepending $bin_dir to PATH"
+}

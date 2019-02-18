@@ -1,4 +1,0 @@
-
-
-
-export GHQ_ROOT=$HOME/.ghq:$HOME/repo
