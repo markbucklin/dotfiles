@@ -1,4 +1,4 @@
-# Some more basic aliases
+# ls
 alias ls='ls --color=auto'
 alias ll='ls -lh --group-directories-first'
 alias lsv='ls -1'
@@ -8,6 +8,24 @@ alias 'ls/'='ls -p'
 alias lss='ls -S'
 alias lsq='ls -Q'
 alias ltree="/bin/ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
+# function _lsd() {ls -d ${1:-$PWD}/*/}
+# alias lsd=_lsd
+# function _lsdh() {ls -d ${1:-$PWD}/*/}
+# alias lsdh=_lsdh
+# ls -d1 $HOME/*/
+
+# safer
+alias mv="mv -i"
+alias cp="cp -i"
+
+# carry environment with sudo
+alias sudo="sudo -E"
+
+# which informative
+alias wh='which -aS'
+
+
+
 alias du_dirs='du -sckx * | sort -nr' #directories sorted by size
 alias du_files='du -kx | sort -nr | less' #files sorted by size
 alias md='mkdir -p'
@@ -48,3 +66,5 @@ alias gitgraph="git log --graph --abbrev-commit --decorate --format=format:'%C(b
 # copy last to clipboard (primary or system clipboard)
 alias copylastcmd='fc -nlr | head -n 1 | tee >(xclip -i -selection primary) | xclip -i -selection clipboard'
 
+# server directory over port 8000 with python
+alias serve="python3 -m http.server"

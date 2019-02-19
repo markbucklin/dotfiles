@@ -25,3 +25,5 @@ alias vsplitup='tilix -a session-add-up'
 
 # fzf
 alias fzf-select-directories-from-current='ls -d */ | fzf -m'
+
+# ls -d1 */ .*/

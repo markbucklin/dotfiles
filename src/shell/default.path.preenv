@@ -4,7 +4,7 @@ function set-default-path()
 if [ "`id -u`" -eq 0 ]; then
   PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 else
-  PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games"
+  PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games:/snap/bin"
 fi
 export PATH
 }
@@ -21,3 +21,9 @@ prepend-path() {
         export PATH
     fi
 }
+
+# Set Default Path
+set-default-path
+
+# Add local user directory to path
+prepend-path ${HOME}/.local/bin

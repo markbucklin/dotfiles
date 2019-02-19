@@ -1,0 +1,1 @@
+eval "$(pandoc --bash-completion)"

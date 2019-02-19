@@ -22,7 +22,7 @@ function write_file(){
     | while read f ; do
         if [[ -e $f ]]; then
             echo "adding $f to $file"
-            printf '\n# ===================\n# %s\n# ===================\n' "${f}" >> $file
+            printf '\n# ======================================\n# %s\n# ======================================\n' "${f}" >> $file
             cat "${f}" >> $file
         fi
     done
