@@ -32,3 +32,5 @@ file=$(init_file zshenv)
 write_file '*.preenv'
 write_file '*.env'
 write_file '*.postenv'
+ln -sf "$destdir/zshenv" "$HOME/.zshenv"
+
