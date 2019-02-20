@@ -48,3 +48,4 @@ jsconfig.json
 .zcompdump
 *.bak
 
+build/
