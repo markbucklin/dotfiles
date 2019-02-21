@@ -1,2 +1,2 @@
 
-alias getrepo="ghq get ghq get $(xsel -o)"
+alias getrepo="ghq get $(xsel -o)"

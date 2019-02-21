@@ -1,3 +1,16 @@
+# command
+# emacs
+# isearch
+# listscroll
+# main
+# menuselect
+# vicmd
+# viins
+# viopp
+# visual
+
+
+# Select Emacs keymap and bind it to main
 bindkey -e
 bindkey '\ew' kill-region
 bindkey -s '\el' "ls\n"
@@ -21,3 +34,5 @@ bindkey "^[[3~" delete-char
 bindkey "^[3;5~" delete-char
 bindkey "\e[3~" delete-char
 
+# Fill remaining (unsigned) keybindings with zsh defaults for selected keymap
+bindkey -m
