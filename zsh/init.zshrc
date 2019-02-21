@@ -5,11 +5,12 @@
 # Local path
 zsh_user_dir=`dirname $0`
 
+fpath=( $zsh_user_dir $fpath )
 
 
 
 # Prompt
-autoload -U promptinit && promptinit
+autoload -Uz promptinit && promptinit
 prompt pure
 
 # Completion Init
@@ -44,6 +45,5 @@ if command -v fasd >/dev/null 2>&1; then
 fi
 
 # Other Tool Files
-fpath=( $zsh_user_dir $fpath )
-source $zsh_user_dir/fpath.zsh
+# source $zsh_user_dir/fpath.zsh
 

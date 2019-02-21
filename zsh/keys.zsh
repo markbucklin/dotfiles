@@ -35,4 +35,4 @@ bindkey "^[3;5~" delete-char
 bindkey "\e[3~" delete-char
 
 # Fill remaining (unsigned) keybindings with zsh defaults for selected keymap
-bindkey -m
+bindkey -m &>/dev/null
