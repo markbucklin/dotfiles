@@ -3,7 +3,7 @@
 # vim:filetype=zsh
 
 # Local path
-zsh_user_dir=`dirname $0`
+zsh_user_dir=$(dirname "$0")
 
 fpath=( $zsh_user_dir $fpath )
 
@@ -26,7 +26,7 @@ export CLICOLOR=1
 
 
 
-source $zsh_user_dir/keys.zsh
+# source $zsh_user_dir/keys.zsh
 source $zsh_user_dir/history.zsh
 source $zsh_user_dir/completion.zsh
 source $zsh_user_dir/aliases.zsh
