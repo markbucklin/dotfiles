@@ -146,11 +146,11 @@ let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 " Plug 'tpope/vim-commentary'
 " autocmd FileType matlab setlocal commentstring=\% %s
 
-" NerdTree
-Plug 'scrooloose/NerdTree'
+" " NerdTree
+" Plug 'scrooloose/NerdTree'
 
-" Vim-Which-Key
-Plug 'liuchengxu/vim-which-key'
+" " Vim-Which-Key
+" Plug 'liuchengxu/vim-which-key'
 
 " On-demand lazy load
 " Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
@@ -161,15 +161,15 @@ Plug 'liuchengxu/vim-which-key'
 " (Which-Key alternative: Plug 'hecal3/vim-leader-guide')
 
 
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+" nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 " By default timeoutlen is 1000 ms
 set timeoutlen=500
 
 " let g:mapleader = "\<Space>"
 " let g:maplocalleader = ','
-nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
-nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+" nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+" nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 
 
 
