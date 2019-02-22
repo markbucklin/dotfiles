@@ -34,6 +34,7 @@ source $zsh_user_dir/stack.zsh
 source $zsh_user_dir/functions.zsh
 
 
+
 # Colors
 autoload -U colors && colors
 source $zsh_user_dir/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
@@ -47,3 +48,8 @@ fi
 # Other Tool Files
 # source $zsh_user_dir/fpath.zsh
 
+# Keymaps (TODO)
+source $zsh_user_dir/keys.zsh
+# source $zsh_user_dir/keybindings.viins.zsh
+bindkey -e
+source $zsh_user_dir/keybindings.emacs.zsh

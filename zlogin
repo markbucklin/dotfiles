@@ -1,2 +1,3 @@
-local dotdir=$(dirname $(realpath $0))
+
+local dotdir=${DOTDIR=-"$HOME/.dotfiles"}
 . $dotdir/zsh/init.zlogin

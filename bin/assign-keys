@@ -1,0 +1,9 @@
+
+
+local kcl="$HOME/.dotfiles/shell/keybindings.list"
+
+
+local keys=(cut -d\" -f2 "$kcl")
+
+
+
