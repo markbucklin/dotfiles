@@ -2,7 +2,7 @@
 # vim:syntax=zsh
 # vim:filetype=zsh
 
-# Local path
+# Local function path
 zsh_user_dir=$(dirname $0)
 fpath=( $zsh_user_dir $fpath )
 
@@ -30,6 +30,7 @@ source $zsh_user_dir/completion.zsh
 source $zsh_user_dir/aliases.zsh
 source $zsh_user_dir/stack.zsh
 source $zsh_user_dir/functions.zsh
+source $zsh_user_dir/fpath.zsh
 
 
 

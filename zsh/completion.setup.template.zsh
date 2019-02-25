@@ -2,8 +2,13 @@
 
 tool_name="pandoc"
 
+zsh_completion_gen_arg=('--zsh-completion' 'completion --zsh' 'completions zsh --completion=zsh' 'gen autocomplete' '+ complete setup zsh')
 
+gen_args=($zsh_completion_gen_arg[@] 'completion')
 
+# todo add bash completion as backup and cycle through all args
+
+# todo [[ command -v $tool_name]] || exit
 # todo
 # ZSH_COMPLETION_DIR
 zsh_cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"

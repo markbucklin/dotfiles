@@ -175,6 +175,16 @@ export GEM_HOME=$HOME/gems
 prepend-path "${GEM_HOME}/bin"
 
 # ======================================
+# /home/mark/.dotfiles/zsh/completion.home.env
+# ======================================
+
+export zsh_completion_system_dir="/usr/share/zsh/vendor-completions"
+export zsh_completion_cache_home="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/completions"
+[[ -d "$zsh_completion_cache_home" ]] || md -p "$zsh_completion_cache_home"
+export ZSH_COMPLETION_DIR=$zsh_completion_cache_home
+fpath=( "$zsh_completion_cache_home" $fpath )
+
+# ======================================
 # /home/mark/.dotfiles/shell/shell.env
 # ======================================
 # This resolves issues install the mysql, postgres, and other gems with native non universal binary extensions

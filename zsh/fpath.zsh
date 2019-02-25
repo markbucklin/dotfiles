@@ -1,14 +1,10 @@
 #!/bin/zsh
 #add each topic folder to fpath so that they can add functions and completion scripts
 
+# note: doing this slows down startup time immensely (150ms -> 1000ms)
 
-for topic_folder in $DOTFILES/*; do
-    if [ -d "$topic_folder" ]; then
-        fpath=($topic_folder $fpath)
-    fi
-done
 
 
 zfuncdir="$HOME/.zfunctions"
-[[ -d "$zfuncdir" ]] || mkdir "$zfuncdir"
-fpath=( $zfuncdir" $fpath )
+[[ -d "$zfuncdir" ]] || mkdir -p "$zfuncdir"
+fpath=( "$zfuncdir" $fpath )
