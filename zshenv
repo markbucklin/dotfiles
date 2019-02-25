@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # ======================================
-# /home/mark/.dotfiles/src/shell/default.path.preenv
+# /home/mark/.dotfiles/shell/default.path.preenv
 # ======================================
 
 function set-default-path()
@@ -27,6 +27,14 @@ prepend-path() {
     fi
 }
 
+
+function library-search-path() {
+	ld --verbose | grep SEARCH_DIR | sed -E 's/("\); |"\);|)(SEARCH_DIR\("=?|$)/\n/g' | head -n -1 | tail -n +2
+	}
+
+
+
+
 # Set Default Path
 set-default-path
 
@@ -34,7 +42,7 @@ set-default-path
 prepend-path ${HOME}/.local/bin
 
 # ======================================
-# /home/mark/.dotfiles/src/development/ffmpeg/ffmpeg.shell.env
+# /home/mark/.dotfiles/ffmpeg/ffmpeg.shell.env
 # ======================================
 # FFMPEG
 export VDPAU_DRIVER=nvidia
@@ -42,23 +50,27 @@ export LIBVA_DRIVER_NAME=vdpau
 
 
 # ======================================
-# /home/mark/.dotfiles/src/development/go/go.shell.env
+# /home/mark/.dotfiles/go/go.path.env
 # ======================================
-
-# Golang
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 prepend-path "${GOROOT}/bin"
 prepend-path "${GOPATH}/bin"
 
 # ======================================
-# /home/mark/.dotfiles/src/development/git/ghq.shell.env
+# /home/mark/.dotfiles/git/ghq.shell.env
 # ======================================
 
 # GHQ
 export GHQ_ROOT=$HOME/.ghq:$HOME/repo
 # ======================================
-# /home/mark/.dotfiles/src/development/node/nvm.shell.env
+# /home/mark/.dotfiles/java/java.path.env
+# ======================================
+export JAVA_BINDIR=$(dirname $(readlink -f $(which java)))
+export JAVA_HOME=$(dirname ${JAVA_BINDIR})
+
+# ======================================
+# /home/mark/.dotfiles/node/nvm.shell.env
 # ======================================
 
 ##### nvm (node version manager) #####
@@ -108,21 +120,20 @@ nvm() {
 }
 
 # ======================================
-# /home/mark/.dotfiles/src/development/haskell/haskell.path.env
+# /home/mark/.dotfiles/haskell/haskell.path.env
 # ======================================
 prepend-path "${HOME}/.cabal/bin"
 
 # ======================================
-# /home/mark/.dotfiles/src/development/python/conda.env
+# /home/mark/.dotfiles/python/conda.env
 # ======================================
-
 if [ -d ${HOME}/miniconda* ] ; then
   source ~/miniconda*/etc/profile.d/conda.sh
 fi
 
 
 # ======================================
-# /home/mark/.dotfiles/src/development/cuda/cuda.shell.env
+# /home/mark/.dotfiles/cuda/cuda.shell.env
 # ======================================
 # CUDA
     export CUDADIR=/usr/local/cuda
@@ -158,40 +169,14 @@ prepend-path "${CUDADIR}/bin"
 #compute_61 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_70,code=compute_70
 
 # ======================================
-# /home/mark/.dotfiles/src/development/ruby/ruby.shell.env
+# /home/mark/.dotfiles/ruby/ruby.path.env
 # ======================================
-# Ruby
 export GEM_HOME=$HOME/gems
 prepend-path "${GEM_HOME}/bin"
-# ======================================
-# /home/mark/.dotfiles/src/development/rust/rust.shell.env
-# ======================================
-# Rust
-export CARGO_HOME="${HOME}/.cargo"
-export RUSTUP_HOME="${HOME}/.rustup"
-prepend-path "${CARGO_HOME}/bin"
 
 # ======================================
-# /home/mark/.dotfiles/src/shell/interactive.env
+# /home/mark/.dotfiles/shell/shell.env
 # ======================================
-# Setup terminal, and turn on colors
-export CLICOLOR=1
-# eval `dircolors -b`
-
-# Virtual Environment Stuff
-#if [[ $HAS_VIRTUALENV -eq 1 ]]; then
-#    source /usr/local/bin/virtualenvwrapper.sh
-#fi
-
-# WORDCHARS='?_-~&;!$%^'
-# WORDCHARS=${WORDCHARS}\'
-# WORDCHARS=${WORDCHARS}\"
-export WORDCHARS=''
-
-# ======================================
-# /home/mark/.dotfiles/src/shell/shell.env
-# ======================================
-# shell.env
 # This resolves issues install the mysql, postgres, and other gems with native non universal binary extensions
 export ARCHFLAGS='-arch x86_64'
 
@@ -205,9 +190,15 @@ export BACKUP_DIR="/hanlab/People/Mark Bucklin/backup"
 
 export PROJECT_HOME=$HOME/projects
 
+# ======================================
+# /home/mark/.dotfiles/rust/rust.path.env
+# ======================================
+export CARGO_HOME="${HOME}/.cargo"
+export RUSTUP_HOME="${HOME}/.rustup"
+prepend-path "${CARGO_HOME}/bin"
 
 # ======================================
-# /home/mark/.dotfiles/src/shell/shell.postenv
+# /home/mark/.dotfiles/shell/shell.postenv
 # ======================================
 # shell.post.env
 

@@ -3,14 +3,11 @@
 # vim:filetype=zsh
 
 # Local path
-zsh_user_dir=$(dirname "$0")
-
+zsh_user_dir=$(dirname $0)
 fpath=( $zsh_user_dir $fpath )
 
-
-
 # Prompt
-autoload -Uz promptinit && promptinit
+autoload -U promptinit && promptinit
 prompt pure
 
 # Completion Init
@@ -25,7 +22,7 @@ setopt NO_NOMATCH
 export CLICOLOR=1
 
 # add completions plugin
-source $zsh_user_dir/plugins/zsh-completions/zsh-completions.plugin.zsh
+# source $zsh_user_dir/plugins/zsh-completions/zsh-completions.plugin.zsh
 
 # source $zsh_user_dir/keys.zsh
 source $zsh_user_dir/history.zsh
@@ -40,6 +37,11 @@ source $zsh_user_dir/functions.zsh
 autoload -U colors && colors
 source $zsh_user_dir/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
+# Keymaps (TODO)
+# source $zsh_user_dir/keybindings.viins.zsh
+bindkey -e
+source $zsh_user_dir/keybindings.emacs.zsh
+source $zsh_user_dir/keys.zsh
 
 # FASD
 if command -v fasd >/dev/null 2>&1; then
@@ -49,8 +51,3 @@ fi
 # Other Tool Files
 # source $zsh_user_dir/fpath.zsh
 
-# Keymaps (TODO)
-# source $zsh_user_dir/keybindings.viins.zsh
-bindkey -e
-source $zsh_user_dir/keybindings.emacs.zsh
-source $zsh_user_dir/keys.zsh

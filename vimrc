@@ -114,10 +114,9 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
 Plug 'lionawurscht/deoplete-biblatex'
 Plug 'zchee/deoplete-zsh'
-Plug 'SevereOverfl0w/deoplete-github'
 
 
 " matlab

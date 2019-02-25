@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # args
-srcdir="${HOME}/.dotfiles/src"
-destdir="${HOME}/.dotfiles/build"
+srcdir="${HOME}/.dotfiles"
+destdir="${HOME}/.dotfiles"
 file=''
 
 # ensure destination directory exists
@@ -18,7 +18,7 @@ function init_file(){
 
 function write_file(){
     local filter=$1
-    find $srcdir -type f -iname $filter -print \
+    find $srcdir -type f -name $filter -print \
     | while read f ; do
         if [[ -e $f ]]; then
             echo "adding $f to $file"
@@ -28,9 +28,9 @@ function write_file(){
     done
 }
 
-file=$(init_file zshenv)
+file="$(init_file zshenv)"
 write_file '*.preenv'
 write_file '*.env'
 write_file '*.postenv'
-ln -sf "$destdir/zshenv" "$HOME/.zshenv"
+ln -sfvr "$destdir/zshenv" "$HOME/.zshenv"
 
