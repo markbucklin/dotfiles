@@ -14,9 +14,12 @@ done
 . "$DOTDIR/zsh/init.zsh"
 
 
-# Source all files with '.shrc' or '.zshrc' suffix (e.g. pager.shrc)
-shrcfiles=( $(ls $DOTDIR/**/*.shrc) $(ls $DOTDIR/**/*.zshrc))
+# Source all files with '.rc.sh' or '.rc.zsh' suffix (e.g. pager.rc.sh)
+shrcfiles=( $(ls $DOTDIR/**/*.rc.sh) $(ls $DOTDIR/**/*.rc.zsh))
 for F in "$shrcfiles[@]"; do
     . "$F"
 done
+
+# Autoload all shell functions from directories in $fpathh
+for func in $^fpath/*(N-.x:t); autoload $func
 

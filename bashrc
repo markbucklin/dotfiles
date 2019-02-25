@@ -31,8 +31,8 @@ pathrm() {
 # . "$DOTDIR/zsh/init.zsh"
 
 
-# Source all files with '.shrc' or '.zshrc' suffix (e.g. pager.shrc)
-shrcfiles=( $(ls $DOTDIR/**/*.shrc) $(ls $DOTDIR/**/*.bashrc))
+# Source all files with '.rc.sh' or '.rc.zsh' suffix (e.g. pager.rc.sh)
+shrcfiles=( $(ls $DOTDIR/**/*.rc.sh) $(ls $DOTDIR/**/*.bashrc))
 for F in "$shrcfiles[@]"; do
     . "$F"
 done

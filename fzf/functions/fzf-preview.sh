@@ -9,7 +9,7 @@ function fzf-preview()
     # prevcmd['text']='highlight -O ansi --wrap-no-numbers --force -i {} 2>/dev/null'
     # prevcmd['pdf']='pdftotext -layout -nopgbrk -q "{}" - '
     
-    fzf -m --prompt  --expect=ctrl-v,ctrl-x,ctrl-t --no-height --preview='([[ -d {} ]] && exa -T {} ) || ( [[ -r {} ]] && highlight -O ansi --wrap-no-numbers --force -i {} 2>/dev/null)' | tee ~/.cache/fzf.out | tee >(xsel -i -p)
+    fzf -m --expect=ctrl-v,ctrl-x,ctrl-t --no-height --preview='([[ -d {} ]] && exa -T {} ) || ( [[ -r {} ]] && [[ $(file -b {}) = *text* ]] && highlight -O ansi --wrap-no-numbers --force -i {} 2>/dev/null)' | tee ~/.cache/fzf.out | tee >(xsel -i -p)
     
 }
 zle -N fzf-preview

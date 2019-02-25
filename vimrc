@@ -6,7 +6,7 @@ set showcmd
 filetype plugin indent on
 
 "" whitespace
-set nowrap
+set wrap
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -36,7 +36,7 @@ if !&scrolloff
   set scrolloff=3       " Show next 3 lines while scrolling.
 endif
 if !&sidescrolloff
-  set sidescrolloff=5   " Show next 5 columns while side-scrolling.
+  set sidescrolloff=15   " Show next 5 columns while side-scrolling.
 endif
 set nostartofline       " Do not jump to first character with page commands.
 
@@ -100,6 +100,12 @@ Plug 'tpope/vim-commentary'
 Plug 'chiel92/vim-autoformat'
 Plug 'godlygeek/tabular'
 
+" Asynchronous Linting Engine (ALE)
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
+let g:ale_list_vertical = 1
+Plug 'w0rp/ale'
+
 " neoplete
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -142,6 +148,8 @@ autocmd filetype markdown nnoremap <Leader>e :normal "wya]}[ "wpa: <https://exam
 " can force markdown without plugin above using: autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
+Plug 'majutsushi/tagbar'
+Plug 'lvht/tagbar-markdown'
 " " Commenting
 " Plug 'tpope/vim-commentary'
 " autocmd FileType matlab setlocal commentstring=\% %s
@@ -164,10 +172,8 @@ let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 " nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 " By default timeoutlen is 1000 ms
-set timeoutlen=500
+set timeoutlen=1000
 
-" let g:mapleader = "\<Space>"
-" let g:maplocalleader = ','
 " nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
 " nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 
@@ -187,13 +193,13 @@ noremap <Leader>x "+
 
 
 " Pairing Braces
-inoremap <> <><Left>
-inoremap () ()<Left>
-inoremap {} {}<Left>
-inoremap [] []<Left>
-inoremap "" ""<Left>
-inoremap '' ''<Left>
-inoremap `` ``<Left>
+" inoremap <> <><Left>
+" inoremap () ()<Left>
+" inoremap {} {}<Left>
+" inoremap [] []<Left>
+" inoremap "" ""<Left>
+" inoremap '' ''<Left>
+" inoremap `` ``<Left>
 
 " Navigation Keys
 nmap <Up>    <Nop>
@@ -259,14 +265,14 @@ nmap <Leader>s :%s//g<Left><Left>
 
 " Tell Vim which characters to show for expanded TABs,
 " trailing whitespace, and end-of-lines. VERY useful!
-if &listchars ==# 'eol:$'
-  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-endif
-set list                " Show problematic characters.
+" if &listchars ==# 'eol:$'
+  " set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+" endif
+" set list                " Show problematic characters.
 
 " Also highlight all tabs and trailing whitespace characters.
-highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-match ExtraWhitespace /\s\+$\|\t/
+" highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+" match ExtraWhitespace /\s\+$\|\t/
 
 
 
@@ -290,3 +296,120 @@ match ExtraWhitespace /\s\+$\|\t/
 " let g:airline_right_sep = ' '
 " let g:airline_right_alt_sep = '|'
 " let g:airline_theme= 'gruvbox'
+"
+"
+
+
+" FZF-Bibtex
+let $FZF_BIBTEX_CACHEDIR = 'PATH-TO-CACHE-DIR'
+let $FZF_BIBTEX_SOURCES = 'PATH-TO-BIBTEX-FILE'
+
+function! s:bibtex_cite_sink(lines)
+    let r=system("bibtex-cite ", a:lines)
+    execute ':normal! i' . r
+endfunction
+
+function! s:bibtex_markdown_sink(lines)
+    let r=system("bibtex-markdown ", a:lines)
+    execute ':normal! i' . r
+endfunction
+
+nnoremap <leader>c :call fzf#run({
+                        \ 'source': 'bibtex-ls',
+                        \ 'sink*': function('<sid>bibtex_cite_sink'),
+                        \ 'up': '40%',
+                        \ 'options': '--ansi --layout=reverse-list --multi --prompt "Cite> "'})<CR>
+
+nnoremap <leader>m :call fzf#run({
+                        \ 'source': 'bibtex-ls',
+                        \ 'sink*': function('<sid>bibtex_markdown_sink'),
+                        \ 'up': '40%',
+                        \ 'options': '--ansi --layout=reverse-list --multi --prompt "Markdown> "'})<CR>
+function! s:bibtex_cite_sink_insert(lines)
+    let r=system("bibtex-cite ", a:lines)
+    execute ':normal! i' . r
+    call feedkeys('a', 'n')
+endfunction
+
+inoremap <silent> @@ <c-g>u<c-o>:call fzf#run({
+                        \ 'source': 'bibtex-ls',
+                        \ 'sink*': function('<sid>bibtex_cite_sink_insert'),
+                        \ 'up': '40%',
+                        \ 'options': '--ansi --layout=reverse-list --multi --prompt "Cite> "'})<CR>"
+
+let g:tagbar_type_asciidoc = {
+    \ 'ctagstype' : 'asciidoc',
+    \ 'kinds' : [
+        \ 'h:table of contents',
+        \ 'a:anchors:1',
+        \ 't:titles:1',
+        \ 'n:includes:1',
+        \ 'i:images:1',
+        \ 'I:inline images:1'
+    \ ],
+    \ 'sort' : 0
+\ }
+let g:tagbar_type_bib = {
+    \ 'ctagstype' : 'bib',
+    \ 'kinds'     : [
+        \ 'a:Articles',
+        \ 'b:Books',
+        \ 'L:Booklets',
+        \ 'c:Conferences',
+        \ 'B:Inbook',
+        \ 'C:Incollection',
+        \ 'P:Inproceedings',
+        \ 'm:Manuals',
+        \ 'T:Masterstheses',
+        \ 'M:Misc',
+        \ 't:Phdtheses',
+        \ 'p:Proceedings',
+        \ 'r:Techreports',
+        \ 'u:Unpublished',
+    \ ]
+\ }
+let g:tagbar_type_go = {
+    \ 'ctagstype': 'go',
+    \ 'kinds' : [
+        \'p:package',
+        \'f:function',
+        \'v:variables',
+        \'t:type',
+        \'c:const'
+    \]
+\}
+let g:tagbar_type_javascript = {
+      \ 'ctagstype': 'javascript',
+      \ 'kinds': [
+      \ 'A:arrays',
+      \ 'P:properties',
+      \ 'T:tags',
+      \ 'O:objects',
+      \ 'G:generator functions',
+      \ 'F:functions',
+      \ 'C:constructors/classes',
+      \ 'M:methods',
+      \ 'V:variables',
+      \ 'I:imports',
+      \ 'E:exports',
+      \ 'S:styled components'
+      \ ]}
+let g:tagbar_type_julia = {
+    \ 'ctagstype' : 'julia',
+    \ 'kinds'     : [
+        \ 't:struct', 'f:function', 'm:macro', 'c:const']
+    \ }
+let g:tagbar_type_make = {
+            \ 'kinds':[
+                \ 'm:macros',
+                \ 't:targets'
+            \ ]
+\}
+let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+        \ 'h:Heading_L1',
+        \ 'i:Heading_L2',
+        \ 'k:Heading_L3'
+    \ ]
+\ }
