@@ -6,11 +6,11 @@
 export DOTDIR="$HOME/.dotfiles"
 
 # Add dirs in DOTDIR to fpath
-for D in $(ls -d $DOTDIR/*); do
-    if [[ -d $D ]]; then
-        fpath=( $D $fpath )
-    fi
-done
+# for D in $(ls -d $DOTDIR/*); do
+#     if [[ -d $D ]]; then
+#         fpath=( $D $fpath )
+#     fi
+# done
 
 # Call "slim" zsh script
 . "$DOTDIR/zsh/init.zsh"
