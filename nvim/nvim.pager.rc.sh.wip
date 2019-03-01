@@ -1,0 +1,34 @@
+#!/bin/sh
+
+
+# nvim ~/.bashrc or ~/.zshrc
+if [[ ! (which nvim &>/dev/null) ]]; then; exit 1; fi
+export MANPAGER="nvim +set\ filetype=man -"
+
+# if the above doesn't work try the following:
+# export MANPAGER="nvim -c 'set ft=man' -"
+
+if [[ $SHELL == 'fish' ]] ; then
+	nvim ~/.config/fish/config.fish
+	set MANPAGER "nvim -c 'set ft=man' -"
+fi
+# The following code snippet does seem to disable the default keybinding gO to toggle the TOC:
+# nvim ~/.config/nvim/init.vim
+# filetype plugin on
+# syntax on
+
+# " manpage with table of contents sidebar with neovim
+# " https://asciinema.org/a/165076
+# " add to shellrc: export MANPAGER="nvim +set\ filetype=man -"
+augroup manlaunchtoc
+    autocmd!
+    if has('nvim')
+        autocmd FileType man
+            \ call man#show_toc() |
+            \ setlocal laststatus=0 nonumber norelativenumber |
+            \ nnoremap <buffer> l <Enter> |
+            \ wincmd H |
+            \ vert resize 35 |
+            \ wincmd p
+    endif
+augroup end

@@ -1,15 +1,3 @@
-[user]
-  name = Mark Bucklin
-  email = markbucklin@gmail.com
-
-[github]
-  user = markbucklin
-
-[bitbucket]
-  user = markbucklin
-
-[gitlab]
-  user = markbucklin
 [core]
   autocrlf = false
   excludesfile = ~/.config/git/ignore

@@ -19,7 +19,7 @@ source "$FZF_ROOT/shell/key-bindings.zsh" 2> /dev/null
 
 export FZF_FUNCTION_DIR="$HOME/.dotfiles/fzf/functions"
 
-local fzf_function_files=( $(ls $FZF_FUNCTION_DIR/**/*) )
+local fzf_function_files=( $(ls $FZF_FUNCTION_DIR/**/*{.sh,.zsh}) )
 for F in "$fzf_function_files[@]"; do
     [[ -f "$F" ]] && source "$F"
 done
