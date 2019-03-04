@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-# zmodload zsh/zprof
 
 # export DOTDIR=$(dirname $(realpath $0))
 export DOTDIR="$HOME/.dotfiles"
@@ -18,4 +17,3 @@ done
 # Autoload all shell functions from directories in $fpathh
 # for func in $^fpath/*(N-.x:t); autoload $func
 
-# zprof

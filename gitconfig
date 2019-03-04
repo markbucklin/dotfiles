@@ -19,12 +19,18 @@
   show = diff-so-fancy | less --tabs=1,5 -RFX
 
 [alias]
-  st  = status -sb
-  ci  = commit -v
-  co  = checkout
-  ls  = log --date=short --pretty=ls
-  rbm = rebase -i origin/master
-  rma = !git ls-files --deleted -z | xargs -0 -r git rm
+	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+	co = checkout
+	st = status
+	br = branch
+	cam = commit -a -m
+	ca = commit -a --amend
+	st  = status -sb
+	ci  = commit -v
+	co  = checkout
+	ls  = log --date=short --pretty=ls
+	rbm = rebase -i origin/master
+	rma = !git ls-files --deleted -z | xargs -0 -r git rm
 
 [pretty]
   ls = format:%C(cyan)%h %C(red)%ad %C(blue)[%an]%C(auto)%d %C(white)%s
@@ -74,10 +80,10 @@
   insteadOf = bb:
 
 [url "git@github.com:markbucklin/"]
-  insteadOf = ghme:
+  insteadOf = ghmb/
 
 [url "git@bitbucket.org:markbucklin/"]
-  insteadOf = ghbb:
+  insteadOf = bbmb/
 
 [include]
   path = user
@@ -88,13 +94,6 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[alias]
-	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
-	co = checkout
-	st = status
-	br = branch
-	cam = commit -a -m
-	ca = commit -a --amend
 [status]
 	submoduleSummary = true
 

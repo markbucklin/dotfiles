@@ -45,7 +45,6 @@ alias df_human='df -hT'
 alias ocaml='rlwrap ocaml'
 # Random aliases
 alias find_duplicate_names='find . -type f 2>/dev/null | sed "s#.*/##" | sort | uniq -c | sort -nr | egrep -v "\s+1\s+"'
-alias hh='history | grep -i '
 alias sshutdown='sudo shutdown -P 0'
 # Find aliases
 alias rfind='find -regextype posix-extended -regex'

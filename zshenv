@@ -14,12 +14,24 @@ fi
 export PATH
 }
 
-prepend-path() {
+append-path() {
     local bin_dir="${1}"
-    
+
     # Get real path to given dir (if symlink given)
     [[ -L $bin_dir ]] && bin_dir=$(realpath $bin_dir)
-    
+
+    # Check if whether bin_dir is in current PATH
+    if [[ -n $bin_dir ]] && [[ ":$PATH:" != *":$bin_dir:"* ]]; then
+        PATH="${PATH}:${bin_dir}"
+        export PATH
+    fi
+}
+prepend-path() {
+    local bin_dir="${1}"
+
+    # Get real path to given dir (if symlink given)
+    [[ -L $bin_dir ]] && bin_dir=$(realpath $bin_dir)
+
     # Check if whether bin_dir is in current PATH
     if [[ -n $bin_dir ]] && [[ ":$PATH:" != *":$bin_dir:"* ]]; then
         PATH="${bin_dir}:${PATH}"
@@ -120,6 +132,11 @@ nvm() {
 }
 
 # ======================================
+# /home/mark/.dotfiles/node/stdlib-js.env
+# ======================================
+export NODE_PATH="/home/mark/.ghq/github.com/stdlib-js/stdlib/lib/node_modules"
+
+# ======================================
 # /home/mark/.dotfiles/haskell/haskell.path.env
 # ======================================
 prepend-path "${HOME}/.cabal/bin"
@@ -180,7 +197,7 @@ prepend-path "${GEM_HOME}/bin"
 
 export zsh_completion_system_dir="/usr/share/zsh/vendor-completions"
 export zsh_completion_cache_home="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/completions"
-[[ -d "$zsh_completion_cache_home" ]] || md -p "$zsh_completion_cache_home"
+[[ -d "$zsh_completion_cache_home" ]] || mkdir -p "$zsh_completion_cache_home"
 export ZSH_COMPLETION_DIR=$zsh_completion_cache_home
 fpath=( "$zsh_completion_cache_home" $fpath )
 

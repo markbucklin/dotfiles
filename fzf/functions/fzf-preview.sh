@@ -8,9 +8,9 @@ function fzf-preview()
     # prevcmd['dir']='exa -T {}'
     # prevcmd['text']='highlight -O ansi --wrap-no-numbers --force -i {} 2>/dev/null'
     # prevcmd['pdf']='pdftotext -layout -nopgbrk -q "{}" - '
-    
+
     fzf -m --expect=ctrl-v,ctrl-x,ctrl-t --no-height --preview='([[ -d {} ]] && exa -T {} ) || ( [[ -r {} ]] && [[ $(file -b {}) = *text* ]] && highlight -O ansi --wrap-no-numbers --force -i {} 2>/dev/null)' | tee ~/.cache/fzf.out | tee >(xsel -i -p)
-    
+
 }
-zle -N fzf-preview
-bindkey "^[t" fzf-preview
+# zle -N fzf-preview
+bindkey -s "^[t" 'fzf-preview'

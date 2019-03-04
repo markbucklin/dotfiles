@@ -7,7 +7,6 @@ if ! $(command -v fff >| /dev/null) ; then
 fi
 
 
-alias f='fff'
 
 
 # Directory color [0-9]

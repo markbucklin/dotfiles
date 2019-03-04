@@ -1,0 +1,1 @@
+echo $(_PAPIS_COMPLETE=source_zsh papis) > _papis
