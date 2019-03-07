@@ -14,6 +14,14 @@ for F in "$shrcfiles[@]"; do
     source "$F"
 done
 
-# Autoload all shell functions from directories in $fpathh
-# for func in $^fpath/*(N-.x:t); autoload $func
+shfunctiondir="$HOME/functions"
+if [[ -d $shfunctiondir ]]; then
+    shfiles=( $(find "$shfunctiondir/" -type f -readable) )
+    for F in "$shfiles[@]"; do
+        source "$F"
+    done
+fi
 
+
+# zshfunctiondir="$HOME/.zfunctions"
+# if [[ -d "$zshfunctiondir/autoload" ]]; then ;; fi

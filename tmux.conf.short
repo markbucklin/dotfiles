@@ -1,0 +1,36 @@
+# clear bindings
+ unbind C-b
+ unbind '"'
+ unbind %
+ # nicer prefix
+ set -g prefix C-Space
+ bind Space send-prefix
+ # splitting like spacemacs
+ bind / split-window -h
+ bind - split-window -v
+ # do like terminator
+ bind -n C-E split-window -h
+ bind -n C-S-Left resize-pane -L 3
+ bind -n C-S-Right resize-pane -R 3
+ bind -n C-S-Up resize-pane -U 3
+ bind -n C-S-Down resize-pane -D 3
+ bind -n C-O split-window -v
+ # move panes without prefix
+ bind -n M-h select-pane -L
+ bind -n M-l select-pane -R
+ bind -n M-k select-pane -U
+ bind -n M-j select-pane -D
+ # bind r source-file ~/.tmux.conf
+
+# FZF
+
+# from: https://github.com/gotbletu/shownotes/blob/master/fzf_locate_fzf_playonlinux.md
+# fzf-locate() function defined in dotfiles/fzf/functions/fzf-locate
+bind-key -n 'M-\' new-window -n locate \; send-keys "fzf-locate && tmux kill-window\n"
+
+bind-key -n C-Space new-window -n fzf-dmenu -c $HOME \; \
+	send-keys 'fzf-dmenu && sleep 1 && tmux kill-window' 'Enter'
+
+# from: gotblletu/shownotes fzf-snippet.md
+bind-key "'" new-window -n snippet \; send-keys "fzf-snippet && tmux kill-window\n"
+bind-key '"' new-window -n multisnippet \; send-keys "fzf-multisnippet && tmux kill-window\n"

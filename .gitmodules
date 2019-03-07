@@ -7,3 +7,9 @@
 [submodule "src/zsh/plugins/pure"]
 	path = src/zsh/plugins/pure
 	url = https://github.com/sindresorhus/pure.git
+[submodule "fzf/fzf-extras"]
+	path = fzf/fzf-extras
+	url = gh:atweiden/fzf-extras
+[submodule "fzf/fzf-widgets"]
+	path = fzf/fzf-widgets
+	url = gh:ytet5uy4/fzf-widgets

@@ -76,6 +76,11 @@ prepend-path "${GOPATH}/bin"
 # GHQ
 export GHQ_ROOT=$HOME/.ghq:$HOME/repo
 # ======================================
+# /home/mark/.dotfiles/fzf/fzf.path.env
+# ======================================
+export FZF_ROOT="$HOME/.fzf"
+
+# ======================================
 # /home/mark/.dotfiles/java/java.path.env
 # ======================================
 export JAVA_BINDIR=$(dirname $(readlink -f $(which java)))
