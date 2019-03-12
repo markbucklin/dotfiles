@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# symlinkshere
+# Take filepaths and add absolute path symlinks to whichever directory this script resides in
+# Mark Bucklin
+# Feb 2019
+
+
+
+# name of command
+CMD="$(basename ${0})"
+
+# absolute directory name of CMD
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# add symbolic links given as arguments to same dir as this script
+for link_name in "$@" ; do
+    target="$(realpath "${link_name}")"
+    link="${DIR}/$(basename "${link_name}")"
+    printf 'Creating symbolic link: \t%s -> %s\n' "$link" "$target"
+    ln -s "$target" "$link"
+done
+
+# unset CMD
+# unset DIR
+# unset link
+# unset target

@@ -1,0 +1,7 @@
+# Install BLSD (Breadth-first LiSt Directories...?)
+__blsd_install_cmd(){
+    bash <(curl -fL https://raw.githubusercontent.com/junegunn/blsd/master/install)
+}
+command -v blsd &>/dev/null \
+    || __blsd_install_cmd \
+    && export FZF_ALT_C_COMMAND="blsd"

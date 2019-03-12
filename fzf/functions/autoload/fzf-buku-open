@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+#
+
+fzf-buku-open() {
+    # save newline separated string into an array
+    website=( "$(buku -p -f 4 | column -ts$'\t' | fzf --multi)" )
+
+    # open each website
+    for i in "${website[@]}"; do
+        index="$(echo "$i" | awk '{print $1}')"
+        buku -p "$index"
+        buku -o "$index"
+    done
+}

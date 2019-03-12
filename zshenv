@@ -79,6 +79,7 @@ export GHQ_ROOT=$HOME/.ghq:$HOME/repo
 # /home/mark/.dotfiles/fzf/fzf.path.env
 # ======================================
 export FZF_ROOT="$HOME/.fzf"
+export FZF_PLUGIN_DIR="$HOME/.dotfiles/fzf"
 
 # ======================================
 # /home/mark/.dotfiles/java/java.path.env
@@ -139,7 +140,21 @@ nvm() {
 # ======================================
 # /home/mark/.dotfiles/node/stdlib-js.env
 # ======================================
-export NODE_PATH="/home/mark/.ghq/github.com/stdlib-js/stdlib/lib/node_modules"
+prepend-node-path() {
+    local module_dir="${1}"
+
+    # Get real path to given dir (if symlink given)
+    [[ -L $module_dir ]] && module_dir=$(realpath $module_dir)
+
+    # Check if whether module_dir is in current PATH
+    if [[ -n $module_dir ]] && [[ ":$NODE_PATH:" != *":$module_dir:"* ]]; then
+        NODE_PATH="${NODE_PATH}:${module_dir}"
+        export NODE_PATH
+    fi
+}
+    prepend-node-path "$HOME/.ghq/github.com/stdlib-js/stdlib/lib/node_modules"
+
+    #export NODE_PATH="/home/mark/.ghq/github.com/stdlib-js/stdlib/lib/node_modules"
 
 # ======================================
 # /home/mark/.dotfiles/haskell/haskell.path.env
