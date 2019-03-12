@@ -1,13 +1,7 @@
 #!/bin/zsh
 
 # Allow for startup profiling
-PROFILE_STARTUP=true
-if [[ "$PROFILE_STARTUP" == true ]]; then
-    # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
-    PS4=$'%D{%M%S%.} %N:%i> '
-    exec 3>&2 2>$HOME/tmp/startlog.$$
-    setopt xtrace prompt_subst
-fi
+#zmodload zsh/zprof
 
 # export DOTDIR=$(dirname $(realpath $0))
 export DOTDIR="$HOME/.dotfiles"
@@ -35,8 +29,5 @@ fi
 eval "$(direnv hook zsh)"
 
 
-# Close Profiling 
-if [[ "$PROFILE_STARTUP" == true ]]; then
-    unsetopt xtrace
-    exec 2>&3 3>&-
-fi
+# print result of profile
+#zprof &
