@@ -1,4 +1,29 @@
 
+USE_LESS=true
+if [[ $USE_LESS ]];
+then
+    # LESS
+    export PAGER="less"
+    export LESS="--ignore-case --LONG-PROMPT --QUIET --chop-long-lines --tabs=4 --RAW-CONTROL-CHARS --quit-if-one-screen --no-init --window=-8 --HILITE-UNREAD --status-column"
+    # export LESS="--ignore-case --LONG-PROMPT --QUIET -Sm --quit-if-one-screen --no-init"
+    export LESSHISTFILE='-'
+    if [[ -x $(which lesspipe 2> /dev/null) ]];
+    then
+        LESSOPEN="| lesspipe %s"
+        export LESSOPEN
+    fi
+    export LESS_TERMCAP_mb="$'\e[1;32m'"
+    export LESS_TERMCAP_md="$'\e[1;35m'"
+    export LESS_TERMCAP_me="$'\e[0m'"
+    export LESS_TERMCAP_se="$'\e[0m'"
+    export LESS_TERMCAP_so="$'\e[01;33m'"
+    export LESS_TERMCAP_ue="$'\e[0m'"
+    export LESS_TERMCAP_us="$'\e[1;4;31m'"
+    if type pygmentize >/dev/null 2>&1; then
+        export LESSCOLORIZER='pygmentize'
+    fi
+else
+    # NOT LESS
 if [[ -x $(which ccat 2> /dev/null) ]];
 then
 # CCAT
@@ -13,26 +38,7 @@ then
     export PAGER="/usr/bin/most -s"
     # todo $HOME/.mostrc
     #     --> setkey "command" "key"
-elif [[ -x $(which less 2> /dev/null) ]];
-then
-# LESS
-    export PAGER="less"
-    export LESS="--ignore-case --LONG-PROMPT --QUIET --chop-long-lines -Sm --RAW-CONTROL-CHARS --quit-if-one-screen --no-init"
-    # export LESS="--ignore-case --LONG-PROMPT --QUIET -Sm --quit-if-one-screen --no-init"
-    export LESSHISTFILE='-'
-    if [[ -x $(which lesspipe 2> /dev/null) ]];
-    then
-        LESSOPEN="| lesspipe %s"
-        export LESSOPEN
-    fi
-    export LESS_TERMCAP_mb="$'\e[1;32m'"
-    export LESS_TERMCAP_md="$'\e[1;32m'"
-    export LESS_TERMCAP_me="$'\e[0m'"
-    export LESS_TERMCAP_se="$'\e[0m'"
-    export LESS_TERMCAP_so="$'\e[01;33m'"
-    export LESS_TERMCAP_ue="$'\e[0m'"
-    export LESS_TERMCAP_us="$'\e[1;4;31m'"
-
+fi
     # function man()
     # {
     #   env \

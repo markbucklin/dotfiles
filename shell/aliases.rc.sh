@@ -1,21 +1,4 @@
-# ls
-alias ls='ls --color=auto --group-directories-first'
-alias ll='ls -lh --group-directories-first'
-alias l='ls -1'
-alias la='ls -A'
-alias lal='ls -Alh --group-directories-first'
-alias lla='ls -lA'
-alias 'ls/'='ls -p'
-alias lss='ls -S'
-alias lsq='ls -Q'
-alias lstree="/bin/ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
-# function _lsd() {ls -d ${1:-$PWD}/*/}
-# alias lsd=_lsd
-# function _lsdh() {ls -d ${1:-$PWD}/*/}
-# alias lsdh=_lsdh
-# ls -d1 $HOME/*/
-
-# safer
+# Safer move and copy
 alias mv="mv -i"
 alias cp="cp -i"
 

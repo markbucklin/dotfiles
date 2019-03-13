@@ -3,7 +3,7 @@
 
 # bat
 # bat --theme "Monokai Extended Bright" --pager "/bin/less -R" --color always --language .bash_aliases aliases.sh
-export BAT_PAGER='less -RF'
+export BAT_PAGER="$LESS"
 export BAT_STYLE='auto'
 export BAT_THEME='Monokai Extended Bright'
 
