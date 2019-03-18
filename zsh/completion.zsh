@@ -1,8 +1,20 @@
+setopt autocd
+setopt autolist
+setopt autoparamslash
+setopt autoremoveslash
+setopt autoparamkeys
+setopt extendedglob
+setopt listambiguous
+setopt interactivecomments
+setopt multios
+setopt nonomatch
 unsetopt menu_complete   # do not autoselect the first completion entry
 unsetopt flowcontrol
 setopt auto_menu         # show completion menu on succesive tab press
 setopt complete_in_word
 setopt always_to_end
+setopt completealiases
+setopt globcomplete
 
 WORDCHARS=''
 

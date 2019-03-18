@@ -7,11 +7,11 @@ export BAT_PAGER="$LESS"
 export BAT_STYLE='auto'
 export BAT_THEME='Monokai Extended Bright'
 
-bat-select-theme()
-{
-	themes=("$(bat --list-themes)")
-	BAT_THEME=$(echo $themes[@] | fzf )
-}
+#bat-select-theme()
+#{
+	#themes=("$(bat --list-themes)")
+	#BAT_THEME=$(echo $themes[@] | fzf )
+#}
 # alias cat=ccat
 # ccat
 

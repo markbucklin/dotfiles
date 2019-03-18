@@ -23,4 +23,4 @@ which-command-line() {
 zle -N which-command-line
 
 # Defined shortcut keys: [Esc] w
-bindkey "w" which-command-line
+bindkey "^@w" which-command-line

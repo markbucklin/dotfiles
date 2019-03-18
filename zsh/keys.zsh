@@ -1,50 +1,45 @@
-# command
-# emacs
-# isearch
-# listscroll
-# main
-# menuselect
-# vicmd
-# viins
-# viopp
-# visual
+# Make functions for managing keys
+keys-using-alt(){
+local map=${1-='main'}
+local keys
+keys=($(bindkey -M $map | grep -e '^"''\^\[''\w.*'))
+}
 
 
-
-# bindkey -v
-
-# bindkey '^P' up-history
-# bindkey '^N' down-history
-# bindkey '^?' backward-delete-char
-# bindkey '^h' backward-delete-char
-# bindkey '^w' backward-kill-word
-# bindkey '^r' history-incremental-search-backward
-# bindkey "^F" forward-word
-# bindkey "^B" backward-word
+# Make Copies of main keymaps
 
 
-# Select Emacs keymap and bind it to main
-bindkey -e
-bindkey '\ew' kill-region
-bindkey '^r' history-incremental-search-backward
+# Delete word or char, Backwards and Forwards
+bindkey '^?' backward-delete-char
+bindkey '^H' backward-delete-char
+bindkey '^W' backward-kill-word
+bindkey "^[[3~" delete-char
+bindkey "^[3;5~" delete-char
+bindkey "\e[3~" delete-char
+
+bindkey "^F" forward-char
+bindkey "^B" backward-char
+
+# Forward and Backward Word
+bindkey "^[F" forward-word
+bindkey "^[B" backward-word
+
+# Up and Down Line
+bindkey '^P' up-line-or-history
+bindkey '^N' down-line-or-history
 bindkey "^[[5~" up-line-or-history
 bindkey "^[[6~" down-line-or-history
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
+
+# Beginning and End of line
 bindkey "^[[H" beginning-of-line
 bindkey "^[[1~" beginning-of-line
 bindkey "^[OH" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[OF" end-of-line
-bindkey ' ' magic-space
-bindkey "^F" forward-word
-bindkey "^B" backward-word
 bindkey '^[[Z' reverse-menu-complete
-bindkey '^?' backward-delete-char
-bindkey "^[[3~" delete-char
-bindkey "^[3;5~" delete-char
-bindkey "\e[3~" delete-char
 
 # bindkey '^[[5;6~'
 # Fill remaining (unsigned) keybindings with zsh defaults for selected keymap

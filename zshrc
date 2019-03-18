@@ -3,6 +3,15 @@
 # Allow for startup profiling
 #zmodload zsh/zprof
 
+# Cache default keymaps
+cachedir="$HOME/.cache/zsh"
+keymapcachedir="$cachedir/keymap"
+mkdir -p "$keymapcachedir"/{initial,current}
+kmapnames=($(bindkey -l))
+for m in "$kmapnames[@]"; do
+    bindkey -M "$m" > "$keymapcachedir/initial/$m.txt"
+done
+
 # export DOTDIR=$(dirname $(realpath $0))
 export DOTDIR="$HOME/.dotfiles"
 
@@ -29,5 +38,11 @@ fi
 eval "$(direnv hook zsh)"
 
 
+# Cache current keymaps as they are at end of zshrc
+kmapnames=($(bindkey -l))
+for m in "$kmapnames[@]"; do
+    bindkey -M "$m" > "$keymapcachedir/current/$m.txt"
+done
+
 # print result of profile
-#zprof &
+# zprof &

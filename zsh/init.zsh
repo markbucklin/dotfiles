@@ -16,17 +16,12 @@ autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit
 
 
-setopt autocd
-setopt extendedglob
-setopt NO_NOMATCH
-# setopt bashautolist
-# setopt bashrematch
+
+
+export KEYTIMEOUT=5
 # setopt vi
 
 export CLICOLOR=1
-
-# add completions plugin
-# source $zsh_user_dir/plugins/zsh-completions/zsh-completions.plugin.zsh
 
 # source $zsh_user_dir/keys.zsh
 source $zsh_user_dir/history.zsh
@@ -43,8 +38,6 @@ autoload -U colors && colors
 source $zsh_user_dir/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # Keymaps (TODO)
-# source $zsh_user_dir/keybindings.viins.zsh
-bindkey -e
 source $zsh_user_dir/keybindings.emacs.zsh
 source $zsh_user_dir/keys.zsh
 
