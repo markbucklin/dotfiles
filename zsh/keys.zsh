@@ -9,13 +9,16 @@ keys=($(bindkey -M $map | grep -e '^"''\^\[''\w.*'))
 # Make Copies of main keymaps
 
 
+# bindkey -m
+
+# menuselect
+bindkey -M menuselect "^j" down-line-or-history
+bindkey -M menuselect "^k" up-line-or-history
+
 # Delete word or char, Backwards and Forwards
-bindkey '^?' backward-delete-char
 bindkey '^H' backward-delete-char
 bindkey '^W' backward-kill-word
 bindkey "^[[3~" delete-char
-bindkey "^[3;5~" delete-char
-bindkey "\e[3~" delete-char
 
 bindkey "^F" forward-char
 bindkey "^B" backward-char
@@ -29,8 +32,8 @@ bindkey '^P' up-line-or-history
 bindkey '^N' down-line-or-history
 bindkey "^[[5~" up-line-or-history
 bindkey "^[[6~" down-line-or-history
-bindkey '^[[A' up-line-or-search
-bindkey '^[[B' down-line-or-search
+bindkey '^[OA' up-line-or-search
+bindkey '^[OB' down-line-or-search
 
 # Beginning and End of line
 bindkey "^[[H" beginning-of-line
@@ -39,7 +42,7 @@ bindkey "^[OH" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[OF" end-of-line
-bindkey '^[[Z' reverse-menu-complete
+# bindkey '^[[Z' reverse-menu-complete
 
 # bindkey '^[[5;6~'
 # Fill remaining (unsigned) keybindings with zsh defaults for selected keymap
@@ -57,3 +60,10 @@ bindkey '^[[Z' reverse-menu-complete
 # export KEYTIMEOUT=1
 # bindkey '^[K' zle-keymap-select
 # bindkey -s '\el' "ls\n"
+#
+#
+#
+#
+
+# source ./keybindings.emacs.zsh
+# source ./keybindings.viins.zsh

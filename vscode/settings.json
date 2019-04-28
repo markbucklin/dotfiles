@@ -1,0 +1,181 @@
+{
+  "breadcrumbs.enabled": true,
+  "simpleVim.yankHighlightBackgroundColor": "#08E3FBAF",
+  "git.enableSmartCommit": true,
+
+  // Settings for Builtin Functions
+  "window.zoomLevel": 1,
+  "explorer.confirmDelete": false,
+  "explorer.enableDragAndDrop": false,
+  "explorer.sortOrder": "type",
+  "explorer.openEditors.visible": 9,
+  "explorer.autoReveal": false,
+  "workbench.editor.closeEmptyGroups": false,
+  "prettier.proseWrap": "preserve",
+  "workbench.editor.closeOnFileDelete": true,
+  "terminal.integrated.cursorStyle": "underline",
+  "workbench.colorTheme": "Bronokai",
+  "workbench.editor.enablePreviewFromQuickOpen": true,
+  "workbench.editor.enablePreview": true,
+  "workbench.colorCustomizations": {
+    "list.focusForeground": "#cccc12",
+    "list.focusBackground": "#000000",
+    "editorCursor.foreground": "#ff1410cf",
+    "editor.wordHighlightBackground": "#000",
+    "editor.lineHighlightBorder": "#22bb2266",
+    "editorLineNumber.activeForeground": "#22bb22ff",
+    "editor.findMatchBorder": "#00a000",
+    "editor.selectionHighlightBorder": "#2222bb22",
+    "editor.selectionBackground": "#666688aa",
+    "editor.findMatchHighlightBorder": "#d8d812dd"
+  },
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 5000,
+  "javascript.suggest.enabled": true,
+  "workbench.editor.revealIfOpen": true,
+  "workbench.statusBar.feedback.visible": false,
+  "workbench.list.keyboardNavigation": "filter",
+  "workbench.list.automaticKeyboardNavigation": false,
+  "workbench.editor.focusRecentEditorAfterClose": true,
+  "workbench.useExperimentalGridLayout": true,
+  "workbench.editor.showTabs": true,
+  "workbench.panel.defaultLocation": "right",
+  "editor.suggest.snippetsPreventQuickSuggestions": true,
+  "editor.wordWrap": "off",
+  "editor.fontSize": 18,
+  "editor.fontWeight": "500",
+  "editor.lineHeight": 0,
+  "editor.cursorBlinking": "solid",
+  "editor.cursorWidth": 4,
+  "editor.cursorSmoothCaretAnimation": false,
+  "editor.tabCompletion": "onlySnippets",
+  "editor.smoothScrolling": true,
+  "editor.showFoldingControls": "mouseover",
+  "editor.links": true,
+  "editor.scrollBeyondLastColumn": 3,
+  "editor.roundedSelection": false,
+  "editor.glyphMargin": false,
+  "editor.dragAndDrop": false,
+  "editor.copyWithSyntaxHighlighting": false,
+  "editor.codeActionsOnSaveTimeout": 500,
+  "editor.fontLigatures": false,
+  "editor.formatOnPaste": true,
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.side": "right",
+  "editor.minimap.showSlider": "always",
+  "editor.minimap.maxColumn": 80,
+  "editor.acceptSuggestionOnEnter": "smart",
+  "editor.snippetSuggestions": "top",
+  "editor.parameterHints.enabled": true,
+  "editor.quickSuggestionsDelay": 350,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+  "editor.hover.enabled": true,
+  "editor.hover.delay": 500,
+  "editor.suggest.shareSuggestSelections": true,
+  "editor.suggest.localityBonus": true,
+  "editor.suggestFontSize": 13,
+  "editor.suggestLineHeight": 18,
+  "editor.suggestSelection": "recentlyUsedByPrefix",
+  "editor.suggest.filteredTypes": {
+    "keyword": true
+  },
+  "editor.fontFamily": "Fira Code",
+  "editor.wordBasedSuggestions": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.organizeImports": true
+  },
+  "javascript.suggest.completeFunctionCalls": true,
+  "typescript.suggest.completeFunctionCalls": true,
+  "extensions.ignoreRecommendations": true,
+  "extensions.showRecommendationsOnlyOnDemand": true,
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": true
+  },
+  "window.openWithoutArgumentsInNewWindow": "off",
+  "search.maintainFileSearchCache": true,
+  "search.location": "panel",
+  "extensions.closeExtensionDetailsOnViewChange": true,
+  "telemetry.enableCrashReporter": false,
+  "bookmarks.saveBookmarksInProject": true,
+  "yaml.format.enable": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "clever.fastJump.large.linesToJump": 10,
+  "clever.fastJump.small.linesToJump": 5,
+  "macros": {
+    "commentDown": [
+      "editor.action.copyLinesDownAction",
+      "cursorUp",
+      "editor.action.addCommentLine",
+      "cursorDown"
+    ],
+    "logCurrentVariable": [
+      "editor.action.addSelectionToNextFindMatch",
+      "problems.action.copy",
+      {
+        "command": "type",
+        "args": {
+          "text": "con"
+        }
+      }
+    ],
+    "showFileAndFocus": [
+      "workbench.files.action.showActiveFileInExplorer",
+      "workbench.files.action.focusFilesExplorer"
+    ],
+    "fastOpenFile": [
+      "list.select", // open current hover file
+      "wait:50", // wait for 20ms before next (default 50ms)
+      "workbench.action.focusSideBar" // send focus back to the file explorer
+    ],
+    "openAndKeepFile": [
+      "list.select", // open current hover file
+      "workbench.action.files.save", // this will keep the file open
+      "wait:20", // wait for 20ms before next (default 50ms)
+      "workbench.action.focusSideBar" // send focus back to the file explorer
+    ],
+    "openFile": [
+      "list.select", // open current hover file
+      "workbench.action.files.save" // this will keep the file open
+    ]
+  },
+  "multiCommand.commands": [
+    {
+      "command": "multiCommand.down3Lines",
+      "label": "down3Lines",
+      "description": "down the cursor in 3 times",
+      "sequence": [
+        "cursorDown",
+        "cursorDown",
+        "cursorDown"
+      ]
+    },
+    {
+      "command": "multiCommand.swapChar",
+      "interval": 30,
+      "sequence": [
+        "cursorLeftSelect",
+        "editor.action.clipboardCutAction",
+        "cursorRight",
+        "editor.action.clipboardPasteAction"
+      ]
+    }
+  ],
+  "markdownlint.run": "onSave",
+  "reflowMarkdown.resizeHeaderDashLines": true,
+  "markdown-link-suggestions.allowFullSuggestMode": true,
+  "workbench.enableExperiments": false,
+  "workbench.iconTheme": "Monokai Pro Icons",
+  "workbench.tree.indent": 20,
+  "workbench.view.alwaysShowHeaderActions": true,
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.openPositioning": "last",
+  "workbench.editor.restoreViewState": false,
+  "wolf.pythonPath": "/usr/bin/python3",
+  "code-runner.enableAppInsights": false
+}

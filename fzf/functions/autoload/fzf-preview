@@ -13,12 +13,12 @@ fzf-preview()
     fzf -m --layout=reverse-list --exact --no-height --border --margin 5%,5%,10%,5% --inline-info --ansi \
 	    --preview-window=right:60%:wrap \
 	    --preview='([[ -d {} ]] && exa -T {} ) || ( [[ -r {} ]] && [[ $(file -b {}) = *text* ]] && highlight -O ansi --wrap-no-numbers --force -i {} 2>/dev/null)' \
-        | tee "$HOME/.cache/fzf.out" | tee >( xsel -i -b ) 
+        | tee "$HOME/.cache/fzf.out" | tee >( xsel -i -b )
 
 #head -n500 {} | highlight -O ansi --wrap-no-numbers --force 2>/dev/null
 }
 # zle -N fzf-preview
-bindkey -s "^[t" "fzf-preview\n"
+bindkey -s "^[t" "fzf-preview"
 
 
 #--expect=ctrl-v,ctrl-x,ctrl-t fzf can return the key that was pressed to stop the selection as the first output -> use to map to commands
