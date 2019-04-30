@@ -1,4 +1,40 @@
 {
+// Markdown
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.wrappingIndent": "same",
+    "editor.insertSpaces": false,
+    "editor.quickSuggestions": true
+  },
+  "markdown-link-suggestions.allowSuggestionsForHeaders": true,
+  "markdown-link-suggestions.allowFullSuggestMode": true,
+  "reflowMarkdown.resizeHeaderDashLines": true,
+  "markdown-preview-enhanced.enableTypographer": true,
+  "markdown-preview-enhanced.imageFolderPath": "/assets",
+  "markdown-preview-enhanced.usePandocParser": false,
+  "markdown-preview-enhanced.pandocMarkdownFlavor": "markdown-raw_tex+tex_math_single_backslash",
+  "markdown.extension.showExplorer": true,
+  "markdown.extension.list.indentationSize": "adaptive",
+  "combineScripts.markdown.includeToc": true,
+
+  // markdownlint
+  "markdownlint.run": "onSave",
+  "markdownlint.config":
+  {
+    "default": true,
+    "no-inline-html": false,
+    "first-line-h1": false,
+    "single-h1": false,
+    "heading-style": {"style": "atx"},
+    "blanks-around-headings": false,
+    "blanks-around-lists": false,
+    "ul-style": { "style": "dash" },
+    "no-duplicate-heading": true,
+    "MD007": false,
+    "no-hard-tabs": false,
+    "line-length": false
+  },
+
 
   // Vim
   "vim.autoSwitchInputMethod.enable": false,
@@ -19,6 +55,7 @@
   "vim.enableNeovim": true,
   "vim.neovimPath": "/usr/bin/nvim",
   "vim.highlightedyank.enable": true,
+  "vim.ignorecase": true,
   "vim.smartcase": true,
   "vim.visualstar": true,
   "vim.showcmd": true,
@@ -31,6 +68,7 @@
   "vim.useCtrlKeys": true,
   "vim.hlsearch": true,
   "vim.leader": "<space>",
+  "vim.autoindent": true,
   "vim.camelCaseMotion.enable": false,
   "vim.handleKeys": {
     "<C-b>": false,
@@ -43,7 +81,8 @@
     "<C-.>": false,
     "<C-h>": true
   },
-  "vim.whichwrap": "h,l,<,>,[,]",
+  "vim.scroll": 20,
+  "vim.whichwrap": "f,F,t,T,h,l,<,>,[,]",
   "vim.cursorStylePerMode.normal": "underline",
   "vim.cursorStylePerMode.insert": "line",
   "vim.cursorStylePerMode.replace": "block-outline",
@@ -53,9 +92,16 @@
   "vim.searchHighlightColor": "rgba(40, 140, 20, 0.5)",
   "vim.highlightedyank.color": "rgba(10, 170, 255, 0.7)",
   "vim.insertModeKeyBindings": [
+  ],
+  "vim.insertModeKeyBindingsNonRecursive": [
+    {"before": ["<esc>"], "after": ["<esc>","l"]},
     {"before": ["j","j"], "after": ["<esc>"]},
+    {"before": ["k","k"], "after": ["<esc>","l"]},
+    // {"before": ["<esc>"], "after": ["cursorRight","<esc>"]},
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
+    {"before": ["v", "v"], "commands": ["editor.action.smartSelect.expand"]},
+    {"before": ["V", "V"], "commands": ["editor.action.smartSelect.shrink"]},
     {"before": ["<leader>", "v"], "commands": ["editor.action.smartSelect.expand"]},
     {"before": ["<leader>","<leader>", "v"], "commands": ["editor.action.smartSelect.shrink"]},
     {"before": ["<leader>", "d"], "after": ["d", "d"]},
@@ -79,9 +125,13 @@
     {"before": ["<leader>","<leader>","P"], "commands": ["workbench.action.moveEditorToPreviousGroup"]},
     {"before": ["<leader>", "o"], "commands": ["outline.focus"]},
     {"before": ["<leader>", "m"], "commands": ["bookmarks.toggle"]},
-    {"before": ["<leader>", "b"], "commands": ["bookmarks.list"]}
+    {"before": ["<leader>","<leader>", "b"], "commands": ["bookmarks.list"]},
+    {"before": ["<leader>", "B"], "commands": ["bookmarks.jumpToPrevious"]},
+    {"before": ["<leader>", "b"], "commands": ["bookmarks.jumpToNext"]}
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
+    {"before": ["v", "v"], "commands": ["editor.action.smartSelect.expand"]},
+    {"before": ["V", "V"], "commands": ["editor.action.smartSelect.shrink"]},
     {"before": ["<leader>", "v"], "commands": ["editor.action.smartSelect.expand"]},
     {"before": ["<leader>","<leader>", "v"], "commands": ["editor.action.smartSelect.shrink"]},
     {"before": ["p"],"after": ["p", "g", "v", "y"]},
@@ -93,36 +143,31 @@
     // { "before": ["g", "j"], "commands": [ "cursorBottom", ] },
     // { "before": ["g", "k"], "commands": [ "cursorTop", ] },
     { "before": ["g", "l"], "commands": [ "cursorEnd", ] },
+    {"before": ["Y"], "after": ["y","$"]},
 ],
   // bookmarks
   // "bookmarks.backgroundLineColor": "#002f5f68",
   "bookmarks.useWorkaroundForFormatters": true,
   "bookmarks.saveBookmarksInProject": true,
   "bookmarks.navigateThroughAllFiles": false,
+  "bookmarks.backgroundLineColor": "#2222ff55",
 
-  // Color Highlight
-  "color-highlight.markerType": "dot-after",
 
   // breadcrumbs
   "breadcrumbs.enabled": true,
   "breadcrumbs.filePath": "on",
   "breadcrumbs.symbolSortOrder": "position",
 
-  "markdownlint.config":
-  {
-    "default": true,
-    "no-inline-html": false,
-    "first-line-h1": false,
-    "single-h1": false,
-    "heading-style": {"style": "atx"},
-    "blanks-around-headings": false,
-    "blanks-around-lists": false,
-    "ul-style": { "style": "consistent" },
-    "no-duplicate-heading": true,
-    "MD007": false,
-    "no-hard-tabs": false,
-    "line-length": false
-  },
+  // ActiveFileInStatusBar
+  "ActiveFileInStatusBar.enable": true,
+  "ActiveFileInStatusBar.fullpath": true,
+  "ActiveFileInStatusBar.revealFile": true,
+  "ActiveFileInStatusBar.color": "#fff",
+
+  // Filter Text
+  "filterText.useDocumentDirAsWorkDir": false,
+
+
 
   // Settings for Builtin Functions
   "editor.wrappingIndent": "same",
@@ -140,62 +185,10 @@
   "workbench.colorTheme": "Bronokai",
   "workbench.editor.enablePreviewFromQuickOpen": true,
   "search.quickOpen.includeSymbols": true,
+  "workbench.quickOpen.preserveInput": false,
+  "workbench.settings.openDefaultKeybindings": false,
+  "workbench.settings.openDefaultSettings": false,
   "workbench.editor.enablePreview": true,
-  "workbench.colorCustomizations": {
-    // sidebar
-    "sideBarSectionHeader.background": "#1177eebb",
-    "sideBarSectionHeader.border": "#e8e812ef",
-    // list
-    "list.focusForeground": "#22bb22ff",
-    "list.focusBackground": "#00000022",
-    "list.activeSelectionForeground": "#1177bb",
-    "list.activeSelectionBackground": "#00aa4844",
-    // suggest
-    "editorSuggestWidget.selectedBackground": "#000000dd",
-    "editorSuggestWidget.background": "#101010df",
-    "editorSuggestWidget.foreground": "#dbdfef",
-    "contrastActiveBorder": "#00cf0099",
-    "contrastBorder": "#22bb2266",
-    // "editorSuggestWidget.foreground": "#4488ccff",
-    "editorSuggestWidget.border": "#1177bbab",
-    // "editorSuggestWidget.highlightForeground": "#c02626ee",
-      // cursor
-    "editorCursor.foreground": "#d03636ff",
-    "editorCursor.background": "#134cd1",
-    // word
-    "editor.wordHighlightBackground": "#1177bb11",
-    "editor.wordHighlightBorder": "#ea5c0058",
-    "editor.wordHighlightStrongBackground": "#1177bb23",
-    "editor.wordHighlightStrongBorder": "#1177bbcc",
-    // line
-    "editor.lineHighlightBorder": "#22ee2244",
-    "editor.lineHighlightBackground": "#00226622",
-    // selection
-    "editor.selectionForeground": "#1177eecc",
-    "editor.selectionBackground": "#22bb2266",
-    "editor.selectionHighlightBackground": "#1177bb44",
-    "editor.selectionHighlightBorder": "#1177bb",
-    // overview ruler
-    "editorOverviewRuler.findMatchForeground": "#00ff0099",
-    // line number
-    "editorLineNumber.activeForeground": "#22bb22ff",
-    "editorLineNumber.foreground": "#1177bb",
-    // find match
-    "editor.findMatchBorder": "#22bb22dd",
-    "editor.findMatchBackground": "#22bb2288",
-    "editor.findMatchHighlightBackground": "#ea4646aa",
-    "editor.findMatchHighlightBorder": "#d8d812dc",
-    // hover
-    "editorHoverWidget.background": "#002600bb",
-    "editor.rangeHighlightBorder": "#1177bb",
-    // Logical Line Highlight
-    "highlightLogicalLine.background": "#00000040"
-    // "statusBar.background": "#005f5f",
-    // "statusBar.noFolderBackground": "#005f5f",
-    // "statusBar.debuggingBackground": "#005f5f"
-  },
-  "editor.tokenColorCustomizations": {
-  },
   "files.autoSaveDelay": 5000,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
@@ -209,7 +202,8 @@
   "workbench.useExperimentalGridLayout": true,
   "workbench.editor.showTabs": true,
   "workbench.panel.defaultLocation": "right",
-  "editor.suggest.snippetsPreventQuickSuggestions": true,
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.stablePeek": true,
   "editor.wordWrap": "off",
   "editor.renderLineHighlight": "all",
   "editor.trimAutoWhitespace": true,
@@ -217,10 +211,10 @@
   "editor.cursorBlinking": "solid",
   "editor.cursorWidth": 4,
   "editor.cursorSmoothCaretAnimation": false,
-  "editor.tabCompletion": "onlySnippets",
-  "editor.showFoldingControls": "always",
+  "editor.tabCompletion": "off",
+  "editor.showFoldingControls": "mouseover",
   "editor.links": true,
-  "editor.smoothScrolling": true,
+  "editor.smoothScrolling": false,
   "editor.scrollBeyondLastColumn": 3,
   "editor.roundedSelection": true,
   "editor.glyphMargin": true,
@@ -235,7 +229,7 @@
   "editor.acceptSuggestionOnEnter": "smart",
   "editor.snippetSuggestions": "top",
   "editor.parameterHints.enabled": true,
-  "editor.quickSuggestionsDelay": 350,
+  "editor.quickSuggestionsDelay": 550,
   "editor.quickSuggestions": {
     "other": true,
     "comments": false,
@@ -245,35 +239,77 @@
   "editor.hover.delay": 500,
   "editor.suggest.shareSuggestSelections": true,
   "editor.suggest.localityBonus": true,
-  "editor.suggestFontSize": 13,
+  "editor.suggestFontSize": 14,
   "editor.suggestLineHeight": 18,
-  "editor.suggestSelection": "recentlyUsedByPrefix",
+  "editor.suggestSelection": "first",
   "editor.suggest.filteredTypes": {
-    "keyword": true
+    "keyword": false
   },
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.acceptSuggestionOnCommitCharacter": true,
   "font-switcher.enableLivePreview": true,
   "font-switcher.fontFamily": "Consolas, DejaVu Sans Mono, monospace, Fira Code, Fira Mono, Inconsolata, Roboto Mono, FontAwesome, Hack, Noto Mono",
   "editor.fontFamily": "Fira Code",
   "editor.fontSize": 18,
   "editor.fontWeight": "normal",
   "editor.fontLigatures": false,
-  "editor.wordBasedSuggestions": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.organizeImports": true
+  "editor.wordBasedSuggestions": true,
+  // "editor.useTabStops": true,
+  // "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?",
+  // "editor.codeActionsOnSave": {
+  //   "source.fixAll": true,
+  //   "source.organizeImports": true
+  // },
+  "editor.autoIndent": true,
+  "editor.find.addExtraSpaceOnTop": true,
+  "editor.colorDecorators": false,
+  "editor.emptySelectionClipboard": true,
+  "editor.folding": true,
+  "editor.largeFileOptimizations": true,
+  "editor.selectionHighlight": false,
+  "editor.occurrencesHighlight": false,
+  "editor.scrollBeyondLastLine": true,
+  "diffEditor.ignoreTrimWhitespace": true,
+  "workbench.colorCustomizations": {
+    "sideBarSectionHeader.background": "#1177eebb",
+    // "sideBarSectionHeader.border": "#e8e812ef",
+    "list.focusForeground": "#22bb22ff",
+    "list.focusBackground": "#00000022",
+    "list.activeSelectionForeground": "#1166ab",
+    "list.activeSelectionBackground": "#00aa4844",
+    // "editorSuggestWidget.selectedBackground": "#000000dd",
+    // "editorSuggestWidget.background": "#303030ef",
+    // "editorSuggestWidget.foreground": "#cbcfcf",
+    // "editorSuggestWidget.border": "#1177abab",
+    // "contrastActiveBorder": "#00cf0099",
+    // "contrastBorder": "#22bb2266",
+    "editorCursor.foreground": "#d03636ff",
+    "editorCursor.background": "#134cd1",
+    // "editor.wordHighlightBackground": "#11778b11",
+    // "editor.wordHighlightBorder": "#ea5c0058",
+    // "editor.wordHighlightStrongBackground": "#1177bb23",
+    // "editor.wordHighlightStrongBorder": "#1177bb88",
+    // "editor.lineHighlightBorder": "#1177eebb",
+    "highlightLogicalLine.background": "#22222260",
+    "editorOverviewRuler.findMatchForeground": "#00ff0099",
+    "editorLineNumber.activeForeground": "#22bb22",
+    "editorLineNumber.foreground": "#1177bb",
+    "editor.findMatchBorder": "#22bb22dd",
+    "editor.findMatchBackground": "#22bb2288",
+    "editor.findMatchHighlightBackground": "#ea4646aa",
+    "editor.findMatchHighlightBorder": "#d8d812dc",
+    "editorHoverWidget.background": "#303030ef",
+    "editor.rangeHighlightBorder": "#1177bb",
+    // "statusBar.background": "#005f5f",
+    // "statusBar.noFolderBackground": "#005f5f",
+    // "statusBar.debuggingBackground": "#005f5f"
+  },
+  "editor.tokenColorCustomizations": {
   },
   "javascript.suggest.completeFunctionCalls": true,
   "typescript.suggest.completeFunctionCalls": true,
   "extensions.ignoreRecommendations": true,
   "extensions.showRecommendationsOnlyOnDemand": true,
-  "pandoc.docxOptString": "",
-  "pandoc.htmlOptString": "-s -t html5 --css=css/style.css",
-  "[markdown]": {
-    "editor.wordWrap": "on",
-    "editor.wrappingIndent": "none",
-    "editor.insertSpaces": false,
-    "editor.quickSuggestions": false
-  },
   // "[json]": {
   //   "editor.defaultFormatter": "esbenp.prettier-vscode"
   // },
@@ -284,7 +320,6 @@
   "telemetry.enableCrashReporter": false,
   "yaml.format.enable": true,
   "editor.multiCursorModifier": "ctrlCmd",
-  "markdown-link-suggestions.allowFullSuggestMode": true,
   "workbench.enableExperiments": false,
   "workbench.iconTheme": "vs-seti",
   "workbench.tree.indent": 20,
@@ -369,8 +404,6 @@
       ]
     }
   ],
-  "markdownlint.run": "onSave",
-  "reflowMarkdown.resizeHeaderDashLines": true,
   "peacock.favoriteColors": [
     {
       "name": "Angular Red",
@@ -417,5 +450,12 @@
       "value": "#42b883"
     }
   ],
-  "editor.multiCursorMergeOverlapping": false
+  "peacock.affectActivityBar": true,
+  "peacock.affectStatusBar": true,
+  "peacock.affectTitleBar": true,
+  "peacock.elementAdjustments": {
+    "activityBar": "lighten"
+  },
+  "editor.multiCursorMergeOverlapping": false,
+  "todohighlight.isEnable": true
 }

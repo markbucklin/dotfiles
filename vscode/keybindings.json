@@ -144,8 +144,8 @@
   // Hover
   {"key": "shift+space", "command": "editor.action.showHover"},
 
-  // Vim-Esacpe
-  // {"key": "alt+i", "command": "extension.vim_esc", "when": "editorTextFocus"},
+  // Vim-Escape
+  // {"key": "alt+i", "command": "vim", "when": "editorTextFocus"},
 
   // List Navigation
   {"key": "g g", "command": "list.focusFirst", "when": "listFocus && !inputFocus"},
