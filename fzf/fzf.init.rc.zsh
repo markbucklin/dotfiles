@@ -24,10 +24,10 @@ fpath+="$FZF_FUNCTION_DIR/autoload"
 autoload -Uz $(ls -F $FZF_FUNCTION_DIR/autoload | grep -v /)
 
 # source functions from functions dir
-for f in $(command find $FZF_FUNCTION_DIR -maxdepth 1 -type f)
-do
-    source "$f"
-done
+# for f in $(command find $FZF_FUNCTION_DIR -maxdepth 1 -type f)
+# do
+#     source "$f"
+# done
 
 # FZF-Extras (submodule)
 fzf_extras_init="$fzf_dot_dir/fzf-extras/fzf-extras.zsh"

@@ -1,6 +1,6 @@
 
 # Bind Common FZF Widget Keybindings
-export FZF_COMPLETION_TRIGGER=''
+export FZF_COMPLETION_TRIGGER='**'
 for m in viins vicmd
 do
     bindkey -M "$m" '^R' fzf-history-widget
@@ -17,6 +17,9 @@ bindkey -M menuselect '^k' 'vi-up-line-or-history'
 # use function in 'zsh-vim-mode' plugin to define a couple extra keybindings
 vim-mode-bindkey viins visual -- vi-cmd-mode '^j'
 vim-mode-bindkey viins visual -- vi-cmd-mode '^[i'
+vim-mode-bindkey vicmd          -- vi-insert '^j'
+bindkey -M viins -s '^@kl' '^[ik$'
+bindkey -M viins -s '^@kh' '^[ik^'
 
 # vim-mode-bindkey       vicmd -- accept-line-and-down-history '^o'
 vim-mode-bindkey vicmd visual -- end-of-line 'gl'
@@ -60,6 +63,10 @@ vim-mode-bindkey viins vicmd -- fzf-select-docker-widget '^@sd'
 vim-mode-bindkey viins vicmd -- fzf-select-git-widget '^@sg'
 vim-mode-bindkey viins vicmd -- fzf-select-github-widget '^@sh'
 vim-mode-bindkey viins vicmd -- fzf-select-widget '^@^s'
+
+vim-mode-bindkey viins vicmd -- describe-key-briefly '^@hk'
+vim-mode-bindkey viins vicmd -- run-help '^@hm'
+vim-mode-bindkey viins vicmd -- which-command '^@hw'
 
 # keybindings for exiting insert mode
 # bindkey -M viins "jj" vi-cmd-mode

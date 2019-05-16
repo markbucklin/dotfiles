@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Allow for startup profiling
-#zmodload zsh/zprof
+zmodload zsh/zprof
 
 # export DOTDIR=$(dirname $(realpath $0))
 export DOTDIR="$HOME/.dotfiles"
@@ -38,20 +38,6 @@ eval "$(direnv hook zsh)"
 # Reset keybinding protection
 # unfunction bindkey
 
-# Bind Common FZF Widget Keybindings
-export FZF_COMPLETION_TRIGGER=''
-for m in viins vicmd
-do
-    bindkey -M "$m" '^R' fzf-history-widget
-    bindkey -M "$m" '^T' fzf-file-widget
-    bindkey -M "$m" '^[c' fzf-cd-widget
-    bindkey -M "$m" '^[i' fzf-locate-widget
-    bindkey -M "$m" '^I' expand-or-complete
-    bindkey -M "$m" '^@^@' fzf-completion
-    # bindkey -M "$m" '^I' fzf-completion
-done
-bindkey -M menuselect '^j' 'vi-down-line-or-history'
-bindkey -M menuselect '^k' 'vi-up-line-or-history'
 
 # bindkey '^I' $fzf_default_completion
 
@@ -64,4 +50,4 @@ bindkey -M menuselect '^k' 'vi-up-line-or-history'
 source $DOTDIR/zsh/keys.vi.zsh
 
 # print result of profile
-# zprof &
+zprof &

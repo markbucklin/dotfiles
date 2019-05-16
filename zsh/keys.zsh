@@ -1,43 +1,4 @@
 # Make functions for managing keys
-keys-using-alt(){
-local map=${1-='main'}
-local keys
-keys=($(bindkey -M $map | grep -e '^"''\^\[''\w.*'))
-}
-
-
-# Make Copies of main keymaps
-
-
-# bindkey -m
-
-# menuselect
-bindkey -M menuselect "^j" down-line-or-history
-bindkey -M menuselect "^k" up-line-or-history
-
-# Delete word or char, Backwards and Forwards
-bindkey '^H' backward-delete-char
-bindkey '^W' backward-kill-word
-bindkey "^[[3~" delete-char
-
-bindkey "^F" forward-char
-bindkey "^B" backward-char
-
-# Forward and Backward Word
-bindkey "^[F" forward-word
-bindkey "^[B" backward-word
-
-# Up and Down Line
-bindkey '^P' up-line-or-history
-bindkey '^N' down-line-or-history
-bindkey "^[[5~" up-line-or-history
-bindkey "^[[6~" down-line-or-history
-bindkey '^[OA' up-line-or-search
-bindkey '^[OB' down-line-or-search
-
-# Beginning and End of line
-bindkey "^[[H" beginning-of-line
-bindkey "^[[1~" beginning-of-line
 bindkey "^[OH" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[[4~" end-of-line
