@@ -70,6 +70,11 @@ prepend-path "${GOROOT}/bin"
 prepend-path "${GOPATH}/bin"
 
 # ======================================
+# /home/mark/.dotfiles/dotdir.path.env
+# ======================================
+ export DOT_BASE_DIR="$HOME/.dotfiles"
+
+# ======================================
 # /home/mark/.dotfiles/git/ghq.shell.env
 # ======================================
 
@@ -115,6 +120,17 @@ do
   version_bin_dir="$version_root/$alias_value/bin"
 done
 
+NODE_ROOT="$version_root/$alias_value"
+export NODE_ROOT
+# NODE_PATH="$NODE_ROOT/lib/node_modules"
+export NODE_PATH
+
+if [ -n "$NODE_PATH" ]
+then
+    NODE_PATH="$NODE_ROOT/lib/node_modules:${NODE_PATH}"
+else
+    NODE_PATH="$NODE_ROOT/lib/node_modules"
+fi
 # Set PATH to default node-version/bin
 # PATH="${version_bin_dir}:${PATH}"
 prepend-path "${version_bin_dir}"
@@ -122,13 +138,16 @@ prepend-path "${version_bin_dir}"
 
 nvm() {
   if [[ -d "${NVM_DIR}" ]]; then
-    
+
     # Source original file
    if [[ -f "$NVM_DIR/nvm.sh" ]]
    then
      . "${NVM_DIR}/nvm.sh"
     fi
-        
+    # source the bash-completion file for nvm
+    ( [[ -n $NVM_DIR ]] && [[ -e "$NVM_DIR/bash_completion" ]] || [[ -e $HOME/.nvm/bash_completion ]]) && source "$NVM_DIR/bash_completion"
+
+
     # invoke the real nvm function now
     nvm "$@"
   else
@@ -140,19 +159,12 @@ nvm() {
 # ======================================
 # /home/mark/.dotfiles/node/stdlib-js.env
 # ======================================
-prepend-node-path() {
-    local module_dir="${1}"
-
-    # Get real path to given dir (if symlink given)
-    [[ -L $module_dir ]] && module_dir=$(realpath $module_dir)
-
-    # Check if whether module_dir is in current PATH
-    if [[ -n $module_dir ]] && [[ ":$NODE_PATH:" != *":$module_dir:"* ]]; then
-        NODE_PATH="${NODE_PATH}:${module_dir}"
-        export NODE_PATH
-    fi
-}
-    prepend-node-path "$HOME/.ghq/github.com/stdlib-js/stdlib/lib/node_modules"
+if [ -n "$NODE_PATH" ]
+then
+    NODE_PATH="${NODE_PATH}:$HOME/.ghq/github.com/stdlib-js/stdlib/lib/node_modules"
+else
+    NODE_PATH="$HOME/.ghq/github.com/stdlib-js/stdlib/lib/node_modules"
+fi
 
     #export NODE_PATH="/home/mark/.ghq/github.com/stdlib-js/stdlib/lib/node_modules"
 
@@ -220,6 +232,14 @@ export zsh_completion_cache_home="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/completion
 [[ -d "$zsh_completion_cache_home" ]] || mkdir -p "$zsh_completion_cache_home"
 export ZSH_COMPLETION_DIR=$zsh_completion_cache_home
 fpath=( "$zsh_completion_cache_home" $fpath )
+
+# ======================================
+# /home/mark/.dotfiles/ranger/ranger.env
+# ======================================
+# avoid loading rc.conf twice because default was copied to
+# ~/.config/ranger/rc.conf
+RANGER_LOAD_DEFAULT_RC=false
+
 
 # ======================================
 # /home/mark/.dotfiles/shell/shell.env

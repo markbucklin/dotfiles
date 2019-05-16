@@ -19,6 +19,7 @@ fzf-preview()
 }
 # zle -N fzf-preview
 bindkey -s "^[t" "fzf-preview"
-
+# zle -N _fzf-preview fzf-preview
+# bindkey "^[t" "fzf-preview"
 
 #--expect=ctrl-v,ctrl-x,ctrl-t fzf can return the key that was pressed to stop the selection as the first output -> use to map to commands

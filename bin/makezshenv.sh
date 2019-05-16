@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # args
 srcdir="${HOME}/.dotfiles"
 destdir="${HOME}/.dotfiles"
@@ -18,13 +20,13 @@ function init_file(){
 
 function write_file(){
     local filter=$1
-    find $srcdir -type f -name $filter -print \
-    | while read f ; do
-        if [[ -e $f ]]; then
-            echo "adding $f to $file"
-            printf '\n# ======================================\n# %s\n# ======================================\n' "${f}" >> $file
-            cat "${f}" >> $file
-        fi
+    local files=( $(command find "$srcdir" -type f -name "$filter" -print) )
+    # | while read f ; do
+    for f in "${files[@]}"
+    do
+        echo "adding $f to $file"
+        printf '\n# ======================================\n# %s\n# ======================================\n' "${f}" >> $file
+        cat "${f}" >> $file
     done
 }
 

@@ -13,4 +13,4 @@ setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history
 setopt hist_reduce_blanks
-
+setopt share_history

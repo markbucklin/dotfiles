@@ -1,0 +1,81 @@
+# Files and folders ignored by ag when searching
+# Uses same format as gitignore
+
+# OS X
+.DS_Store
+
+# Vim
+Session.vim
+
+# Cache and Backup Directory Filters
+.cache/
+cache/
+*.bak
+~snapshot
+GLCache/
+Cache/
+_cacache/
+
+# Temporary Files and Dirs
+tmp
+*.tags*
+
+# Source Control Directory Filters
+.git
+.svn
+.hg
+.gx
+.github
+
+# Package Files
+__test__/
+Zotero/storage/
+!Zotero/storage/*/*.pdf
+lib/python*/
+site-packages/
+template/images/
+_images/
+include/qt/
+_vendor
+_site
+app/img/
+node_modules/
+bower_components/
+perl*/lib/
+perl*/man/
+perl*/doc/
+go/src/
+go/pkg/
+html/_sources/
+gems/doc/
+gems/extensions/
+gems/*/ext/
+gems/*/test/
+gems/specifications/
+gems/gems/
+.cargo/registry/
+.vscode*/extensions/
+
+
+overlay2/
+
+*conda*/lib/
+*conda*/pkgs/
+*conda*/conda-meta/
+*conda*/share/
+*conda*/translations/
+fonts/
+locales/
+snap/*/*/.local/
+snap/*/*/.*
+meta_feed/meta/
+
+*.inc
+*.inc.php
+*.compiled.php
+*.min.js
+*.pyc
+*.bbl
+*.blg
+*.toc
+*~

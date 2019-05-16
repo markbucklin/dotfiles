@@ -18,35 +18,35 @@ fi
 
 function __colortext()
 {
-  echo -e " $__ESCAPESEQ[$2m$1$__ESCAPESEQ[0m"
+  echo -e "${__ESCAPESEQ}[$2m$1${__ESCAPESEQ}[0m"
 }
 
-function echogreen() 
+function echogreen()
 {
   echo $(__colortext "$1" "32")
 }
 
-function echored() 
+function echored()
 {
   echo $(__colortext "$1" "31")
 }
 
-function echoblue() 
+function echoblue()
 {
   echo $(__colortext "$1" "34")
 }
 
-function echopurple() 
+function echopurple()
 {
   echo $(__colortext "$1" "35")
 }
 
-function echoyellow() 
+function echoyellow()
 {
   echo $(__colortext "$1" "33")
 }
 
-function echocyan() 
+function echocyan()
 {
   echo $(__colortext "$1" "36")
 }

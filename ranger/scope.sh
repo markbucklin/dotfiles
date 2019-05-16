@@ -26,7 +26,7 @@ height="$3"          # Height of the preview pane (number of fitting characters)
 cached="$4"          # Path that should be used to cache image previews
 preview_images="$5"  # "True" if image previews are enabled, "False" otherwise.
 
-maxln=200    # Stop after $maxln lines.  Can be used like ls | head -n $maxln
+maxln=400    # Stop after $maxln lines.  Can be used like ls | head -n $maxln
 
 # Find out something about the file:
 mimetype=$(file --mime-type -Lb "$path")
@@ -54,8 +54,8 @@ if [ "$preview_images" = "True" ]; then
         image/*)
             exit 7;;
         # Image preview for video, disabled by default.:
-        ###video/*)
-        ###    ffmpegthumbnailer -i "$path" -o "$cached" -s 0 && exit 6 || exit 1;;
+        video/*)
+           ffmpegthumbnailer -i "$path" -o "$cached" -s 0 && exit 6 || exit 1;;
     esac
 fi
 

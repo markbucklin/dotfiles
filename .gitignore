@@ -41,6 +41,9 @@ jsconfig.json
 *.msm
 *.msp
 
+# packages
+node_modules/
+
 # End of https://www.gitignore.io/api/archives
 
 # Custom dotfiles
@@ -48,5 +51,7 @@ jsconfig.json
 .zcompdump
 *.bak
 
-build/
-vscode/User/workspaceStorage
+# build/
+# vscode/User/workspaceStorage
+.tags
+fzf-extras/
