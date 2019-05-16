@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Allow for startup profiling
-zmodload zsh/zprof
+# zmodload zsh/zprof
 
 # export DOTDIR=$(dirname $(realpath $0))
 export DOTDIR="$HOME/.dotfiles"
@@ -50,4 +50,4 @@ eval "$(direnv hook zsh)"
 source $DOTDIR/zsh/keys.vi.zsh
 
 # print result of profile
-zprof &
+# zprof &

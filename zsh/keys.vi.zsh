@@ -1,25 +1,43 @@
 
 # Bind Common FZF Widget Keybindings
-export FZF_COMPLETION_TRIGGER='**'
+export FZF_COMPLETION_TRIGGER=''
 for m in viins vicmd
 do
     bindkey -M "$m" '^R' fzf-history-widget
     bindkey -M "$m" '^T' fzf-file-widget
     bindkey -M "$m" '^[c' fzf-cd-widget
-    bindkey -M "$m" '^[i' fzf-locate-widget
     bindkey -M "$m" '^I' expand-or-complete
-    bindkey -M "$m" '^@^@' fzf-completion
+    bindkey -M "$m" '^@^I' fzf-completion
     # bindkey -M "$m" '^I' fzf-completion
+    bindkey -M "$m" '^@bcw' bash_complete-word
+    bindkey -M "$m" '^@blc' _bash_list-choices
+    bindkey -M "$m" '^@ch' _complete_help
+    bindkey -M "$m" '^@cf' _correct_filename
+    bindkey -M "$m" '^@cw' _correct_word
+    bindkey -M "$m" '^@hcn' _history-complete-newer
+    bindkey -M "$m" '^@hco' _history-complete-older
+    bindkey -M "$m" '^@amc' accept-and-menu-complete
+    bindkey -M "$m" '^@cw' complete-word
+    bindkey -M "$m" '^@eocl' expand-or-complete
+    bindkey -M "$m" '^@eocp' expand-or-complete-prefix
+    bindkey -M "$m" '^@mc' menu-complete
+    bindkey -M "$m" '^@meoc' menu-expand-or-complete
+    bindkey -M "$m" '^@rmc' reverse-menu-complete
 done
 bindkey -M menuselect '^j' 'vi-down-line-or-history'
 bindkey -M menuselect '^k' 'vi-up-line-or-history'
 
 # use function in 'zsh-vim-mode' plugin to define a couple extra keybindings
+vim-mode-bindkey vicmd   -- fzf-locate-widget '^[i'
 vim-mode-bindkey viins visual -- vi-cmd-mode '^j'
 vim-mode-bindkey viins visual -- vi-cmd-mode '^[i'
 vim-mode-bindkey vicmd          -- vi-insert '^j'
-bindkey -M viins -s '^@kl' '^[ik$'
 bindkey -M viins -s '^@kh' '^[ik^'
+bindkey -M viins -s '^@kj' '^[ik^W'
+bindkey -M viins -s '^@kk' '^[ik$B'
+bindkey -M viins -s '^@kl' '^[ik$'
+bindkey -M viins -s '^@kv' '^[ik$vB'
+
 
 # vim-mode-bindkey       vicmd -- accept-line-and-down-history '^o'
 vim-mode-bindkey vicmd visual -- end-of-line 'gl'
@@ -52,6 +70,7 @@ vim-mode-bindkey viins vicmd -- fzf-exec-ssh '^@essh'
 vim-mode-bindkey viins vicmd -- fzf-git-add-files '^@gaf'
 vim-mode-bindkey viins vicmd -- fzf-git-change-repository '^@gcr'
 vim-mode-bindkey viins vicmd -- fzf-git-checkout-branch '^@gcb'
+vim-mode-bindkey viins vicmd -- fzf-git-checkout-branch '^@gco'
 vim-mode-bindkey viins vicmd -- fzf-git-delete-branches '^@gdb'
 vim-mode-bindkey viins vicmd -- fzf-github-close-issue '^@gclo'
 vim-mode-bindkey viins vicmd -- fzf-github-comment-issue '^@gcomi'

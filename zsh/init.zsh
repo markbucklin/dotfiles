@@ -6,7 +6,8 @@
 zsh_user_dir=$(dirname $0)
 
 # Set up fpath
-source $zsh_user_dir/fpath.zsh
+# source $zsh_user_dir/fpath.zsh
+# note: this script currently slows down startup immensely
 
 # Prompt
 autoload -U promptinit && promptinit
@@ -65,3 +66,4 @@ source "$zsh_user_dir/plugins/fasd-fzf/fasd-fzf.plugin.zsh"
 
 # Options
 setopt autocontinue
+setopt listrowsfirst
