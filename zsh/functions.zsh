@@ -403,3 +403,15 @@ chromium-history () {
 	sqlite3 -separator $sep /tmp/h "select substr(title, 1, $cols), url
      from urls order by last_visit_time desc" | awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' | fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
 }
+
+fzfp(){
+    FZF="$(echo fzf ${FZF_CTRL_T_OPTS} | tr -dc '[\n[:print:]]')";
+    eval "$FZF";
+}
+
+make-animated-png(){
+    srcglob="${1}/*.png"
+    outname="${2}$(basename $1).png"
+    ffmpeg -v verbose -f image2 -pattern_type glob -framerate 5 -i "$srcglob" -f apng -plays 0 -final_delay 0.2 "$outname"
+}
+

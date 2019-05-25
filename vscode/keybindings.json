@@ -2,6 +2,10 @@
 [
   // NAVIGATION
   // ==================================================
+
+  // File Navigator
+  { "key": "ctrl+alt+p", "command": "extension.codeFileNav" },
+
   // Sidebar
   {"key": "alt+h alt+h", "command": "workbench.action.toggleSidebarVisibility"},
   {"key": "alt+h alt+l", "command": "workbench.action.focusActiveEditorGroup", "when": "sideBarFocus"},
@@ -189,6 +193,7 @@
   // findWidgetVisible || searchViewletVisible ||
 
   // Disable Conflicting Extension Defaults
+
   {"key": "alt+d", "command": "-divider.addDividerLevel1", "when": "editorTextFocus" },
   {"key": "ctrl+alt+d", "command": "-divider.addDividerLevel2", "when": "editorTextFocus" },
   {"key": "ctrl+p h", "command": "-handlebarsPreview.preview", "when": "!terminalFocus"},
@@ -221,5 +226,13 @@
   { "key": "alt+p", "command": "-seito-openfile.openFileFromText", "when": "editorTextFocus" },
   { "key": "ctrl+h", "command": "-extension.dash.specific", "when": "editorTextFocus" },
   { "key": "ctrl+alt+h", "command": "-extension.dash.all", "when": "editorTextFocus" },
-  { "key": "ctrl+shift+h", "command": "-extension.dash.emptySyntax", "when": "editorTextFocus" }
+  {
+    "key": "ctrl+shift+h",
+    "command": "-extension.dash.emptySyntax",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "-extension.codeFileNav"
+  }
 ]

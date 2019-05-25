@@ -23,6 +23,7 @@ do
     bindkey -M "$m" '^@mc' menu-complete
     bindkey -M "$m" '^@meoc' menu-expand-or-complete
     bindkey -M "$m" '^@rmc' reverse-menu-complete
+    bindkey -M "$m" '^@^@' list-choices
 done
 bindkey -M menuselect '^j' 'vi-down-line-or-history'
 bindkey -M menuselect '^k' 'vi-up-line-or-history'
@@ -86,6 +87,11 @@ vim-mode-bindkey viins vicmd -- fzf-select-widget '^@^s'
 vim-mode-bindkey viins vicmd -- describe-key-briefly '^@hk'
 vim-mode-bindkey viins vicmd -- run-help '^@hm'
 vim-mode-bindkey viins vicmd -- which-command '^@hw'
+
+# type help with current command and repaste on next line
+bindkey -M viins -s '^@hh' '^[iyyA  --help^M^[iPA'
+# bindkey -M vicmd -s '^@hh' 'yyA  --help^M^[iPA'
+
 
 # keybindings for exiting insert mode
 # bindkey -M viins "jj" vi-cmd-mode

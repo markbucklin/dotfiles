@@ -33,7 +33,7 @@ MODE_INDICATOR_VISUAL='%F{12}[%F{12}VISUAL%F{12}]%f'
 MODE_INDICATOR_VLINE='%F{12}[%F{13}[VISLINE%F{12}]%f'
 setopt promptsubst
 PS1='%B${MODE_INDICATOR_PROMPT}%b %(!,#,$) '
-RPS1='%24<..<%B%~%b'
+RPS1='%44<..<%F{1}%B%~%b%f'
 
 
 # setopt vi

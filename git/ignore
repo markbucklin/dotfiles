@@ -6,7 +6,7 @@
 *.so
 *.pyc
 
-# Pacakges
+# Packages
 *.7z
 *.dmg
 *.gz
@@ -32,3 +32,4 @@ tmp/
 node_modules/
 bower_components/
 vendor/
+_build/

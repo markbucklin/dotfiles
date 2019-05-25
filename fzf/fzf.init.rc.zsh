@@ -51,6 +51,7 @@ export PREVIEW_CMD='
     || cat {} ||
     )
     2> /dev/null'
+export PREVIEW_FILTER='tr -dc \"[\\n[:print:]]\"'
     # --height 75% --multi --no-height --no-reverse --bind ctrl-f:page-down,ctrl-b:page-up'
     # --bind \"enter:execute(less {})\"
 typeset  -A FILE_SEARCH_CMD
@@ -63,7 +64,7 @@ export FILE_SEARCH_COMMAND
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
 declare -a fzf_default_opts
 fzf_default_opts=(
-    '--height 75%'
+    '--no-height'
     '--multi'
     '--layout=reverse-list'
     '--bind=ctrl-d:page-down,ctrl-u:page-up'
@@ -71,6 +72,7 @@ fzf_default_opts=(
     '--bind=ctrl-alt-j:preview-down,ctrl-alt-k:preview-up'
     '--bind=ctrl-alt-d:preview-page-down,ctrl-alt-u:preview-page-up'
     '--bind=alt-z:toggle-preview-wrap'
+    '--bind="ctrl-y:execute(echo -n {} | cut -d \" \" -f1 --complement | xsel -i -b)"'
     '--bind=ctrl-alt-a:toggle-all,alt-a:select-all'
     '--filepath-word'
     '--inline-info'
@@ -79,7 +81,7 @@ fzf_default_opts=(
     '--color=dark,info:3,hl:12,hl+:11,pointer:9,marker:1,border:4,prompt:10'
     "--history=$HOME/.fzfhistory"
     '--preview="echo {+}"'
-    '--preview-window=down:3:wrap'
+    '--preview-window=right:45%:wrap'
     )
 export FZF_DEFAULT_OPTS="${fzf_default_opts[@]}"
 
@@ -89,29 +91,29 @@ export FZF_ALT_C_OPTS='
     --exit-0
     --no-multi
     --preview "tree -C {} | head -200"
-    --preview-window down:70%
+    --preview-window down:50%
     '
 
 export FZF_CTRL_R_OPTS='
-    --preview "(echo {} | highlight --syntax=bash -O ansi || echo {})"
+    --multi
+    --preview "(echo {+} | highlight --syntax=bash -O ansi || echo {+})"
     --preview-window down:45%:wrap
     --layout=default
-    --bind="ctrl-y:execute(echo -n {} | cut -d \" \" -f1 --complement | xsel -i -b)"
     '
 
 # export FZF_CTRL_R_OPTS="${(@q-)fzf_ctrl_r_opts[@]}"
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS="
-    --select-1
-    --exit-0
-    --layout=reverse-list
-    --exact
-    --no-height
-    --border
-    --margin 5%,5%,10%,5%
-  --preview-window=right:60%:wrap
-  --preview='([[ $\"\$(file --mime \"\$(chase {} )\")\" =~ binary ]] && eval \"{} --help\" 2>/dev/null || [[ $\"\$(file --mime \"\$(chase {} )\")\" =~ text ]] && highlight -O ansi -t 2 --force --line-length=$COLUMNS {} 2>/dev/null ) 2>/dev/null'
+export FZF_CTRL_T_OPTS=" \
+    --select-1 \
+    --exit-0 \
+    --layout=reverse-list \
+    --exact \
+    --no-height \
+    --border \
+    --margin 5%,5%,10%,5% \
+  --preview-window=right:60%:wrap \
+  --preview='([[ $\"\$(file --mime \"\$(chase {} )\")\" =~ binary ]] && eval \"{} --help\" 2>/dev/null || [[ $\"\$(file --mime \"\$(chase {} )\")\" =~ text ]] && highlight -O ansi -t 2 --force --line-length=$COLUMNS {} 2>/dev/null ) 2>/dev/null' \
  "
 
 # FZF_PREVIEW_CMD='([[ -d {} ]] && exa -T {} ) || ( [[ -r {} ]] && [[ $(file -b {}) = *text* ]] && highlight -O ansi --wrap-no-numbers --force -i {} 2>/dev/null)'
