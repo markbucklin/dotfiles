@@ -1,0 +1,3 @@
+FZF="$(echo fzf ${FZF_CTRL_T_OPTS} | tr -dc '[\n[:print:]]')" && files=( "$(fd -t f -e md | eval ${FZF} )" ) && pandoc --from=markdown --to=markdown --wrap=none --atx-headers $(echo "$files[@]")
+HIGHLIGHT DIFFERENCE between the current MARKDOWN INCLUDE file and the output of the command used to GENERATE the file
+Use XEV to show KEYBOARD KEY CODES

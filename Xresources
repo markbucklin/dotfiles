@@ -4,11 +4,11 @@
 *.background:   #1d1f21
 *.font:	Fira Code-20:pixelsize=20:antialias=true:autohint=true
 *.alpha:	240
-*cursorColor:	red
+*.cursorColor:	#de352e
 *.cursorUnderline:  true
 
 ! black
-*.color0:       #111111
+*.color0:       #1c1e20
 *.color8:       #000000
 
 ! red
@@ -17,23 +17,23 @@
 
 ! green
 *.color2:       #22b700
-*.color10:      #44f366
+*.color10:      #1dd351
 
 ! yellow
 *.color3:       #d7a921
 *.color11:      #f3f022
 
 ! blue
-*.color4:       #2a54b0
-*.color12:      #2034ff
+*.color4:       #3054d0
+*.color12:      #4081ff
 
 ! magenta
 *.color5:       #8022ee
 *.color13:      #ee94dd
 
 ! cyan
-*.color6:       #81a2be
-*.color14:      #44defd
+*.color6:       #22ded0
+*.color14:      #6ec08c
 
 ! white
 *.color7:       #808080
