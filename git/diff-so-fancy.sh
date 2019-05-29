@@ -21,12 +21,12 @@ git config --global color.diff.new        "green bold"
 git config --global color.diff.whitespace "red reverse"
 
 
-# git config --bool --global diff-so-fancy.markEmptyLines false
-# git config --bool --global diff-so-fancy.stripLeadingSymbols false
-# git config --bool --global diff-so-fancy.changeHunkIndicators false
+git config --bool --global diff-so-fancy.markEmptyLines false
+git config --bool --global diff-so-fancy.stripLeadingSymbols false
+git config --bool --global diff-so-fancy.changeHunkIndicators false
 
 
 # git diff --color | diff-so-fancy
 #
-# git config --global alias.dsf '!f() { [ -z "$GIT_PREFIX" ] || cd "$GIT_PREFIX" '\
-# '&& git diff --color "$@" | diff-so-fancy  | less --tabs=4 -RFX; }; f'
+git config --global alias.dsf '!f() { [ -z "$GIT_PREFIX" ] || cd "$GIT_PREFIX" '\
+'&& git diff --color "$@" | diff-so-fancy  | less --tabs=4 -RFX; }; f'

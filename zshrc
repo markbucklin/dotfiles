@@ -3,6 +3,8 @@
 # Allow for startup profiling
 # zmodload zsh/zprof
 
+bindkey -v
+
 # export DOTDIR=$(dirname $(realpath $0))
 export DOTDIR="$HOME/.dotfiles"
 
@@ -18,15 +20,15 @@ source "$DOTDIR/zsh/init.zsh"
 # }
 
 # Source all files with '.rc.sh' or '.rc.zsh' suffix (e.g. pager.rc.sh)
-shrcfiles=( $(ls $DOTDIR/**/*.rc.sh) $(ls $DOTDIR/**/*.rc.zsh))
-for F in "$shrcfiles[@]"; do
+shrcfiles=( $(command ls $DOTDIR/**/*.rc.sh) $(command ls $DOTDIR/**/*.rc.zsh))
+for F in "${shrcfiles[@]}"; do
     source "$F"
 done
 
 shfunctiondir="$HOME/functions"
 if [[ -d $shfunctiondir ]]; then
     shfiles=( $(find "$shfunctiondir/" -type f -readable) )
-    for F in "$shfiles[@]"; do
+    for F in "${shfiles[@]}"; do
         source "$F"
     done
 fi

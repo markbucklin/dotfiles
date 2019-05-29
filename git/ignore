@@ -1,3 +1,6 @@
+*~
+._*
+
 # Compiled files
 *.sass-cache
 *.cache
@@ -5,6 +8,17 @@
 *.o
 *.so
 *.pyc
+*.pyo
+*.exe
+*.dll
+*.com
+*.a
+*.so
+*.so.*
+*.dylib
+.build_cache_dir
+MANIFEST
+
 
 # Packages
 *.7z
@@ -15,21 +29,81 @@
 *.rar
 *.tar
 *.zip
+*.tgz
+*.bzip
+*.bz2
+*.xz
+*.lzma
+*.cab
 
 # OS Generated files
 .DS_Store
 .DS_Store?
-._*
 .Trashes
+Desktop.ini
+
+# Logs and databases
+Thumbs.db
+ehthumbs.db
+*.log
+*.sql
+*.sqlite
+*.db
 
 # Other things
 .bundle
 .vagrant
-.idea
+*.idea
+.idea/
+.vscode
 .tern-project
 .importjs.js
-tmp/
-node_modules/
-bower_components/
+node_modules
+bower_components
 vendor/
+.Spotlight-V100
+*.orig
+*.sass-cache
+.directory
+*.swp
+svn-commit.*
+TAGS
+.tags
+tags
+tmtags
+package-lock.json
+yarn.lock
+env/
+
+# Custom dotfiles
+.cache
+.zcompdump
+
+# Generated Output
 _build/
+_site
+tmp
+test/**/test_output
+codegen/
+_dist/
+dist/
+
+# Backup files
+*.backup
+*.bak
+test/bak
+*.autosave
+*.m~
+
+# Matlab
+*.mltbx
+*.mlappinstall
+helpsearch*
+octave-workspace
+*.mex*
+*.asv
+
+# Sync Utility and other Environement vars
+.stignore
+.env
+

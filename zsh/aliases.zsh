@@ -10,3 +10,5 @@ alias -g XX="\`xclip -o\`"
 
 alias -s {txt,h,c,hpp,cpp,tex,bib,html,xml}=$EDITOR
 
+alias lnew='ls *(.om[1,10])'
+

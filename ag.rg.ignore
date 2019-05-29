@@ -56,6 +56,8 @@ gems/gems/
 .cargo/registry/
 .vscode*/extensions/
 
+*.indexeddb/
+*.leveldb/
 
 overlay2/
 
