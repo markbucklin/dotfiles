@@ -1,8 +1,8 @@
-
 # Bind Common FZF Widget Keybindings
-export FZF_COMPLETION_TRIGGER=''
-for m in viins vicmd
-do
+export FZF_COMPLETION_TRIGGER='**'
+
+bindkey -v "^O" vi-open-line-below
+for m in viins vicmd; do
     bindkey -M "$m" '^R' fzf-history-widget
     bindkey -M "$m" '^T' fzf-file-widget
     bindkey -M "$m" '^[c' fzf-cd-widget
@@ -29,16 +29,15 @@ bindkey -M menuselect '^j' 'vi-down-line-or-history'
 bindkey -M menuselect '^k' 'vi-up-line-or-history'
 
 # use function in 'zsh-vim-mode' plugin to define a couple extra keybindings
-vim-mode-bindkey vicmd   -- fzf-locate-widget '^[i'
+vim-mode-bindkey vicmd -- fzf-locate-widget '^[i'
 vim-mode-bindkey viins visual -- vi-cmd-mode '^j'
 vim-mode-bindkey viins visual -- vi-cmd-mode '^[i'
-vim-mode-bindkey vicmd          -- vi-insert '^j'
+vim-mode-bindkey vicmd -- vi-insert '^j'
 bindkey -M viins -s '^@kh' '^[ik^'
 bindkey -M viins -s '^@kj' '^[ik^W'
 bindkey -M viins -s '^@kk' '^[ik$B'
 bindkey -M viins -s '^@kl' '^[ik$'
 bindkey -M viins -s '^@kv' '^[ik$vB'
-
 
 # vim-mode-bindkey       vicmd -- accept-line-and-down-history '^o'
 vim-mode-bindkey vicmd visual -- end-of-line 'gl'
@@ -92,7 +91,6 @@ vim-mode-bindkey viins vicmd -- which-command '^@hw'
 bindkey -M viins -s '^@hh' '^[iyyA  --help^M^[iPA'
 # bindkey -M vicmd -s '^@hh' 'yyA  --help^M^[iPA'
 
-
 # keybindings for exiting insert mode
 # bindkey -M viins "jj" vi-cmd-mode
 # bindkey -M viins ",." vi-cmd-mode
@@ -117,7 +115,6 @@ bindkey -M viins -s '^@hh' '^[iyyA  --help^M^[iPA'
 # bindkey -M vicmd "gh" beginning-of-line
 # bindkey -M visual "gl" end-of-line
 # bindkey -M visual "gh" beginning-of-line
-
 
 # bindkey -M viins "^o" accept-line-and-down-history
 # bindkey -M viins "^j" vi-cmd-mode

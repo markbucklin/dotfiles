@@ -50,9 +50,9 @@ node_modules/
 .cache/
 .zcompdump
 *.bak
+*.zwc
 
 # build/
 # vscode/User/workspaceStorage
 .tags
-fzf-extras/
 tags

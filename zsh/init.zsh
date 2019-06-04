@@ -2,11 +2,14 @@
 # vim:syntax=zsh
 # vim:filetype=zsh
 
-# Local function path
-zsh_user_dir=$(dirname $0)
+# Local init path
+# ZSH_INIT_DIR=${ZSH}/init
+# command ls $ZSH_INIT_DIR &>/dev/null || ZSH_INIT_DIR="$(dirname $0)"
+ZSH_INIT_DIR="$(chase $(dirname $0))"
+export ZSH_INIT_DIR
 
 # Set up fpath
-# source $zsh_user_dir/fpath.zsh
+# source $ZSH/init/fpath.zsh
 # note: this script currently slows down startup immensely
 
 # Prompt
@@ -18,9 +21,18 @@ PS1='%18<..<%B%4~ %(!,#,$)%b '
 autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit
 
+# Bind VIINS keymap to MAIN
+bindkey -v
+# setopt vi
+
+# FASD
+if command -v fasd >/dev/null 2>&1; then
+    eval "$(fasd --init zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install posix-alias)"
+fi
+source "$ZSH_INIT_DIR/plugins/fasd-fzf/fasd-fzf.plugin.zsh"
 
 # Vi-Mode Keybindings
-source $zsh_user_dir/plugins/zsh-vim-mode/zsh-vim-mode.plugin.zsh
+source $ZSH_INIT_DIR/plugins/zsh-vim-mode/zsh-vim-mode.plugin.zsh
 MODE_CURSOR_VICMD="green steady underline"
 # MODE_CURSOR_VIINS="#20d08a blinking bar"
 MODE_CURSOR_VIINS="red blinking bar"
@@ -35,35 +47,28 @@ setopt promptsubst
 PS1='%B${MODE_INDICATOR_PROMPT}%b %(!,#,$) '
 RPS1='%44<..<%F{1}%B%~%b%f'
 
-
-# setopt vi
-
 export CLICOLOR=1
 
-# source $zsh_user_dir/keys.zsh
-source $zsh_user_dir/history.zsh
-source $zsh_user_dir/completion.zsh
-source $zsh_user_dir/aliases.zsh
-source $zsh_user_dir/stack.zsh
-source $zsh_user_dir/functions.zsh
-# source $zsh_user_dir/help.zsh
+# source $ZSH_INIT_DIR/keys.zsh
+source $ZSH_INIT_DIR/history.zsh
+source $ZSH_INIT_DIR/completion.zsh
+source $ZSH_INIT_DIR/aliases.zsh
+source $ZSH_INIT_DIR/stack.zsh
+source $ZSH_INIT_DIR/functions.zsh
+# source $ZSH_INIT_DIR/help.zsh
 
-#source $zsh_user_dir/plugins/which.plugin.zsh
+#source $ZSH_INIT_DIR/plugins/which.plugin.zsh
 
 # Colors
-autoload -U colors && colors
-source $zsh_user_dir/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+autoload -Uz colors && colors
+source $ZSH_INIT_DIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # Keymaps (TODO)
-# source $zsh_user_dir/keys.zsh
-# source $zsh_user_dir/load-surround.zsh
-
-# FASD
-if command -v fasd >/dev/null 2>&1; then
-    eval "$(fasd --init zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install posix-alias)"
-fi
-source "$zsh_user_dir/plugins/fasd-fzf/fasd-fzf.plugin.zsh"
+# source $ZSH_INIT_DIR/keys.zsh
+# source $ZSH_INIT_DIR/load-surround.zsh
 
 # Options
 setopt autocontinue
-setopt listrowsfirst
+setopt globstarshort
+setopt nolistrowsfirst
+setopt rcquotes

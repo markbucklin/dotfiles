@@ -39,6 +39,7 @@ Plug 'universal-ctags/ctags'
 Plug 'majutsushi/tagbar'
 Plug 'lvht/tagbar-markdown'
 Plug 'vim-voom/VOoM'
+Plug 'moorereason/vim-markdownfmt'
 
 Plug 'jreybert/vimagit'
 Plug 'MattesGroeger/vim-bookmarks'
@@ -550,3 +551,20 @@ let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
 highlight multiple_cursors_cursor  cterm=bold ctermbg=darkblue gui=bold guibg=darkblue guifg=orange
 highlight link multiple_cursors_visual Visual
+
+
+" function! MmarkFmt ()
+"     let l = line(".")
+"     let c = col(".")
+"     silent !clear
+"     execute "%!" . "mmark -markdown"
+"     redraw!
+"     call cursor(l, c)
+" endfunction
+
+" au FileType pandoc command! Fmt call MmarkFmt()
+" au FileType markdown command! Fmt call MmarkFmt()
+" let mmark = "mmark -markdown -width 100"
+" au FileType pandoc set formatprg=mmark
+" au FileType markdown set formatprg=mmark
+

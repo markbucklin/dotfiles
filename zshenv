@@ -188,14 +188,17 @@ export GEM_HOME=$HOME/gems
 prepend-path "${GEM_HOME}/bin"
 
 # ======================================
-# /home/mark/.dotfiles/zsh/completion.home.env
+# /home/mark/.dotfiles/zsh/zsh.home.env
 # ======================================
+ZSH="$HOME/.config/zsh"
+# ZDOTDIR="$ZSH"
+ZSH_COMPLETION_DIR="$ZSH/completions"
+ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+export ZSH ZSH_CACHE_DIR ZSH_COMPLETION_DIR
 
-export zsh_completion_system_dir="/usr/share/zsh/vendor-completions"
-export zsh_completion_cache_home="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/completions"
-[[ -d "$zsh_completion_cache_home" ]] || mkdir -p "$zsh_completion_cache_home"
-export ZSH_COMPLETION_DIR=$zsh_completion_cache_home
-fpath=( "$zsh_completion_cache_home" $fpath )
+# add completion directory to end of fpath
+[[ -d "$ZSH_COMPLETION_DIR" ]] || mkdir -p "$ZSH_COMPLETION_DIR"
+fpath+="$ZSH_COMPLETION_DIR"
 
 # ======================================
 # /home/mark/.dotfiles/ranger/ranger.env

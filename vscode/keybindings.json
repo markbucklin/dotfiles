@@ -83,8 +83,8 @@
   {"key": "alt+p", "command": "workbench.action.navigateBack", "when": "!inKeybindings"},
   {"key": "alt+n", "command": "workbench.action.navigateForward", "when": "!inKeybindings"},
   {"key": "shift+alt+p", "command": "workbench.action.navigateToLastEditLocation"},
-  {"key": "shift+j", "command": "multiCommand.down8Lines", "when": "editorTextFocus && vim.active && vim.mode == 'Normal' && !inDebugRepl && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"},
-  {"key": "shift+k", "command": "multiCommand.up8Lines", "when": "editorTextFocus && vim.active && vim.mode == 'Normal' && !inDebugRepl && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"},
+//   {"key": "shift+j", "command": "multiCommand.down8Lines", "when": "editorTextFocus && vim.active && vim.mode == 'Normal' && !inDebugRepl && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"},
+//   {"key": "shift+k", "command": "multiCommand.up8Lines", "when": "editorTextFocus && vim.active && vim.mode == 'Normal' && !inDebugRepl && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"},
   // {"key": "shift+h", "command": "cursorMove", "args": {"to": "wrappedLineFirstNonWhitespaceCharacter"}, "when": "editorTextFocus && vim.active && vim.mode != 'Insert' && !inDebugRepl"},
   // {"key": "shift+l", "command": "cursorMove", "args": {"to": "wrappedLineLastNonWhitespaceCharacter"}, "when": "editorTextFocus && vim.active && vim.mode != 'Insert' && !inDebugRepl"},
   // // {"key": "shift+g t", "command": "cursorMove", "args": {"to": "viewPortTop"}, "when": "editorFocus && vim.active && vim.mode != 'Insert' && !inDebugRepl"},
@@ -92,12 +92,12 @@
   // {"key": "shift+g b", "command": "cursorMove", "args": {"to": "viewPortBottom"}, "when": "editorFocus && vim.active && vim.mode != 'Insert' && !inDebugRepl"},
 
   // // Scrolling
-  //   { "key": "ctrl+y", "command": "scrollkey.up1", "when": "editorTextFocus" },
-  //   { "key": "ctrl+u", "command": "scrollkey.up2", "when": "editorTextFocus" },
-  //   { "key": "PageUp", "command": "scrollkey.up3", "when": "editorTextFocus" },
-  //   { "key": "ctrl+e", "command": "scrollkey.down1", "when": "editorTextFocus" },
-  //   { "key": "ctrl+d", "command": "scrollkey.down2", "when": "editorTextFocus" },
-  //   { "key": "PageDown", "command": "scrollkey.down3", "when": "editorTextFocus" },
+    // { "key": "ctrl+y", "command": "scrollkey.up1", "when": "editorTextFocus" },
+    // { "key": "ctrl+u", "command": "scrollkey.up2", "when": "editorTextFocus" },
+    // { "key": "PageUp", "command": "scrollkey.up3", "when": "editorTextFocus" },
+    // { "key": "ctrl+e", "command": "scrollkey.down1", "when": "editorTextFocus" },
+    // { "key": "ctrl+d", "command": "scrollkey.down2", "when": "editorTextFocus" },
+    // { "key": "PageDown", "command": "scrollkey.down3", "when": "editorTextFocus" },
 
   // Multicursor
   {"key": "alt+m j", "command": "editor.action.addSelectionToNextFindMatch", "when": "editorTextFocus"},
@@ -138,18 +138,18 @@
   {"key": "ctrl+shift+j", "command": "selectNextPageSuggestion", "when": "suggestWidgetVisible && suggestWidgetMultipleSuggestions"},
   {"key": "ctrl+shift+k", "command": "selectPrevPageSuggestion", "when": "suggestWidgetVisible && suggestWidgetMultipleSuggestions"},
 
-  // Suggestion Widget
+  // Parameter Hints Widget
   {"key": "ctrl+shift+space", "command": "editor.action.triggerParameterHints"},
   {"key": "ctrl+h", "command": "closeParameterHints", "when": "parameterHintsVisible"},
   {"key": "ctrl+j", "command": "showNextParameterHint", "when": "parameterHintsVisible && parameterHintsMultipleSignatures"},
   {"key": "ctrl+k", "command": "showPrevParameterHint", "when": "parameterHintsVisible && parameterHintsMultipleSignatures"},
 
-
   // Hover
   {"key": "shift+space", "command": "editor.action.showHover"},
 
   // Vim-Escape
-  // {"key": "alt+i", "command": "vim", "when": "editorTextFocus"},
+    { "before": ["<leader>", "j"], "after": ["v","J","<esc>","g","_"]  },
+  {"key": "alt+i", "command": "extension.vim_escape", "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode != 'Normal'"},
 
   // List Navigation
   {"key": "g g", "command": "list.focusFirst", "when": "listFocus && !inputFocus"},
@@ -160,9 +160,7 @@
   {"key": "o", "command": "list.toggleExpand", "when": "listFocus && !inputFocus" },
   {"key": "/", "command": "list.toggleKeyboardNavigation", "when": "listFocus && !inputFocus && listSupportsKeyboardNavigation" },
   {"key": "ctrl+/", "command": "list.toggleKeyboardNavigation", "when": "listFocus && !inputFocus && listSupportsKeyboardNavigation" },
-
-  // Smart Selection
-    // "command": "editor.action.smartSelect.expand",
+  {"key": "ctrl+shift+k", "command": "list.expandSelectionUp", "when": "listFocus && !inputFocus"},
 
   // Breadcrumbs
   {"key": "ctrl+h", "command": "breadcrumbs.focusPrevious", "when": "breadcrumbsActive && breadcrumbsVisible" },

@@ -1,13 +1,8 @@
-
-
 # todo make bash compatible (command is zsh only)
-if ! $(command -v fff >| /dev/null) ; then
-  wget -P ~/bin https://raw.githubusercontent.com/dylanaraps/fff/master/fff
-  chmod ug+x ~/bin/fff
+if ! $(command -v fff >|/dev/null); then
+  wget -P ~.local/bin https://raw.githubusercontent.com/dylanaraps/fff/master/fff
+  chmod ug+x ~/.local/bin/fff
 fi
-
-
-
 
 # Directory color [0-9]
 export FFF_COL1=2
