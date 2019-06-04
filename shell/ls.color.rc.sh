@@ -12,14 +12,14 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias ls='ls --color'
+alias ls='ls --color=auto'
 # Remove any alias to ls
 # unalias ls &>/dev/null && echo "ls is being unaliased and redefined as a function in $0"
 
 
 # Override builtin ls command with ls function
 # ls() {
-#     command ls -F -h --color=always -v --author --time-style=long-iso -C "$@" | less -R -X -F 
+#     command ls -F -h --color=always -v --author --time-style=long-iso -C "$@" | less -R -X -F
 # }
 
 # Make commands for printing directories
