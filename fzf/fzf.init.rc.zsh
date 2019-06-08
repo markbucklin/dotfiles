@@ -91,10 +91,11 @@ fzf_default_opts=(
     '--no-height'
     '--multi'
     '--layout=reverse-list'
-    '--bind=ctrl-d:page-down,ctrl-u:page-up'
+    '--bind=ctrl-alt-j:half-page-down,ctrl-alt-k:half-page-up'
+    '--bind=ctrl-d:preview-down,ctrl-u:preview-up'
+    '--bind=ctrl-alt-p:toggle-preview'
+    '--bind=ctrl-alt-w:toggle-preview-wrap'
     '--bind=?:toggle-preview'
-    '--bind=ctrl-alt-j:preview-down,ctrl-alt-k:preview-up'
-    '--bind=ctrl-alt-d:preview-page-down,ctrl-alt-u:preview-page-up'
     '--bind=alt-z:toggle-preview-wrap'
     '--bind="ctrl-y:execute(echo -n {} | cut -d \" \" -f1 --complement | xsel -i -b)"'
     '--bind=ctrl-alt-a:toggle-all,alt-a:select-all'
@@ -105,7 +106,7 @@ fzf_default_opts=(
     '--color=dark,info:3,hl:12,hl+:11,pointer:9,marker:1,border:4,prompt:10'
     "--history=$HOME/.fzfhistory"
     '--preview-window down:60%:hidden:wrap'
-    '--preview ''eval "fzf_preview_command {+}" '' '
+    '--preview ''eval "fzf_preview_command {}" '' '
 )
 
 # '--preview ''[[ $(file --mime {+}) =~ binary ]] && echo {+} is a binary file || (highlight -O ansi -l {+} || coderay {+} || rougify {+} || ccat {+} || cat {+}) 2>/dev/null'''

@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+typeset -gA FAST_BLIST_PATTERNS
+FAST_BLIST_PATTERNS[/handata/*]=1
+FAST_BLIST_PATTERNS[/hanlab/*]=2

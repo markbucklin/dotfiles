@@ -232,5 +232,113 @@
   {
     "key": "ctrl+l",
     "command": "-extension.codeFileNav"
-  }
+},
+{
+    "key": "ctrl+alt+g shift+c",
+    "command": "extension.vscode-git-automator.addAndCommitAllFiles"
+},
+{
+    "key": "ctrl+alt+g c",
+    "command": "extension.vscode-git-automator.addAndCommitCurrentFile"
+},
+{
+    "key": "ctrl+alt+g p",
+    "command": "extension.vscode-git-automator.pushLocalCommits"
+},
+{
+    "key": "alt+; r",
+    "command": "workbench.view.extension.references-view"
+},
+{
+    "key": "ctrl+alt+n c",
+    "command": "extension.nodejsReplCurrent"
+},
+{
+    "key": "ctrl+alt+f f",
+    "command": "extension.fuzzySearch"
+},
+{
+    "key": "ctrl+alt+f ctrl+l",
+    "command": "extension.fuzzySearchFlush"
+},
+{
+    "key": "ctrl+alt+n o",
+    "command": "extension.nodejsRepl"
+},
+{
+    "key": "ctrl+alt+n q",
+    "command": "extension.nodejsReplClose"
+},
+{
+    "key": "ctrl+t g",
+    "command": "extension.searchCTags",
+    "when": "editorTextFocus"
+},
+{
+    "key": "ctrl+t",
+    "command": "-extension.searchCTags",
+    "when": "editorTextFocus"
+},
+{
+    "key": "ctrl+t h",
+    "command": "extension.showNavigationHistory",
+    "when": "editorTextFocus"
+},
+{
+    "key": "ctrl+shift+t",
+    "command": "-extension.showNavigationHistory",
+    "when": "editorTextFocus"
+},
+{
+    "key": "ctrl+t ctrl+l",
+    "command": "extension.clearAllNavigationHistory"
+},
+{
+    "key": "ctrl+t u",
+    "command": "extension.clearOneNavigationHistory"
+},
+{
+    "key": "ctrl+shift+alt+.",
+    "command": "editor.action.fixAll"
+},
+{
+    "key": "ctrl+shift+k",
+    "command": "list.expandSelectionUp",
+    "when": "listFocus && listSupportsMultiselect && !inputFocus"
+},
+{
+    "key": "shift+up",
+    "command": "-list.expandSelectionUp",
+    "when": "listFocus && listSupportsMultiselect && !inputFocus"
+},
+{
+    "key": "ctrl+shift+j",
+    "command": "list.expandSelectionDown",
+    "when": "listFocus && listSupportsMultiselect && !inputFocus"
+},
+{
+    "key": "shift+down",
+    "command": "-list.expandSelectionDown",
+    "when": "listFocus && listSupportsMultiselect && !inputFocus"
+},
+{
+    "key": "ctrl+shift+escape",
+    "command": "removeSecondaryCursors",
+    "when": "editorHasMultipleSelections && textInputFocus"
+},
+{
+    "key": "escape",
+    "command": "-removeSecondaryCursors",
+    "when": "editorHasMultipleSelections && textInputFocus"
+},
+{
+    "key": "enter",
+    "command": "markdown.extension.onEnterKey",
+    "when": "!inputFocus && editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId == 'markdown' && vim.mode != 'CommandlineInProgress' && vim.mode != 'EasyMotionInputMode' && vim.mode != 'EasyMotionMode' && vim.mode != 'Normal' && vim.mode != 'Replace' && vim.mode != 'SearchInProgressMode' && vim.mode != 'SurroundInputMode' && vim.mode != 'Visual' && vim.mode != 'VisualBlock' && vim.mode != 'VisualLine'"
+},
+{
+    "key": "enter",
+    "command": "-markdown.extension.onEnterKey",
+    "when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId == 'markdown' && vim.mode != 'CommandlineInProgress' && vim.mode != 'EasyMotionInputMode' && vim.mode != 'EasyMotionMode' && vim.mode != 'Normal' && vim.mode != 'Replace' && vim.mode != 'SearchInProgressMode' && vim.mode != 'SurroundInputMode' && vim.mode != 'Visual' && vim.mode != 'VisualBlock' && vim.mode != 'VisualLine'"
+}
 ]

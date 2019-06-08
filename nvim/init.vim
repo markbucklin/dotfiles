@@ -8,7 +8,6 @@
 " map leader to space
 " let mapleader ="\<SPACE>"
 let mapleader =","
-
 " ===========================================
 call plug#begin('~/.config/nvim/plugged')
 " ===========================================
@@ -115,7 +114,7 @@ highlight TermCursor cterm=bold gui=bold ctermbg=black ctermfg=green guibg=black
 filetype plugin indent on
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set smartindent
-set tabstop=4 shiftwidth=4 softtabstop=4 expandtab smarttab textwidth=79
+set tabstop=4 shiftwidth=4 softtabstop=4 expandtab smarttab textwidth=0
 
 " Relative numbering (toggle with ',,r')
 set number norelativenumber
@@ -130,8 +129,12 @@ endfunc
 nnoremap <leader><leader>r :call NumberToggle()<cr>
 
 " Remappings for Jump to Start/End of Line
-noremap gh g^
-noremap gl g$
+noremap gh ^
+noremap gl $
+" noremap H ^
+" noremap L $
+" unmap J
+" remap J :10j
 
 " Remappings for Write/Quite
 nnoremap <leader><leader><leader>w :w!<CR>
@@ -162,12 +165,7 @@ let g:qs_lazy_highlight = 1
 
 " Vim-Sneak
 let g:sneak#use_ic_scs = 1
-" let g:sneak#target_labels = "sftunq/SFGHLTUNRMQZ"
 let g:sneak#label = 1
-" map f <Plug>Sneak_f
-" map F <Plug>Sneak_F
-" map t <Plug>Sneak_t
-" map T <Plug>Sneak_T
 autocmd ColorScheme * highlight SneakScope guifg=green guibg=black ctermfg=green ctermbg=black
 autocmd ColorScheme * highlight Sneak guifg=yellow guibg=black ctermfg=yellow ctermbg=black
 
@@ -537,16 +535,18 @@ xnoremap <silent> il :<c-u>normal! g_v^<cr>
 onoremap <silent> il :<c-u>normal! g_v^<cr>
 
 
-" Vim Multiple Cursors
-" let g:multi_cursor_use_default_mapping=0
-" let g:multi_cursor_start_word_key      = '<C-n>'
-" let g:multi_cursor_select_all_word_key = '<A-n>'
-" let g:multi_cursor_start_key           = 'g<C-n>'
-" let g:multi_cursor_select_all_key      = 'g<A-n>'
-" let g:multi_cursor_next_key            = '<C-n>'
-" let g:multi_cursor_prev_key            = '<C-p>'
-" let g:multi_cursor_skip_key            = '<C-x>'
-" let g:multi_cursor_quit_key            = '<Esc>'
+ " Vim Multiple Cursors
+ let g:multi_cursor_use_default_mapping=0
+ let g:multi_cursor_start_word_key      = '<C-n>'
+ let g:multi_cursor_select_all_word_key = '<A-n>'
+ let g:multi_cursor_start_key           = 'g<C-n>'
+ let g:multi_cursor_select_all_key      = 'g<A-n>'
+ let g:multi_cursor_next_key            = '<C-n>'
+ let g:multi_cursor_prev_key            = '<C-p>'
+ let g:multi_cursor_skip_key            = '<C-x>'
+ let g:multi_cursor_quit_key            = '<Esc>'
+
+"
 let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
 highlight multiple_cursors_cursor  cterm=bold ctermbg=darkblue gui=bold guibg=darkblue guifg=orange
@@ -561,6 +561,19 @@ highlight link multiple_cursors_visual Visual
 "     redraw!
 "     call cursor(l, c)
 " endfunction
+
+let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
+let g:pandoc#filetypes#pandoc_markdown = 0
+" let g:pandoc#modules#disabled = ["folding"]
+let g:pandoc#formatting#mode = "a"
+let g:pandoc#formatting#textwidth = 0
+let g:pandoc#folding#mode = "stacked"
+let g:pandoc#folding#level = 2
+let g:pandoc#folding#fastfolds = 1
+let g:pandoc#folding#fold_yaml = 1
+let g:pandoc#folding#fold_div_classes = 1
+
+let g:pandoc#completion#bib#use_preview = 1
 
 " au FileType pandoc command! Fmt call MmarkFmt()
 " au FileType markdown command! Fmt call MmarkFmt()
