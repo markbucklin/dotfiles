@@ -62,6 +62,16 @@ export LIBVA_DRIVER_NAME=vdpau
 
 
 # ======================================
+# /home/mark/.dotfiles/gnomekeyring.env
+# ======================================
+
+if [ -x "$DESKTOP_SESSION" ]; then
+    eval $(gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
+fi
+ssh-add "$HOME/.ssh/id_rsa"
+
+# ======================================
 # /home/mark/.dotfiles/go/go.path.env
 # ======================================
 export GOROOT=/usr/local/go
@@ -176,8 +186,8 @@ prepend-path "${HOME}/.cabal/bin"
 # ======================================
 # /home/mark/.dotfiles/python/conda.env
 # ======================================
-if [ -d ${HOME}/miniconda* ] ; then
-  source ~/miniconda*/etc/profile.d/conda.sh
+if [ -d ${HOME}/miniconda3 ] ; then
+  . "${HOME}/miniconda3/etc/profile.d/conda.sh"
 fi
 
 
@@ -190,15 +200,30 @@ prepend-path "${GEM_HOME}/bin"
 # ======================================
 # /home/mark/.dotfiles/zsh/zsh.home.env
 # ======================================
+export DOTDIR="$HOME/.dotfiles"
 ZSH="$HOME/.config/zsh"
 # ZDOTDIR="$ZSH"
-ZSH_COMPLETION_DIR="$ZSH/completions"
-ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
-export ZSH ZSH_CACHE_DIR ZSH_COMPLETION_DIR
 
 # add completion directory to end of fpath
+ZSH_COMPLETION_DIR="$ZSH/completions"
 [[ -d "$ZSH_COMPLETION_DIR" ]] || mkdir -p "$ZSH_COMPLETION_DIR"
-fpath+="$ZSH_COMPLETION_DIR"
+fpath+=( "$ZSH_COMPLETION_DIR" )
+
+# Add function paths to fpath
+ZSH_FUNCTION_DIR="$ZSH/functions"
+[[ -d "$ZSH_FUNCTION_DIR" ]] || mkdir -p "$ZSH_FUNCTION_DIR"
+zfdirs=( $ZSH_FUNCTION_DIR{,/*(/)} )
+fpath+=( $zfdirs[@] )
+
+# Add cache directory and symlink in main ZSH dir
+ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+[[ -d "$ZSH_CACHE_DIR" ]] || mkdir -p "$ZSH_CACHE_DIR"
+# ln -s "$ZSH_CACHE_DIR" "$ZSH/cache"
+
+
+
+
+export ZSH ZSH_CACHE_DIR ZSH_COMPLETION_DIR
 
 # ======================================
 # /home/mark/.dotfiles/ranger/ranger.env

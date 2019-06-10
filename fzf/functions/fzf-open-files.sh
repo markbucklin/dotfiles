@@ -1,7 +1,7 @@
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-0)
-fe() {
+fzf-fe() {
   local files
   IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
@@ -10,7 +10,7 @@ fe() {
 # Modified version where you can press
 #   - CTRL-O to open with `open` command,
 #   - CTRL-E or Enter key to open with the $EDITOR
-fo() {
+fzf-fo() {
   local out file key
   IFS=$'\n' out=($(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e))
   key=$(head -1 <<< "$out")
@@ -22,7 +22,7 @@ fo() {
 # vf - fuzzy open with vim from anywhere
 # ex: vf word1 word2 ... (even part of a file name)
 # zsh autoload function
-vf() {
+fzf-vf() {
   local files
 
   files=(${(f)"$(locate -Ai -0 $@ | grep -z -vE '~$' | fzf --read0 -0 -1 -m)"})
@@ -34,7 +34,7 @@ vf() {
  fi
 }
 # fuzzy grep open via ag
-vg() {
+fzf-vg() {
   local file
 
   file="$(ag --nobreak --noheading $@ | fzf -0 -1 | awk -F: '{print $1}')"

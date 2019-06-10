@@ -10,10 +10,10 @@ export DOTDIR="$HOME/.dotfiles"
 ZSH=${ZSH:-"$HOME/.config/zsh"}
 
 # Add Plugin function paths to fpath
-local plugindirs=($ZSH/plugins/*(/))
-ls $plugindirs &>/dev/null && fpath+=($plugindirs)
-local functiondirs=($ZSH/functions{,/*(/)})
-ls $functiondirs &>/dev/null && fpath+=($functiondirs)
+# plugindirs=($ZSH/plugins/*(/))
+# ls $plugindirs &>/dev/null && fpath+=($plugindirs)
+# functiondirs=($ZSH/functions{,/*(/)})
+# ls $functiondirs &>/dev/null && fpath+=($functiondirs)
 
 # Call "slim" zsh script
 source "$DOTDIR/zsh/init.zsh"

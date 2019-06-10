@@ -37,12 +37,12 @@ fzf_extras_init="$fzf_dot_dir/fzf-extras/fzf-extras.zsh"
 [[ -e "$fzf_extras_init" ]] && source "$fzf_extras_init"
 
 # fzf-widgets (submodule)
-fzf_widgets_init="$fzf_dot_dir/fzf-widgets/init.zsh"
-[[ -e "$fzf_widgets_init" ]] && source "$fzf_widgets_init"
-FZF_WIDGET_OPTS["insert-history"]='--exact'
+# fzf_widgets_init="$fzf_dot_dir/fzf-widgets/init.zsh"
+# [[ -e "$fzf_widgets_init" ]] && source "$fzf_widgets_init"
+# FZF_WIDGET_OPTS["insert-history"]='--exact'
 
-autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-add-zsh-hook chpwd chpwd_recent_dirs
+# autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+# add-zsh-hook chpwd chpwd_recent_dirs
 
 # ------------------------
 # Default Options

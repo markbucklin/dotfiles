@@ -39,7 +39,7 @@ for f in "$@"; do
                 then
                     ccat --color=always ${help_str}
                     echo '====================='
-                    exit $?
+                    # exit $?
                 fi
             ) &
         fi
@@ -56,7 +56,7 @@ for f in "$@"; do
                 2>/dev/null || coderay "$f" || rougify highlight "$f" || ccat --color=always "$f" \
                 --color=always || cat "$f"
             ) &
-            exit $?
+            # exit $?
         fi
 
         # PDF
@@ -64,7 +64,7 @@ for f in "$@"; do
         then
             # pdftotext -nopgbrk -q -eol unix "$f" - | ccat --color=always
             pdfinfo "$f" 2>/dev/null | ccat --color=always -
-            exit $?
+            # exit $?
         fi
 
 # todo: image
