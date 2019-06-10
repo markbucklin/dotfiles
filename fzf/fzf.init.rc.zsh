@@ -10,7 +10,7 @@ prepend-path "$FZF_ROOT/bin"
 # ---------------
 # Completion
 # ---------------
-export FZF_COMPLETION_OPTS='-c -x -m'
+# export FZF_COMPLETION_OPTS='-c -x -m'
 source "$FZF_ROOT/shell/completion.zsh" 2>/dev/null
 source "$FZF_ROOT/shell/key-bindings.zsh" 2>/dev/null
 
@@ -23,7 +23,6 @@ append-path "$FZF_BIN_DIR"
 # fpath=($fpath ${funcdirlist1})
 
 # Autoload function files in fzf functions dir
-local funcfilelist
 funcfilelist=($FZF_FUNCTION_DIR/*(.))
 # autoload -Uz "$funcfilelist"
 
@@ -114,7 +113,9 @@ fzf_default_opts=(
 # '--preview="echo {+}"'
 export FZF_DEFAULT_OPTS="${fzf_default_opts[@]}"
 
-export FZF_ALT_C_COMMAND='fd --type d . --color=never'
+# command find -L . -mindepth 1 \( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \) -prune -o -type d -print 2> /dev/null | cut -b3-\n
+
+export FZF_ALT_C_COMMAND='cat <(echo ${PWD%/*}/) <(fd -t d -u -a) <(fd . .. -t d --exclude="${PWD##\/}/*" -a)'
 export FZF_ALT_C_OPTS='
     --select-1
     --exit-0

@@ -1,5 +1,5 @@
 # Bind Common FZF Widget Keybindings
-export FZF_COMPLETION_TRIGGER='**'
+# export FZF_COMPLETION_TRIGGER='**'
 
 for m in viins vicmd; do
     bindkey -M "$m" '^@' list-choices
@@ -18,7 +18,7 @@ for m in viins vicmd; do
     # bindkey -M "$m" '^R' fzf-history-widget
     bindkey -M "$m" '^[R' fzf-history-widget
     bindkey -M "$m" '^[T' fzf-file-widget
-    bindkey -M "$m" '^[c' fzf-cd-widget
+    bindkey -M "$m" '^[C' fzf-cd-widget
     # bindkey -M "$m" '^I' expand-or-complete
 
     bindkey -M "$m" '^\ch' _complete_help
@@ -36,7 +36,6 @@ for m in viins vicmd; do
 done
 bindkey -M menuselect '^j' vi-down-line-or-history
 bindkey -M menuselect '^k' vi-up-line-or-history
-bindkey -M vicmd "^O" vi-open-line-below
 bindkey -M viins "^[O" vi-cmd-mode
 bindkey -M viins "^[oj" accept-line-and-down-history
 bindkey -M viins "^[ogl" end-of-line
@@ -48,13 +47,17 @@ bindkey -M viins "^[ogh" beginning-of-line
 # bindkey -M "$m" '^I' fzf-completion
 # vim-mode-bindkey viins visual -- vi-cmd-mode '^[i'
 
-# toggle between vi-cmd and vi-ins using ALT+SHIFT+I
-vim-mode-bindkey viins visual -- vi-cmd-mode '^[I'
-vim-mode-bindkey vicmd -- vi-insert '^[I'
+# toggle between vi-cmd and vi-ins using ALT+I
+bindkey -M vicmd '^[i' vi-insert
 bindkey -M viins '^[i' vi-cmd-mode
+bindkey -M visual '^[i' vi-cmd-mode
+
+# control j to open line below in vi insert mode
+bindkey -M viins '^J' vi-open-line-below
 
 # quickly open previous line for editing at tail end or beginning
 bindkey -M viins -s '^[L' '\ek$A \egel'
+bindkey -M viins -s ',.' '\ekA'
 bindkey -M viins -s '^[H' '\ek^cW'
 
 # bindkey -M viins -s ',,kh' '^[ik^'
@@ -68,17 +71,17 @@ vim-mode-bindkey vicmd visual -- end-of-line 'gl'
 vim-mode-bindkey vicmd visual -- beginning-of-line 'gh'
 
 # vim-mode-bindkey viins vicmd -- fzf-completion '^i'
-vim-mode-bindkey viins vicmd -- fzf-cd-widget ',,,c'
-vim-mode-bindkey viins vicmd -- fzf-file-widget ',,,t'
-vim-mode-bindkey viins vicmd -- fzf-locate-widget ',,,i'
-vim-mode-bindkey viins vicmd -- fzf-history-widget ',,,r'
+vim-mode-bindkey viins vicmd -- fzf-cd-widget ',,c'
+vim-mode-bindkey viins vicmd -- fzf-file-widget ',,t'
+vim-mode-bindkey viins vicmd -- fzf-locate-widget ',,l'
+vim-mode-bindkey viins vicmd -- fzf-history-widget ',,r'
 
 # remap some commands to leader-sequence
 vim-mode-bindkey viins vicmd -- fzf-insert-directory ',,id'
 vim-mode-bindkey viins vicmd -- fzf-insert-files ',,if'
 vim-mode-bindkey viins vicmd -- fzf-insert-history ',,ih'
 vim-mode-bindkey viins vicmd -- fzf-insert-named-directory ',,ind'
-vim-mode-bindkey viins vicmd -- fzf-change-directory ',,cd'
+vim-mode-bindkey viins vicmd -- fzf-change-directory ',,,cd'
 vim-mode-bindkey viins vicmd -- fzf-change-named-directory ',,cnd'
 vim-mode-bindkey viins vicmd -- fzf-change-recent-directory ',,crd'
 vim-mode-bindkey viins vicmd -- fzf-docker-kill-containers ',,dkc'
