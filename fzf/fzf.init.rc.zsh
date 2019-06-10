@@ -96,7 +96,10 @@ fzf_default_opts=(
     '--bind=ctrl-alt-w:toggle-preview-wrap'
     '--bind=?:toggle-preview'
     '--bind=alt-z:toggle-preview-wrap'
+    '--bind=alt-w:toggle-preview-wrap'
+    '--bind=ctrl-s:toggle-sort'
     '--bind="ctrl-y:execute(echo -n {} | cut -d \" \" -f1 --complement | xsel -i -b)"'
+    '--bind="ctrl-alt-y:execute(echo -n {+} | cut -d \" \" -f1 --complement | xsel -i -b)"'
     '--bind=ctrl-alt-a:toggle-all,alt-a:select-all'
     '--filepath-word'
     '--inline-info'
@@ -104,7 +107,7 @@ fzf_default_opts=(
     '--tabstop=4'
     '--color=dark,info:3,hl:12,hl+:11,pointer:9,marker:1,border:4,prompt:10'
     "--history=$HOME/.fzfhistory"
-    '--preview-window down:60%:hidden:wrap'
+    '--preview-window down:60%:wrap'
     '--preview ''eval "fzf_preview_command {}" '' '
 )
 
