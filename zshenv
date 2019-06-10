@@ -51,7 +51,7 @@ function library-search-path() {
 set-default-path
 
 # Add local user directory to path
-prepend-path ${HOME}/.local/bin
+prepend-path ${HOME}/bin
 
 # ======================================
 # /home/mark/.dotfiles/ffmpeg/ffmpeg.shell.env
