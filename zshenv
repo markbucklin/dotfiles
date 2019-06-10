@@ -65,11 +65,15 @@ export LIBVA_DRIVER_NAME=vdpau
 # /home/mark/.dotfiles/gnomekeyring.env
 # ======================================
 
-if [ -x "$DESKTOP_SESSION" ]; then
+if [ -n "$DESKTOP_SESSION" ]; then
     eval $(gnome-keyring-daemon --start)
     export SSH_AUTH_SOCK
+else
+    eval "$(ssh-agent --start)"
 fi
-ssh-add "$HOME/.ssh/id_rsa"
+if [ -z "$(ssh-add -l 2>/dev/null)" ]; then
+    ssh-add "$HOME/.ssh/id_rsa"
+fi
 
 # ======================================
 # /home/mark/.dotfiles/go/go.path.env
