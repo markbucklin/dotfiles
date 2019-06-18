@@ -9,14 +9,15 @@ bindkey -v
 export DOTDIR="$HOME/.dotfiles"
 ZSH=${ZSH:-"$HOME/.config/zsh"}
 
+
+# Call "slim" zsh script
+source "$DOTDIR/zsh/init.zsh"
+
 # Add Plugin function paths to fpath
 # plugindirs=($ZSH/plugins/*(/))
 # ls $plugindirs &>/dev/null && fpath+=($plugindirs)
 # functiondirs=($ZSH/functions{,/*(/)})
 # ls $functiondirs &>/dev/null && fpath+=($functiondirs)
-
-# Call "slim" zsh script
-source "$DOTDIR/zsh/init.zsh"
 
 # Source all files with '.rc.sh' or '.rc.zsh' suffix (e.g. pager.rc.sh)
 shrcfiles=($(command ls $DOTDIR/**/*.rc.sh) $(command ls $DOTDIR/**/*.rc.zsh))
@@ -36,15 +37,24 @@ fi
 # hook direnv into shell
 eval "$(direnv hook zsh)"
 
-# bindkey '^I' $fzf_default_completion
+
+
+source $DOTDIR/zsh/keys.vi.zsh
+
+WORDCHARS=${WORDCHARS//[&\/\=;$]}
+
+autoload -Uz predict-on
+zle -N predict-on
+zle -N predict-off
+bindkey '^X^Z' predict-on
+bindkey '^Z' predict-off
+
+# Load Zsh Editor
+autoload -Uz zed
 
 #Dedicated Completion Key
 # export FZF_COMPLETION_TRIGGER=''
 # bindkey '^T' fzf-completion
 # bindkey '^I' $fzf_default_completion
 # expand-or-complete
-
-source $DOTDIR/zsh/keys.vi.zsh
-
-# print result of profile
-# zprof &
+# bindkey '^I' $fzf_default_completion
