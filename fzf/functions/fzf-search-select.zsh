@@ -58,7 +58,7 @@ fzf-preview() {
     #head -n500 {} | highlight -O ansi --wrap-no-numbers --force 2>/dev/null
 }
 # zle -N fzf-preview
-bindkey -s "^[t" "fzf-preview"
+# bindkey -s "^[t" "fzf-preview"
 # zle -N _fzf-preview fzf-preview
 # bindkey "^[t" "fzf-preview"
 

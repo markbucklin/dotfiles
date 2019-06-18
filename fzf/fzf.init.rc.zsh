@@ -98,8 +98,8 @@ fzf_default_opts=(
     '--bind=alt-z:toggle-preview-wrap'
     '--bind=alt-w:toggle-preview-wrap'
     '--bind=ctrl-s:toggle-sort'
-    '--bind="ctrl-y:execute(echo -n {} | cut -d \" \" -f1 --complement | xsel -i -b)"'
-    '--bind="ctrl-alt-y:execute(echo -n {+} | cut -d \" \" -f1 --complement | xsel -i -b)"'
+    '--bind="ctrl-y:execute(echo {} -n | xsel -i -b)"'
+    '--bind="ctrl-alt-y:execute(echo -n {+} | xsel -i -b)"'
     '--bind=ctrl-alt-a:toggle-all,alt-a:select-all'
     '--filepath-word'
     '--inline-info'
@@ -118,12 +118,11 @@ export FZF_DEFAULT_OPTS="${fzf_default_opts[@]}"
 
 # command find -L . -mindepth 1 \( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \) -prune -o -type d -print 2> /dev/null | cut -b3-\n
 
-export FZF_ALT_C_COMMAND='cat <(echo ${PWD%/*}/) <(fd -t d -u -a) <(fd . .. -t d --exclude="${PWD##\/}/*" -a)'
+export FZF_ALT_C_COMMAND='cat <(echo ${PWD%/*}) <(fd -t d -u -a) <(fd . .. -t d -u -a -F --exclude="${PWD##\/}")'
 export FZF_ALT_C_OPTS='
     --select-1
     --exit-0
     --no-multi
-    --preview "tree -C {} | head -200"
     --preview-window down:50%
     '
 
@@ -144,7 +143,6 @@ export FZF_CTRL_T_OPTS=" \
     --exact \
     --no-height \
     --border \
-    --margin 5%,5%,10%,5% \
   --preview-window=down:60%:wrap \
  "
 
