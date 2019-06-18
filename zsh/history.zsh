@@ -3,7 +3,7 @@ if [ -z $HISTFILE ]; then
 fi
 HISTSIZE=100000
 SAVEHIST=100000
-HISTCONTROL=ignoredups
+# HISTCONTROL=ignoredups
 
 setopt append_history
 setopt extended_history

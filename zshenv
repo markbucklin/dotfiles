@@ -216,8 +216,9 @@ fpath+=( "$ZSH_COMPLETION_DIR" )
 # Add function paths to fpath
 ZSH_FUNCTION_DIR="$ZSH/functions"
 [[ -d "$ZSH_FUNCTION_DIR" ]] || mkdir -p "$ZSH_FUNCTION_DIR"
-zfdirs=( $ZSH_FUNCTION_DIR{,/*(/)} )
-fpath+=( $zfdirs[@] )
+typeset -a zsh_function_dirs=( $ZSH_FUNCTION_DIR )
+zsh_function_dirs+=( $ZSH_FUNCTION_DIR/**(/) ) 2>/dev/null
+fpath+=( $zsh_function_dirs[@] )
 
 # Add cache directory and symlink in main ZSH dir
 ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
