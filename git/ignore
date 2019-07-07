@@ -21,20 +21,20 @@ MANIFEST
 
 
 # Packages
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
-*.tgz
-*.bzip
-*.bz2
-*.xz
-*.lzma
-*.cab
+# *.7z
+# *.dmg
+# *.gz
+# *.iso
+# *.jar
+# *.rar
+# *.tar
+# *.zip
+# *.tgz
+# *.bzip
+# *.bz2
+# *.xz
+# *.lzma
+# *.cab
 
 # OS Generated files
 .DS_Store
@@ -46,16 +46,16 @@ Desktop.ini
 Thumbs.db
 ehthumbs.db
 *.log
-*.sql
-*.sqlite
-*.db
+# *.sql
+# *.sqlite
+# *.db
 
 # Other things
 .bundle
 .vagrant
 *.idea
 .idea/
-.vscode
+# .vscode
 .tern-project
 .importjs.js
 node_modules
@@ -84,14 +84,13 @@ _build/
 _site
 tmp
 test/**/test_output
-codegen/
+# codegen/
 _dist/
-dist/
+# dist/
 
 # Backup files
 *.backup
 *.bak
-test/bak
 *.autosave
 *.m~
 
@@ -100,7 +99,7 @@ test/bak
 *.mlappinstall
 helpsearch*
 octave-workspace
-*.mex*
+# *.mex*
 *.asv
 
 # Sync Utility and other Environement vars

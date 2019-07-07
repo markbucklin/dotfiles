@@ -64,13 +64,10 @@ call plug#end()
 
 " Settings
 set nocompatible
-set virtualedit=""
 set hidden
 set encoding=utf-8
+set fileformats=unix
 set showmatch
-set expandtab
-set tabstop=4
-set shiftwidth=4
 set ignorecase
 set smartcase
 set gdefault
@@ -78,25 +75,60 @@ set splitbelow splitright
 set bg=dark
 set mouse=a
 set clipboard=unnamedplus
-set wildignore=*.bak,~,*.o,*.info,*.swp,*.class
-set winminheight=0
-set modelines=1
+set modeline
+set modelines=3
 set autowrite
 set ttyfast
-set nowrap
-set wildmode=longest,list,full
 " set diffopt+=algorithm:patience
 " set diffopt+=indent-heuristic
 
 set hlsearch
+set incsearch
 set tags=.tags;
-set timeout timeoutlen=400
+set timeout timeoutlen=3000 ttimeoutlen=100
+set backspace=indent,eol,start
 set foldenable "check
+set foldnestmax=3
+set foldlevelstart=2
+set virtualedit=onemore
+set nojoinspaces
+set clipboard=unnamed
+set wildmenu
+set wildignore=*.bak,~,*.o,*.info,*.swp,*.class
+set winminheight=0
+set wildmode=longest,list,full
 
-" Remapping Keys Defaults (fix alt mapping)
-" if !has('gui_running')
-"   map <A-n>
-" endif
+" completion
+set complete=.,w,b,u,t
+set completeopt=longest,menuone,preview
+
+" FileType Config
+filetype plugin indent on
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+set smartindent
+set autoindent
+set expandtab
+set nosmarttab
+set tabstop=4
+set softtabstop=2
+set shiftwidth=2
+set shiftround
+
+set report=0
+set nostartofline
+set mat=5
+
+" wrap options
+set textwidth=0
+set wrapscan
+set nowrap
+set whichwrap+=h,l,<,>,[,]
+
+
+set list
+set listchars=tab:\|\_,nbsp:~,trail:\>
+set autoread
+set scrolloff=10
 
 " Undo
 if has("persistent_undo")
@@ -109,12 +141,20 @@ endif
 " todo: not working
 highlight TermCursor cterm=bold gui=bold ctermbg=black ctermfg=green guibg=black guifg=green
 
+" quickfix mapping
+map <F7> :cn<CR>
 
-" FileType Config
-filetype plugin indent on
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-set smartindent
-set tabstop=4 shiftwidth=4 softtabstop=4 expandtab smarttab textwidth=0
+" Undo
+if has("persistent_undo")
+    set undodir=~/.undodir/
+    set undofile
+endif
+
+" set highlight mode
+" set highlight=8b,@-,db,es,lb,mb,M-,nu,rs,sr,tb,vr,ws
+" todo: not working
+highlight TermCursor cterm=bold gui=bold ctermbg=black ctermfg=green guibg=black guifg=green
+
 
 " Relative numbering (toggle with ',,r')
 set number norelativenumber
@@ -408,6 +448,8 @@ vnoremap  :Commentary<CR>
 :inoremap  <esc>ui
 
 
+
+
 " test text for imap imap
 
 " Vim after ob
@@ -562,18 +604,18 @@ highlight link multiple_cursors_visual Visual
 "     call cursor(l, c)
 " endfunction
 
-let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
-let g:pandoc#filetypes#pandoc_markdown = 0
+" let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
+" let g:pandoc#filetypes#pandoc_markdown = 0
 " let g:pandoc#modules#disabled = ["folding"]
-let g:pandoc#formatting#mode = "a"
-let g:pandoc#formatting#textwidth = 0
-let g:pandoc#folding#mode = "stacked"
-let g:pandoc#folding#level = 2
-let g:pandoc#folding#fastfolds = 1
-let g:pandoc#folding#fold_yaml = 1
-let g:pandoc#folding#fold_div_classes = 1
+" let g:pandoc#formatting#mode = "a"
+" let g:pandoc#formatting#textwidth = 0
+" let g:pandoc#folding#mode = "stacked"
+" let g:pandoc#folding#level = 2
+" let g:pandoc#folding#fastfolds = 1
+" let g:pandoc#folding#fold_yaml = 1
+" let g:pandoc#folding#fold_div_classes = 1
 
-let g:pandoc#completion#bib#use_preview = 1
+" let g:pandoc#completion#bib#use_preview = 1
 
 " au FileType pandoc command! Fmt call MmarkFmt()
 " au FileType markdown command! Fmt call MmarkFmt()
@@ -581,3 +623,6 @@ let g:pandoc#completion#bib#use_preview = 1
 " au FileType pandoc set formatprg=mmark
 " au FileType markdown set formatprg=mmark
 
+"use docx2txt.pl to allow VIm to view the text content of a .docx file directly.
+autocmd BufReadPre *.docx set ro
+autocmd BufReadPost *.docx %!docx2txt
