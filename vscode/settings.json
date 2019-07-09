@@ -276,8 +276,7 @@
 	"editor.minimap.side": "right",
 	"editor.minimap.showSlider": "always",
 	"editor.minimap.maxColumn": 120,
-	"editor.parameterHints.enabled": true,
-	"editor.useTabStops": true,
+    "editor.parameterHints.enabled": true,
 	"editor.foldingStrategy": "indentation",
 
 	"editor.quickSuggestionsDelay": 50,
@@ -558,8 +557,7 @@
 	"prettier.printWidth": 120,
 	"prettier.semi": false,
 	"prettier.bracketSpacing": true,
-	"prettier.trailingComma": "es5",
-	"prettier.useTabs": true,
+    "prettier.trailingComma": "es5",
 	"prettier.quoteProps": "as-needed",
 	// "markdown-link-suggestions.allowFullSuggestMode":true,
 	"editor.multiCursorMergeOverlapping": true,
@@ -576,5 +574,8 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"telemetry.enableTelemetry": false,
-	"git.autofetch": true
+    "git.autofetch": true,
+    "[matlab]": {
+
+    }
 }

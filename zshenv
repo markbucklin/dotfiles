@@ -127,7 +127,7 @@ local alias_file="$alias_root/$alias_name"
 local version_bin_dir=""
 
 # Allow for multiple alias pointers (e.g. default -> latest -> v11.6.0)
-while ! [[ -d $version_bin_dir ]] && [[ -f $alias_file ]]
+while ! [[ -e $version_bin_dir ]] && [[ -f $alias_file ]]
 do
   alias_value=`cat $alias_file`
   alias_file="$alias_root/$alias_value"
