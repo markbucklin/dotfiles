@@ -41,6 +41,7 @@ Plug 'vim-voom/VOoM'
 Plug 'moorereason/vim-markdownfmt'
 
 Plug 'jreybert/vimagit'
+Plug 'airblade/vim-gitgutter'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'farmergreg/vim-lastplace'
 Plug 'kana/vim-operator-user'
@@ -144,12 +145,6 @@ highlight TermCursor cterm=bold gui=bold ctermbg=black ctermfg=green guibg=black
 " quickfix mapping
 map <F7> :cn<CR>
 
-" Undo
-if has("persistent_undo")
-    set undodir=~/.undodir/
-    set undofile
-endif
-
 " set highlight mode
 " set highlight=8b,@-,db,es,lb,mb,M-,nu,rs,sr,tb,vr,ws
 " todo: not working
@@ -179,17 +174,17 @@ noremap gl $
 " Remappings for Write/Quite
 nnoremap <leader><leader><leader>w :w!<CR>
 nnoremap <leader><leader><leader>q :q!<CR>
-nnoremap <leader><leader>w :w<CR>
-nnoremap <leader><leader>wq :wq<CR>
-nnoremap <leader><leader>q :q<CR>
+" nnoremap <leader><leader>w :w<CR>
+" nnoremap <leader><leader>wq :wq<CR>
+" nnoremap <leader><leader>q :q<CR>
 
 " EasyMotion
-map <leader> <Plug>(easymotion-prefix)
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>h <Plug>(easymotion-linebackward)
-nmap <Leader>s <Plug>(easymotion-overwin-f2)
+" map <leader> <Plug>(easymotion-prefix)
+map <Leader><Leader>l <Plug>(easymotion-lineforward)
+map <Leader><Leader>j <Plug>(easymotion-j)
+map <Leader><Leader>k <Plug>(easymotion-k)
+map <Leader><Leader>h <Plug>(easymotion-linebackward)
+nmap <Leader><Leader>s <Plug>(easymotion-overwin-f2)
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_startofline = 1 " keep cursor column when JK motion
 
@@ -287,45 +282,45 @@ autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
 " vnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
 " map <leader><leader> <Esc>/<++><Enter>"_c4l
 
-""""LATEX
-"" Word count:
-"" autocmd FileType tex map <leader>w :w !detex \| wc -w<CR>
-"" Code snippets
-"autocmd FileType tex inoremap ,fr \begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter><Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
-"autocmd FileType tex inoremap ,fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
-"autocmd FileType tex inoremap ,exe \begin{exe}<Enter>\ex<Space><Enter>\end{exe}<Enter><Enter><++><Esc>3kA
-"autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i
-"autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
-"autocmd FileType tex vnoremap , <ESC>`<i\{<ESC>`>2la}<ESC>?\\{<Enter>a
-"autocmd FileType tex inoremap ,it \textit{}<++><Esc>T{i
-"autocmd FileType tex inoremap ,ct \textcite{}<++><Esc>T{i
-"autocmd FileType tex inoremap ,cp \parencite{}<++><Esc>T{i
-"autocmd FileType tex inoremap ,glos {\gll<Space><++><Space>\\<Enter><++><Space>\\<Enter>\trans{``<++>''}}<Esc>2k2bcw
-"autocmd FileType tex inoremap ,x \begin{xlist}<Enter>\ex<Space><Enter>\end{xlist}<Esc>kA<Space>
-"autocmd FileType tex inoremap ,ol \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
-"autocmd FileType tex inoremap ,ul \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA\item<Space>
-"autocmd FileType tex inoremap ,li <Enter>\item<Space>
-"autocmd FileType tex inoremap ,ref \ref{}<Space><++><Esc>T{i
-"autocmd FileType tex inoremap ,tab \begin{tabular}<Enter><++><Enter>\end{tabular}<Enter><Enter><++><Esc>4kA{}<Esc>i
-"autocmd FileType tex inoremap ,ot \begin{tableau}<Enter>\inp{<++>}<Tab>\const{<++>}<Tab><++><Enter><++><Enter>\end{tableau}<Enter><Enter><++><Esc>5kA{}<Esc>i
-"autocmd FileType tex inoremap ,can \cand{}<Tab><++><Esc>T{i
-"autocmd FileType tex inoremap ,con \const{}<Tab><++><Esc>T{i
-"autocmd FileType tex inoremap ,v \vio{}<Tab><++><Esc>T{i
-"autocmd FileType tex inoremap ,a \href{}{<++>}<Space><++><Esc>2T{i
-"autocmd FileType tex inoremap ,sc \textsc{}<Space><++><Esc>T{i
-"autocmd FileType tex inoremap ,chap \chapter{}<Enter><Enter><++><Esc>2kf}i
-"autocmd FileType tex inoremap ,sec \section{}<Enter><Enter><++><Esc>2kf}i
-"autocmd FileType tex inoremap ,ssec \subsection{}<Enter><Enter><++><Esc>2kf}i
-"autocmd FileType tex inoremap ,sssec \subsubsection{}<Enter><Enter><++><Esc>2kf}i
-"autocmd FileType tex inoremap ,st <Esc>F{i*<Esc>f}i
-"autocmd FileType tex inoremap ,beg \begin{DELRN}<Enter><++><Enter>\end{DELRN}<Enter><Enter><++><Esc>4k0fR:MultipleCursorsFind<Space>DELRN<Enter>c
-"autocmd FileType tex inoremap ,up <Esc>/usepackage<Enter>o\usepackage{}<Esc>i
-"autocmd FileType tex nnoremap ,up /usepackage<Enter>o\usepackage{}<Esc>i
-"autocmd FileType tex inoremap ,tt \texttt{}<Space><++><Esc>T{i
-"autocmd FileType tex inoremap ,bt {\blindtext}
-"autocmd FileType tex inoremap ,nu $\varnothing$
-"autocmd FileType tex inoremap ,col \begin{columns}[T]<Enter>\begin{column}{.5\textwidth}<Enter><Enter>\end{column}<Enter>\begin{column}{.5\textwidth}<Enter><++><Enter>\end{column}<Enter>\end{columns}<Esc>5kA
-"autocmd FileType tex inoremap ,rn (\ref{})<++><Esc>F}i
+"""LATEX
+" Word count:
+" autocmd FileType tex map <leader>w :w !detex \| wc -w<CR>
+" Code snippets
+autocmd FileType tex inoremap ,fr \begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter><Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
+autocmd FileType tex inoremap ,fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
+autocmd FileType tex inoremap ,exe \begin{exe}<Enter>\ex<Space><Enter>\end{exe}<Enter><Enter><++><Esc>3kA
+autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i
+autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
+autocmd FileType tex vnoremap , <ESC>`<i\{<ESC>`>2la}<ESC>?\\{<Enter>a
+autocmd FileType tex inoremap ,it \textit{}<++><Esc>T{i
+autocmd FileType tex inoremap ,ct \textcite{}<++><Esc>T{i
+autocmd FileType tex inoremap ,cp \parencite{}<++><Esc>T{i
+autocmd FileType tex inoremap ,glos {\gll<Space><++><Space>\\<Enter><++><Space>\\<Enter>\trans{``<++>''}}<Esc>2k2bcw
+autocmd FileType tex inoremap ,x \begin{xlist}<Enter>\ex<Space><Enter>\end{xlist}<Esc>kA<Space>
+autocmd FileType tex inoremap ,ol \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
+autocmd FileType tex inoremap ,ul \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA\item<Space>
+autocmd FileType tex inoremap ,li <Enter>\item<Space>
+autocmd FileType tex inoremap ,ref \ref{}<Space><++><Esc>T{i
+autocmd FileType tex inoremap ,tab \begin{tabular}<Enter><++><Enter>\end{tabular}<Enter><Enter><++><Esc>4kA{}<Esc>i
+autocmd FileType tex inoremap ,ot \begin{tableau}<Enter>\inp{<++>}<Tab>\const{<++>}<Tab><++><Enter><++><Enter>\end{tableau}<Enter><Enter><++><Esc>5kA{}<Esc>i
+autocmd FileType tex inoremap ,can \cand{}<Tab><++><Esc>T{i
+autocmd FileType tex inoremap ,con \const{}<Tab><++><Esc>T{i
+autocmd FileType tex inoremap ,v \vio{}<Tab><++><Esc>T{i
+autocmd FileType tex inoremap ,a \href{}{<++>}<Space><++><Esc>2T{i
+autocmd FileType tex inoremap ,sc \textsc{}<Space><++><Esc>T{i
+autocmd FileType tex inoremap ,chap \chapter{}<Enter><Enter><++><Esc>2kf}i
+autocmd FileType tex inoremap ,sec \section{}<Enter><Enter><++><Esc>2kf}i
+autocmd FileType tex inoremap ,ssec \subsection{}<Enter><Enter><++><Esc>2kf}i
+autocmd FileType tex inoremap ,sssec \subsubsection{}<Enter><Enter><++><Esc>2kf}i
+autocmd FileType tex inoremap ,st <Esc>F{i*<Esc>f}i
+autocmd FileType tex inoremap ,beg \begin{DELRN}<Enter><++><Enter>\end{DELRN}<Enter><Enter><++><Esc>4k0fR:MultipleCursorsFind<Space>DELRN<Enter>c
+autocmd FileType tex inoremap ,up <Esc>/usepackage<Enter>o\usepackage{}<Esc>i
+autocmd FileType tex nnoremap ,up /usepackage<Enter>o\usepackage{}<Esc>i
+autocmd FileType tex inoremap ,tt \texttt{}<Space><++><Esc>T{i
+autocmd FileType tex inoremap ,bt {\blindtext}
+autocmd FileType tex inoremap ,nu $\varnothing$
+autocmd FileType tex inoremap ,col \begin{columns}[T]<Enter>\begin{column}{.5\textwidth}<Enter><Enter>\end{column}<Enter>\begin{column}{.5\textwidth}<Enter><++><Enter>\end{column}<Enter>\end{columns}<Esc>5kA
+autocmd FileType tex inoremap ,rn (\ref{})<++><Esc>F}i
 
 """"HTML
 "autocmd FileType html inoremap ,b <b></b><Space><++><Esc>FbT>i
@@ -373,27 +368,27 @@ autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
 "autocmd FileType html inoremap ù &ugrave;
 
 
-"""".bib
-"autocmd FileType bib inoremap ,a @article{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>journal<Space>=<Space>{<++>},<Enter>volume<Space>=<Space>{<++>},<Enter>pages<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
-"autocmd FileType bib inoremap ,b @book{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>6kA,<Esc>i
-"autocmd FileType bib inoremap ,c @incollection{<Enter>author<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>booktitle<Space>=<Space>{<++>},<Enter>editor<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
+""".bib
+autocmd FileType bib inoremap ,a @article{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>journal<Space>=<Space>{<++>},<Enter>volume<Space>=<Space>{<++>},<Enter>pages<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
+autocmd FileType bib inoremap ,b @book{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>6kA,<Esc>i
+autocmd FileType bib inoremap ,c @incollection{<Enter>author<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>booktitle<Space>=<Space>{<++>},<Enter>editor<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
 
-""MARKDOWN
-"" autocmd Filetype markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
-"autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
-"autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
-"autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
-"autocmd Filetype markdown,rmd inoremap ,e **<++><Esc>F*i
-"autocmd Filetype markdown,rmd inoremap ,h ====<Space><++><Esc>F=hi
-"autocmd Filetype markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
-"autocmd Filetype markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
-"autocmd Filetype markdown,rmd inoremap ,1 #<Space><Enter><++><Esc>kA
-"autocmd Filetype markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
-"autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
-"autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
-"autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
-"autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
-"autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
+"MARKDOWN
+" autocmd Filetype markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
+autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
+autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
+autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
+autocmd Filetype markdown,rmd inoremap ,e **<++><Esc>F*i
+autocmd Filetype markdown,rmd inoremap ,h ====<Space><++><Esc>F=hi
+autocmd Filetype markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
+autocmd Filetype markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
+autocmd Filetype markdown,rmd inoremap ,1 #<Space><Enter><++><Esc>kA
+autocmd Filetype markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
+autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
+autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
+" autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
+" autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
+" autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
 
 """".xml
 "autocmd FileType xml inoremap ,e <item><Enter><title><++></title><Enter><guid<space>isPermaLink="false"><++></guid><Enter><pubDate><Esc>:put<Space>=strftime('%a, %d %b %Y %H:%M:%S %z')<Enter>kJA</pubDate><Enter><link><++></link><Enter><description><![CDATA[<++>]]></description><Enter></item><Esc>?<title><enter>cit
@@ -471,8 +466,8 @@ inoremap <C-Space>t <Esc>:CtrlSFToggle<CR>
 " map <C-K> <C-W>k
 " map <C-L> <C-W>l
 " map <C-H> <C-W>h
-nnoremap <Leader>jh 1<C-W>w
-nnoremap <Leader>jl 1<C-W>b
+" nnoremap <Leader>jh 1<C-W>w
+" nnoremap <Leader>jl 1<C-W>b
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 " nnoremap j gj
@@ -568,7 +563,7 @@ if &term =~ "xterm\\|rxvt"
   autocmd VimLeave * silent !echo -ne "\033]112\007"
   let &t_SI .= "\<Esc>[6 q"
   let &t_EI .= "\<Esc>[5 q"
-    let &t_SR .= "\<Esc>[1 q"
+  let &t_SR .= "\<Esc>[1 q"
 endif
 
 
@@ -577,22 +572,35 @@ xnoremap <silent> il :<c-u>normal! g_v^<cr>
 onoremap <silent> il :<c-u>normal! g_v^<cr>
 
 
- " Vim Multiple Cursors
- let g:multi_cursor_use_default_mapping=0
- let g:multi_cursor_start_word_key      = '<C-n>'
- let g:multi_cursor_select_all_word_key = '<A-n>'
- let g:multi_cursor_start_key           = 'g<C-n>'
- let g:multi_cursor_select_all_key      = 'g<A-n>'
- let g:multi_cursor_next_key            = '<C-n>'
- let g:multi_cursor_prev_key            = '<C-p>'
- let g:multi_cursor_skip_key            = '<C-x>'
- let g:multi_cursor_quit_key            = '<Esc>'
+" Vim Multiple Cursors
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_start_word_key      = '<C-n>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-n>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+let g:multi_cursor_normal_maps = {'@': 1, 'F': 1, 'T': 1, '[': 1, '\': 1, ']': 1, '!': 1, '"': 1, 'c': 1, 'd': 1, 'f': 1, 'g': 1, 'm': 1, 'q': 1, 'r': 1, 't': 1, 'y': 1, 'z': 1, '<': 1, '=': 1, '>': 1}
 
 "
 let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
 highlight multiple_cursors_cursor  cterm=bold ctermbg=darkblue gui=bold guibg=darkblue guifg=orange
 highlight link multiple_cursors_visual Visual
+function! Multiple_cursors_before()
+  if exists(':NeoCompleteLock')==2
+    exe 'NeoCompleteLock'
+  endif
+endfunction
+
+function! Multiple_cursors_after()
+  if exists(':NeoCompleteUnlock')==2
+    exe 'NeoCompleteUnlock'
+  endif
+endfunction
+
 
 
 " function! MmarkFmt ()
@@ -603,6 +611,7 @@ highlight link multiple_cursors_visual Visual
 "     redraw!
 "     call cursor(l, c)
 " endfunction
+let g:pandoc#syntax#conceal#use = 0
 
 " let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
 " let g:pandoc#filetypes#pandoc_markdown = 0
@@ -612,10 +621,10 @@ highlight link multiple_cursors_visual Visual
 " let g:pandoc#folding#mode = "stacked"
 " let g:pandoc#folding#level = 2
 " let g:pandoc#folding#fastfolds = 1
-" let g:pandoc#folding#fold_yaml = 1
+let g:pandoc#folding#fold_yaml = 1
 " let g:pandoc#folding#fold_div_classes = 1
 
-" let g:pandoc#completion#bib#use_preview = 1
+let g:pandoc#completion#bib#use_preview = 1
 
 " au FileType pandoc command! Fmt call MmarkFmt()
 " au FileType markdown command! Fmt call MmarkFmt()

@@ -1,7 +1,10 @@
 {
+    "latex-workshop.latex.autoClean.run": "onFailed",
+    "latex-workshop.latex.outDir": "../vscodebuild",
+    "latex-workshop.latex.bibDirs": ["/home/mark/dissertation/ref/bibclean"],
 	"files.associations": { "*.m": "matlab" },
-	"matlab.matlabpath": "/usr/local/bin/matlab",
-	"matlab.mlintpath": "/usr/local/bin/mlint",
+	"matlab.matlabpath": "/home/mark/.local/bin/matlab",
+	"matlab.mlintpath": "/home/mark/.local/opt/matlab/bin/glnxa64/mlint",
 	"path-intellisense.showHiddenFiles": true,
 
 	// Markdown
@@ -26,33 +29,9 @@
 	"markdown-preview-enhanced.HTML5EmbedUseLinkSyntax": true,
 	// "reflowMarkdown.resizeHeaderDashLines": true,
 	"markdown-preview-enhanced.enableTypographer": true,
-	"markdown-preview-enhanced.imageFolderPath": "/img",
+	"markdown-preview-enhanced.imageFolderPath": "/figures",
 	"markdown-preview-enhanced.usePandocParser": false,
 	"markdown-preview-enhanced.pandocMarkdownFlavor": "markdown-raw_tex+tex_math_single_backslash",
-	// "markdown.extension.showExplorer": false,
-	// "markdown.extension.list.indentationSize": "adaptive",
-	// "combineScripts.markdown.includeToc": true,
-	// markdownlint
-	// "markdownlint.run": "onSave",
-	// "markdownlint.config": {
-	//   "default": true,
-	//   "no-inline-html": false,
-	//   "first-line-h1": false,
-	//   "single-h1": false,
-	//   "heading-style": {
-	//     "style": "atx"  },
-	//   "blanks-around-headings": false,
-	//   "blanks-around-fences": false,
-	//   "blanks-around-lists": false,
-	//   "no-multiple-blanks": false,
-	//   "ul-style": {
-	//     "style": "dash"  },
-	//   "no-duplicate-heading": true,
-	//   "ul-indent": true,
-	//   "no-hard-tabs": true,
-	//   "line-length": false
-	// },
-	// Vim
 	"editor.tabSize": 4,
 	"vim.autoSwitchInputMethod.enable": false,
 	"vim.overrideCopy": true,
@@ -64,9 +43,6 @@
 	"vim.easymotionMarkerFontSize": "18",
 	"vim.easymotionMarkerYOffset": 0,
 	"vim.easymotionMarkerHeight": 22,
-	//   "vim.easymotionMarkerBackgroundColor": "#000099bb",
-	//   "vim.easymotionMarkerForegroundColorOneChar": "#ffff11ff",
-	//   "vim.easymotionMarkerForegroundColorTwoChar": "#ff4422ff",
 	"vim.easymotionMarkerFontFamily": "Inconsolata",
 	"vim.easymotionKeys": "yuiopnmqrtxcvbasdf",
 	"vim.easymotionMarkerFontWeight": "bold",
@@ -123,25 +99,20 @@
 	],
 
 	"vim.normalModeKeyBindingsNonRecursive": [
+        { "before": ["u"], "commands": ["undo"] },
+        { "before": ["U"], "commands": ["redo"]},
+        // { "before": ["<C-r>"], "commands": ["redo"]},
 		{ "before": ["<leader>", "v"], "commands": ["editor.action.smartSelect.expand"] },
 		{ "before": ["<leader>", "<leader>", "v"], "commands": ["editor.action.smartSelect.shrink"] },
 		{ "before": ["<leader>", "V"], "commands": ["expandLineSelection"] },
 		{ "before": ["<C-n>"], "commands": [":nohl"] },
 		{ "before": ["<leader>", "/"], "commands": [":nohl"] },
-		{ "before": ["<leader>", "w"], "commands": ["workbench.action.files.save"] },
-		{
-			"before": ["<leader>", "q"],
-			"commands": ["workbench.action.closeActiveEditor", "workbench.files.action.focusFilesExplorer"]
-		},
-		{
-			"before": ["Z", "Z"],
-			"commands": [
-				"workbench.action.files.save",
-				"workbench.action.closeActiveEditor",
-				"workbench.files.action.focusFilesExplorer"
-			]
-		},
-		{ "before": ["<leader>", "<leader>", "q"], "commands": [":wq!"] },
+		{ "before": ["<leader>","<leader>","<leader>", "w"], "commands": ["workbench.action.files.save"] },
+        { "before": ["<leader>","<leader>","<leader>", "q"], "commands": ["workbench.action.closeActiveEditor","workbench.files.action.focusFilesExplorer"]},
+		// { "before": ["<leader>","<leader>", "w"], "commands": ["workbench.action.files.save"] },
+        // { "before": ["<leader>","<leader>", "q"], "commands": ["workbench.action.closeActiveEditor","workbench.files.action.focusFilesExplorer"]},
+		{ "before": ["Z", "Z"], "commands": [ "workbench.action.files.save", "workbench.action.closeActiveEditor", "workbench.files.action.focusFilesExplorer" ]},
+		// { "before": ["<leader>", "<leader>", "q"], "commands": [":wq!"] },
 		{ "before": ["leader", "leader", "leader", "q"], "commands": ["workbench.action.closeWindow"] },
 		{ "before": ["<leader>", "f"], "commands": ["workbench.files.action.focusFilesExplorer"] },
 		{ "before": ["<leader>", ",t", "n"], "commands": ["workbench.action.nextEditorInGroup"] },
@@ -577,5 +548,7 @@
     "git.autofetch": true,
     "[matlab]": {
 
-    }
+    },
+    "latex-workshop.view.pdf.viewer": "external",
+    "latex-workshop.latex.clean.subfolder.enabled": true
 }
