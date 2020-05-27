@@ -2,7 +2,7 @@
 if ls --color -d . >/dev/null 2>&1; then
     # is GNU ls
     if [ -x /usr/bin/dircolors ]; then
-    eval "$(dircolors ~/.dircolors)" || eval "$(dircolors -b)"
+    eval "$(dircolors ~/.dircolors 2>/dev/null)" || eval "$(dircolors -b | tee ~/.dircolors)"
 fi
 # remember COLUMNS for subprocesses
 export COLUMNS

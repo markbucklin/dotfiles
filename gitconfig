@@ -1,6 +1,6 @@
 [user]
-  name = Mark Bucklin
-  email = markbucklin@gmail.com
+	name = Mark Bucklin
+	email = markbucklin@gmail.com
 
 [github]
   user = markbucklin
@@ -13,6 +13,7 @@
 [core]
   autocrlf = false
   excludesfile = ~/.config/git/ignore
+	editor = nvim
 
 [pager]
   diff = diff-so-fancy | less --tabs=1,5 -RFX
@@ -97,3 +98,5 @@
 [status]
 	submoduleSummary = true
 
+[credential]
+	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe

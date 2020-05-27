@@ -58,3 +58,5 @@ autoload -Uz zed
 # bindkey '^I' $fzf_default_completion
 # expand-or-complete
 # bindkey '^I' $fzf_default_completion
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

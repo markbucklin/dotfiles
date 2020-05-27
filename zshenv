@@ -54,57 +54,16 @@ set-default-path
 prepend-path ${HOME}/bin
 
 # ======================================
-# /home/mark/.dotfiles/ffmpeg/ffmpeg.shell.env
-# ======================================
-# FFMPEG
-export VDPAU_DRIVER=nvidia
-export LIBVA_DRIVER_NAME=vdpau
-
-
-# ======================================
-# /home/mark/.dotfiles/gnomekeyring.env
-# ======================================
-
-if [ -n "$DESKTOP_SESSION" ]; then
-    eval $(gnome-keyring-daemon --start)
-    export SSH_AUTH_SOCK
-else
-    eval "$(ssh-agent --start)"
-fi
-if [ -z "$(ssh-add -l 2>/dev/null)" ]; then
-    ssh-add "$HOME/.ssh/id_rsa"
-fi
-
-# ======================================
-# /home/mark/.dotfiles/go/go.path.env
-# ======================================
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-prepend-path "${GOROOT}/bin"
-prepend-path "${GOPATH}/bin"
-
-# ======================================
-# /home/mark/.dotfiles/dotdir.path.env
-# ======================================
- export DOT_BASE_DIR="$HOME/.dotfiles"
-
-# ======================================
-# /home/mark/.dotfiles/git/ghq.shell.env
-# ======================================
-
-# GHQ
-export GHQ_ROOT=$HOME/.ghq:$HOME/repo
-# ======================================
 # /home/mark/.dotfiles/fzf/fzf.path.env
 # ======================================
 export FZF_ROOT="$HOME/.fzf"
 export FZF_PLUGIN_DIR="$HOME/.dotfiles/fzf"
 
 # ======================================
-# /home/mark/.dotfiles/java/java.path.env
+# /home/mark/.dotfiles/ruby/ruby.path.env
 # ======================================
-export JAVA_BINDIR=$(dirname $(readlink -f $(which java)))
-export JAVA_HOME=$(dirname ${JAVA_BINDIR})
+export GEM_HOME=$HOME/gems
+prepend-path "${GEM_HOME}/bin"
 
 # ======================================
 # /home/mark/.dotfiles/node/nvm.shell.env
@@ -183,23 +142,41 @@ fi
     #export NODE_PATH="/home/mark/.ghq/github.com/stdlib-js/stdlib/lib/node_modules"
 
 # ======================================
-# /home/mark/.dotfiles/haskell/haskell.path.env
+# /home/mark/.dotfiles/git/ghq.shell.env
 # ======================================
-prepend-path "${HOME}/.cabal/bin"
+
+# GHQ
+export GHQ_ROOT=$HOME/.ghq:$HOME/repo
+# ======================================
+# /home/mark/.dotfiles/go/go.path.env
+# ======================================
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+prepend-path "${GOROOT}/bin"
+prepend-path "${GOPATH}/bin"
 
 # ======================================
-# /home/mark/.dotfiles/python/conda.env
+# /home/mark/.dotfiles/rust/rust.path.env
 # ======================================
-if [ -d ${HOME}/miniconda3 ] ; then
-  . "${HOME}/miniconda3/etc/profile.d/conda.sh"
-fi
+export CARGO_HOME="${HOME}/.cargo"
+export RUSTUP_HOME="${HOME}/.rustup"
+prepend-path "${CARGO_HOME}/bin"
+
+# ======================================
+# /home/mark/.dotfiles/ranger/ranger.env
+# ======================================
+# avoid loading rc.conf twice because default was copied to
+# ~/.config/ranger/rc.conf
+RANGER_LOAD_DEFAULT_RC=false
 
 
 # ======================================
-# /home/mark/.dotfiles/ruby/ruby.path.env
+# /home/mark/.dotfiles/ffmpeg/ffmpeg.shell.env
 # ======================================
-export GEM_HOME=$HOME/gems
-prepend-path "${GEM_HOME}/bin"
+# FFMPEG
+export VDPAU_DRIVER=nvidia
+export LIBVA_DRIVER_NAME=vdpau
+
 
 # ======================================
 # /home/mark/.dotfiles/zsh/zsh.home.env
@@ -231,11 +208,36 @@ ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 export ZSH ZSH_CACHE_DIR ZSH_COMPLETION_DIR
 
 # ======================================
-# /home/mark/.dotfiles/ranger/ranger.env
+# /home/mark/.dotfiles/java/java.path.env
 # ======================================
-# avoid loading rc.conf twice because default was copied to
-# ~/.config/ranger/rc.conf
-RANGER_LOAD_DEFAULT_RC=false
+export JAVA_BINDIR=$(dirname $(readlink -f $(which java)))
+export JAVA_HOME=$(dirname ${JAVA_BINDIR})
+
+# ======================================
+# /home/mark/.dotfiles/dotdir.path.env
+# ======================================
+ export DOT_BASE_DIR="$HOME/.dotfiles"
+
+# ======================================
+# /home/mark/.dotfiles/gnomekeyring.env
+# ======================================
+
+if [ -n "$DESKTOP_SESSION" ]; then
+    eval $(gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
+else
+    eval "$(ssh-agent --start)"
+fi
+if [ -z "$(ssh-add -l 2>/dev/null)" ]; then
+    ssh-add "$HOME/.ssh/id_rsa"
+fi
+
+# ======================================
+# /home/mark/.dotfiles/python/conda.env
+# ======================================
+if [ -d ${HOME}/miniconda3 ] ; then
+  . "${HOME}/miniconda3/etc/profile.d/conda.sh"
+fi
 
 
 # ======================================
@@ -255,11 +257,9 @@ export BACKUP_DIR="/hanlab/People/Mark Bucklin/backup"
 export PROJECT_HOME=$HOME/projects
 
 # ======================================
-# /home/mark/.dotfiles/rust/rust.path.env
+# /home/mark/.dotfiles/haskell/haskell.path.env
 # ======================================
-export CARGO_HOME="${HOME}/.cargo"
-export RUSTUP_HOME="${HOME}/.rustup"
-prepend-path "${CARGO_HOME}/bin"
+prepend-path "${HOME}/.cabal/bin"
 
 # ======================================
 # /home/mark/.dotfiles/shell/shell.postenv
